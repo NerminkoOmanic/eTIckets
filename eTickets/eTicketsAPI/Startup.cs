@@ -10,6 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eTicketsAPI.Database;
+using eTicketsAPI.Services;
 using eTIcketsAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,12 +31,14 @@ namespace eTicketsAPI
         {
             services.AddControllers();
 
-            /*services.AddDbContext<IB3012Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));*/
+            services.AddDbContext<IB3012Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddSwaggerGen();
 
             services.AddScoped<IWeatherForecastService, WeatherForecastService>();
+            services.AddScoped<IKorisnikService, KorisnikService>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

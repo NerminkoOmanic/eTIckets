@@ -2,7 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-#nullable disable
+// Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
+// If you have enabled NRTs for your project, then un-comment the following line:
+// #nullable disable
 
 namespace eTicketsAPI.Database
 {
@@ -17,35 +19,31 @@ namespace eTicketsAPI.Database
         {
         }
 
-        public virtual DbSet<Drzava> Drzavas { get; set; }
-        public virtual DbSet<Grad> Grads { get; set; }
-        public virtual DbSet<Kategorija> Kategorijas { get; set; }
-        public virtual DbSet<Komentar> Komentars { get; set; }
-        public virtual DbSet<Korisnik> Korisniks { get; set; }
-        public virtual DbSet<PodKategorija> PodKategorijas { get; set; }
-        public virtual DbSet<Slika> Slikas { get; set; }
-        public virtual DbSet<Spol> Spols { get; set; }
-        public virtual DbSet<Ticket> Tickets { get; set; }
-        public virtual DbSet<Transakcija> Transakcijas { get; set; }
-        public virtual DbSet<Uloga> Ulogas { get; set; }
+        public virtual DbSet<Drzava> Drzava { get; set; }
+        public virtual DbSet<Grad> Grad { get; set; }
+        public virtual DbSet<Kategorija> Kategorija { get; set; }
+        public virtual DbSet<Komentar> Komentar { get; set; }
+        public virtual DbSet<Korisnik> Korisnik { get; set; }
+        public virtual DbSet<PodKategorija> PodKategorija { get; set; }
+        public virtual DbSet<Slika> Slika { get; set; }
+        public virtual DbSet<Spol> Spol { get; set; }
+        public virtual DbSet<Ticket> Ticket { get; set; }
+        public virtual DbSet<Transakcija> Transakcija { get; set; }
+        public virtual DbSet<Uloga> Uloga { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+
                 optionsBuilder.UseSqlServer("Data Source=localhost,1434;Initial Catalog=IB3012; User=sa; Password=qweASD123!");
             }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
-
             modelBuilder.Entity<Drzava>(entity =>
             {
-                entity.ToTable("Drzava");
-
                 entity.Property(e => e.DrzavaId).HasColumnName("DrzavaID");
 
                 entity.Property(e => e.Naziv)
@@ -55,8 +53,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Grad>(entity =>
             {
-                entity.ToTable("Grad");
-
                 entity.Property(e => e.GradId).HasColumnName("GradID");
 
                 entity.Property(e => e.DrzavaId).HasColumnName("DrzavaID");
@@ -67,7 +63,7 @@ namespace eTicketsAPI.Database
                     .IsUnicode(false);
 
                 entity.HasOne(d => d.Drzava)
-                    .WithMany(p => p.Grads)
+                    .WithMany(p => p.Grad)
                     .HasForeignKey(d => d.DrzavaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Grad_Drzava");
@@ -75,8 +71,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Kategorija>(entity =>
             {
-                entity.ToTable("Kategorija");
-
                 entity.Property(e => e.KategorijaId).HasColumnName("KategorijaID");
 
                 entity.Property(e => e.Naziv)
@@ -86,16 +80,14 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Komentar>(entity =>
             {
-                entity.ToTable("Komentar");
-
                 entity.Property(e => e.KomentarId).HasColumnName("KomentarID");
 
                 entity.Property(e => e.Datum).HasColumnType("datetime");
 
                 entity.Property(e => e.Komentar1)
                     .IsRequired()
-                    .HasMaxLength(300)
-                    .HasColumnName("Komentar");
+                    .HasColumnName("Komentar")
+                    .HasMaxLength(300);
 
                 entity.Property(e => e.KomentatorId).HasColumnName("KomentatorID");
 
@@ -104,19 +96,19 @@ namespace eTicketsAPI.Database
                 entity.Property(e => e.TransakcijaId).HasColumnName("TransakcijaID");
 
                 entity.HasOne(d => d.Komentator)
-                    .WithMany(p => p.KomentarKomentators)
+                    .WithMany(p => p.KomentarKomentator)
                     .HasForeignKey(d => d.KomentatorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Komentar_Komentator");
 
                 entity.HasOne(d => d.Komentirani)
-                    .WithMany(p => p.KomentarKomentiranis)
+                    .WithMany(p => p.KomentarKomentirani)
                     .HasForeignKey(d => d.KomentiraniId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Komentar_KomentantiraniKorisnik");
 
                 entity.HasOne(d => d.Transakcija)
-                    .WithMany(p => p.Komentars)
+                    .WithMany(p => p.Komentar)
                     .HasForeignKey(d => d.TransakcijaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Komentar_Transakcija");
@@ -124,12 +116,12 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Korisnik>(entity =>
             {
-                entity.ToTable("Korisnik");
-
-                entity.HasIndex(e => e.Email, "CK_Email")
+                entity.HasIndex(e => e.Email)
+                    .HasName("CK_Email")
                     .IsUnique();
 
-                entity.HasIndex(e => e.KorisnickoIme, "CK_KorisnickoIme")
+                entity.HasIndex(e => e.KorisnickoIme)
+                    .HasName("CK_KorisnickoIme")
                     .IsUnique();
 
                 entity.Property(e => e.KorisnikId).HasColumnName("KorisnikID");
@@ -167,19 +159,19 @@ namespace eTicketsAPI.Database
                 entity.Property(e => e.UlogaId).HasColumnName("UlogaID");
 
                 entity.HasOne(d => d.Grad)
-                    .WithMany(p => p.Korisniks)
+                    .WithMany(p => p.Korisnik)
                     .HasForeignKey(d => d.GradId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Korisnik_Grad");
 
                 entity.HasOne(d => d.Spol)
-                    .WithMany(p => p.Korisniks)
+                    .WithMany(p => p.Korisnik)
                     .HasForeignKey(d => d.SpolId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Korisnik_Spol");
 
                 entity.HasOne(d => d.Uloga)
-                    .WithMany(p => p.Korisniks)
+                    .WithMany(p => p.Korisnik)
                     .HasForeignKey(d => d.UlogaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Korisnik_Uloga");
@@ -187,8 +179,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<PodKategorija>(entity =>
             {
-                entity.ToTable("PodKategorija");
-
                 entity.Property(e => e.PodKategorijaId).HasColumnName("PodKategorijaID");
 
                 entity.Property(e => e.KategorijaId).HasColumnName("KategorijaID");
@@ -198,7 +188,7 @@ namespace eTicketsAPI.Database
                     .HasMaxLength(40);
 
                 entity.HasOne(d => d.Kategorija)
-                    .WithMany(p => p.PodKategorijas)
+                    .WithMany(p => p.PodKategorija)
                     .HasForeignKey(d => d.KategorijaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_PodKategorija_Kategorija");
@@ -206,8 +196,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Slika>(entity =>
             {
-                entity.ToTable("Slika");
-
                 entity.Property(e => e.SlikaId).HasColumnName("SlikaID");
 
                 entity.Property(e => e.Slika1)
@@ -217,8 +205,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Spol>(entity =>
             {
-                entity.ToTable("Spol");
-
                 entity.Property(e => e.SpolId).HasColumnName("SpolID");
 
                 entity.Property(e => e.Naziv)
@@ -228,8 +214,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Ticket>(entity =>
             {
-                entity.ToTable("Ticket");
-
                 entity.Property(e => e.TicketId).HasColumnName("TicketID");
 
                 entity.Property(e => e.AdminId).HasColumnName("AdminID");
@@ -255,30 +239,30 @@ namespace eTicketsAPI.Database
                 entity.Property(e => e.SlikaId).HasColumnName("SlikaID");
 
                 entity.HasOne(d => d.Admin)
-                    .WithMany(p => p.TicketAdmins)
+                    .WithMany(p => p.TicketAdmin)
                     .HasForeignKey(d => d.AdminId)
                     .HasConstraintName("FK_Ulaznica_Admin");
 
                 entity.HasOne(d => d.Grad)
-                    .WithMany(p => p.Tickets)
+                    .WithMany(p => p.Ticket)
                     .HasForeignKey(d => d.GradId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Ulaznica_Grad");
 
                 entity.HasOne(d => d.PodKategorija)
-                    .WithMany(p => p.Tickets)
+                    .WithMany(p => p.Ticket)
                     .HasForeignKey(d => d.PodKategorijaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Ulaznica_PodKategorija");
 
                 entity.HasOne(d => d.Prodavac)
-                    .WithMany(p => p.TicketProdavacs)
+                    .WithMany(p => p.TicketProdavac)
                     .HasForeignKey(d => d.ProdavacId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Ulaznica_Prodavac");
 
                 entity.HasOne(d => d.Slika)
-                    .WithMany(p => p.Tickets)
+                    .WithMany(p => p.Ticket)
                     .HasForeignKey(d => d.SlikaId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Ulaznica_Slika");
@@ -286,8 +270,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Transakcija>(entity =>
             {
-                entity.ToTable("Transakcija");
-
                 entity.Property(e => e.TransakcijaId).HasColumnName("TransakcijaID");
 
                 entity.Property(e => e.Datum).HasColumnType("datetime");
@@ -297,13 +279,13 @@ namespace eTicketsAPI.Database
                 entity.Property(e => e.TicketId).HasColumnName("TicketID");
 
                 entity.HasOne(d => d.Kupac)
-                    .WithMany(p => p.Transakcijas)
+                    .WithMany(p => p.Transakcija)
                     .HasForeignKey(d => d.KupacId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Transakcija_Kupac");
 
                 entity.HasOne(d => d.Ticket)
-                    .WithMany(p => p.Transakcijas)
+                    .WithMany(p => p.Transakcija)
                     .HasForeignKey(d => d.TicketId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_Transakcija_Ulaznica");
@@ -311,8 +293,6 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Uloga>(entity =>
             {
-                entity.ToTable("Uloga");
-
                 entity.Property(e => e.UlogaId).HasColumnName("UlogaID");
 
                 entity.Property(e => e.Naziv)
