@@ -5,32 +5,34 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using eProdaja.Model;
 using eTicketsAPI.Database;
 using eTicketsAPI.Services;
 
 namespace eTicketsAPI.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class KorisnikController : BaseReadController<eProdaja.Model.Korisnik>
+ 
+    public class GradController : BaseReadController<eProdaja.Model.Grad>
     {
-        public KorisnikController(IKorisnikService korisnikService) :base(korisnikService)
+
+
+        public GradController(IGradService gradService) : base(gradService)
         {
         }
 
 
-        //// PUT: api/Korisnik/5
+        //// PUT: api/Grad/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for
         //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutKorisnik(int id, Korisnik korisnik)
+        //public async Task<IActionResult> PutGrad(int id, Grad grad)
         //{
-        //    if (id != korisnik.KorisnikId)
+        //    if (id != grad.GradId)
         //    {
         //        return BadRequest();
         //    }
 
-        //    _context.Entry(korisnik).State = EntityState.Modified;
+        //    _context.Entry(grad).State = EntityState.Modified;
 
         //    try
         //    {
@@ -38,7 +40,7 @@ namespace eTicketsAPI.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!KorisnikExists(id))
+        //        if (!GradExists(id))
         //        {
         //            return NotFound();
         //        }
@@ -51,37 +53,37 @@ namespace eTicketsAPI.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/Korisnik
+        //// POST: api/Grad
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for
         //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         //[HttpPost]
-        //public async Task<ActionResult<Korisnik>> PostKorisnik(Korisnik korisnik)
+        //public async Task<ActionResult<Grad>> PostGrad(Grad grad)
         //{
-        //    _context.Korisnik.Add(korisnik);
+        //    _context.Grad_1.Add(grad);
         //    await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction("GetKorisnik", new { id = korisnik.KorisnikId }, korisnik);
+        //    return CreatedAtAction("GetGrad", new { id = grad.GradId }, grad);
         //}
 
-        //// DELETE: api/Korisnik/5
+        //// DELETE: api/Grad/5
         //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Korisnik>> DeleteKorisnik(int id)
+        //public async Task<ActionResult<Grad>> DeleteGrad(int id)
         //{
-        //    var korisnik = await _context.Korisnik.FindAsync(id);
-        //    if (korisnik == null)
+        //    var grad = await _context.Grad_1.FindAsync(id);
+        //    if (grad == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    _context.Korisnik.Remove(korisnik);
+        //    _context.Grad_1.Remove(grad);
         //    await _context.SaveChangesAsync();
 
-        //    return korisnik;
+        //    return grad;
         //}
 
-        //private bool KorisnikExists(int id)
+        //private bool GradExists(int id)
         //{
-        //    return _context.Korisnik.Any(e => e.KorisnikId == id);
+        //    return _context.Grad_1.Any(e => e.GradId == id);
         //}
     }
 }
