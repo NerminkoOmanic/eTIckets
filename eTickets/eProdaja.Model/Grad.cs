@@ -9,7 +9,6 @@ namespace eProdaja.Model
         public int GradId { get; set; }
         public int DrzavaId { get; set; }
         public string Naziv { get; set; }
-
         public virtual Drzava Drzava { get; set; }
     }
 }

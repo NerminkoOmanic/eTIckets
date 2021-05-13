@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace eTicketsAPI.Services
 {
-    public interface IDrzavaService : IReadService<eProdaja.Model.Drzava>
+    public interface IDrzavaService : IReadService<eProdaja.Model.Drzava, object>
     {
         
     }

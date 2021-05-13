@@ -12,7 +12,7 @@ namespace eTicketsAPI.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class KorisnikController : BaseReadController<eProdaja.Model.Korisnik>
+    public class KorisnikController : BaseReadController<eProdaja.Model.Korisnik, object>
     {
         public KorisnikController(IKorisnikService korisnikService) :base(korisnikService)
         {

@@ -2,37 +2,36 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using eProdaja.Model;
+using eProdaja.Model.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using eProdaja.Model;
 using eTicketsAPI.Database;
 using eTicketsAPI.Services;
 
 namespace eTicketsAPI.Controllers
 {
- 
-    public class GradController : BaseReadController<eProdaja.Model.Grad, object>
+    public class TicketController : 
+        BaseCrudController<eProdaja.Model.Ticket, TicketSearchObject, TicketInsertRequest, TicketUpdateRequest>
     {
-
-
-        public GradController(IGradService gradService) : base(gradService)
+        public TicketController(ITicketService ticketService) : base(ticketService)
         {
         }
 
 
-        //// PUT: api/Grad/5
+        //// PUT: api/Korisnik/5
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for
         //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutGrad(int id, Grad grad)
+        //public async Task<IActionResult> PutKorisnik(int id, Korisnik korisnik)
         //{
-        //    if (id != grad.GradId)
+        //    if (id != korisnik.KorisnikId)
         //    {
         //        return BadRequest();
         //    }
 
-        //    _context.Entry(grad).State = EntityState.Modified;
+        //    _context.Entry(korisnik).State = EntityState.Modified;
 
         //    try
         //    {
@@ -40,7 +39,7 @@ namespace eTicketsAPI.Controllers
         //    }
         //    catch (DbUpdateConcurrencyException)
         //    {
-        //        if (!GradExists(id))
+        //        if (!KorisnikExists(id))
         //        {
         //            return NotFound();
         //        }
@@ -53,37 +52,37 @@ namespace eTicketsAPI.Controllers
         //    return NoContent();
         //}
 
-        //// POST: api/Grad
+        //// POST: api/Korisnik
         //// To protect from overposting attacks, enable the specific properties you want to bind to, for
         //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         //[HttpPost]
-        //public async Task<ActionResult<Grad>> PostGrad(Grad grad)
+        //public async Task<ActionResult<Korisnik>> PostKorisnik(Korisnik korisnik)
         //{
-        //    _context.Grad_1.Add(grad);
+        //    _context.Korisnik.Add(korisnik);
         //    await _context.SaveChangesAsync();
 
-        //    return CreatedAtAction("GetGrad", new { id = grad.GradId }, grad);
+        //    return CreatedAtAction("GetKorisnik", new { id = korisnik.KorisnikId }, korisnik);
         //}
 
-        //// DELETE: api/Grad/5
+        //// DELETE: api/Korisnik/5
         //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Grad>> DeleteGrad(int id)
+        //public async Task<ActionResult<Korisnik>> DeleteKorisnik(int id)
         //{
-        //    var grad = await _context.Grad_1.FindAsync(id);
-        //    if (grad == null)
+        //    var korisnik = await _context.Korisnik.FindAsync(id);
+        //    if (korisnik == null)
         //    {
         //        return NotFound();
         //    }
 
-        //    _context.Grad_1.Remove(grad);
+        //    _context.Korisnik.Remove(korisnik);
         //    await _context.SaveChangesAsync();
 
-        //    return grad;
+        //    return korisnik;
         //}
 
-        //private bool GradExists(int id)
+        //private bool KorisnikExists(int id)
         //{
-        //    return _context.Grad_1.Any(e => e.GradId == id);
+        //    return _context.Korisnik.Any(e => e.KorisnikId == id);
         //}
     }
 }

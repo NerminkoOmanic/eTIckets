@@ -11,7 +11,7 @@ using eTicketsAPI.Services;
 
 namespace eTicketsAPI.Controllers
 {
-    public class DrzavaController : BaseReadController<eProdaja.Model.Drzava>
+    public class DrzavaController : BaseReadController<eProdaja.Model.Drzava, object>
     {
 
         public DrzavaController(IDrzavaService drzavaService)

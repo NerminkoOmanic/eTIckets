@@ -7,7 +7,7 @@ using eTicketsAPI.Database;
 
 namespace eTicketsAPI.Services
 {
-    public class BaseReadService<T, TDb> : IReadService<T> where T:class where TDb:class
+    public class BaseReadService<T, TDb, TSearch> : IReadService<T, TSearch> where T : class where TDb : class where TSearch:class
     {
         public IB3012Context Context { get; set; }
         protected readonly IMapper _mapper;
@@ -17,7 +17,7 @@ namespace eTicketsAPI.Services
             Context = context;
             _mapper = mapper;
         }
-        public virtual IEnumerable<T> Get()
+        public virtual IEnumerable<T> Get(TSearch search = null)
         {
             var dbSet = Context.Set<TDb>();
 
@@ -29,7 +29,7 @@ namespace eTicketsAPI.Services
         public virtual T GetById(int id)
         {
             var dbSet = Context.Set<TDb>();
-
+            
             var entity = dbSet.Find(id);
 
             return _mapper.Map<T>(entity);

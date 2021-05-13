@@ -7,7 +7,7 @@ using eProdaja.Model;
 
 namespace eTicketsAPI.Services
 {
-    public interface IKorisnikService : IReadService<eProdaja.Model.Korisnik>
+    public interface IKorisnikService : IReadService<eProdaja.Model.Korisnik, object>
     {
 
     }

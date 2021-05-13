@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace eTicketsAPI.Services
 {
-    public interface IGradService : IReadService<eProdaja.Model.Grad>
+    public interface IGradService : IReadService<eProdaja.Model.Grad, object>
     {
     }
 }
