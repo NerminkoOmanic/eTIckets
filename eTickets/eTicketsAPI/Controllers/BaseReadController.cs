@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace eTicketsAPI.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class BaseReadController<T, TSearch> : ControllerBase where T:class where TSearch:class
     {
         protected readonly IReadService<T, TSearch> _service;

@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTicketsAPI.Services
 {
-    public class KorisnikService : BaseReadService<eProdaja.Model.Korisnik, Database.Korisnik, object>, IKorisnikService
+    public class KorisnikService : BaseReadService<eTickets.Model.Korisnik, Database.Korisnik, object>, IKorisnikService
     {
         public KorisnikService(IB3012Context context, IMapper mapper) : base(context,mapper)
         {

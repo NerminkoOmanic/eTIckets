@@ -12,7 +12,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using eTicketsAPI.Database;
 using eTicketsAPI.Services;
-using eTIcketsAPI.Services;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTicketsAPI

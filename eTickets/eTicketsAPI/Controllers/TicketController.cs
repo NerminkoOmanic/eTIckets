@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eProdaja.Model;
-using eProdaja.Model.Requests;
+using eTickets.Model;
+using eTickets.Model.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +13,7 @@ using eTicketsAPI.Services;
 namespace eTicketsAPI.Controllers
 {
     public class TicketController : 
-        BaseCrudController<eProdaja.Model.Ticket, TicketSearchObject, TicketInsertRequest, TicketUpdateRequest>
+        BaseCrudController<eTickets.Model.Ticket, TicketSearchObject, TicketInsertRequest, TicketUpdateRequest>
     {
         public TicketController(ITicketService ticketService) : base(ticketService)
         {

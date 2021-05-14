@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using eTicketsAPI;
+﻿using System.Collections.Generic;
 
-namespace eTIcketsAPI.Services
+namespace eTicketsAPI.Services
 {
     public interface IWeatherForecastService
     {

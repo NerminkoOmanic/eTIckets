@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
-namespace eProdaja.Model
+namespace eTickets.Model
 {
     public partial class Ticket
     {

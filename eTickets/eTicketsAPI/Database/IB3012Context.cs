@@ -1,7 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
-using eProdaja.Model;
 
 // Code scaffolded by EF Core assumes nullable reference types (NRTs) are not used or disabled.
 // If you have enabled NRTs for your project, then un-comment the following line:
@@ -306,8 +305,8 @@ namespace eTicketsAPI.Database
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);
 
-        public DbSet<eProdaja.Model.Drzava> Drzava_1 { get; set; }
+        public DbSet<eTickets.Model.Drzava> Drzava_1 { get; set; }
 
-        public DbSet<eProdaja.Model.Grad> Grad_1 { get; set; }
+        public DbSet<eTickets.Model.Grad> Grad_1 { get; set; }
     }
 }

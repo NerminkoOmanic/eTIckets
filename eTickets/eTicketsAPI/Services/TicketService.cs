@@ -3,15 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using eProdaja.Model;
-using eProdaja.Model.Requests;
+using eTickets.Model;
+using eTickets.Model.Requests;
 using eTicketsAPI.Database;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTicketsAPI.Services
 {
     public class TicketService 
-        : BaseCrudService<eProdaja.Model.Ticket, Database.Ticket , TicketSearchObject, TicketInsertRequest,TicketUpdateRequest>,
+        : BaseCrudService<eTickets.Model.Ticket, Database.Ticket , TicketSearchObject, TicketInsertRequest,TicketUpdateRequest>,
             ITicketService
     {
         public TicketService(IB3012Context context, IMapper mapper)
@@ -19,7 +19,7 @@ namespace eTicketsAPI.Services
         {
         }
 
-        public override IEnumerable<eProdaja.Model.Ticket> Get(TicketSearchObject search = null)
+        public override IEnumerable<eTickets.Model.Ticket> Get(TicketSearchObject search = null)
         {
             var dbSet = Context.Set<Database.Ticket>().AsQueryable();
 
@@ -49,7 +49,7 @@ namespace eTicketsAPI.Services
 
             var list = dbSet.ToList();
 
-            return _mapper.Map<List<eProdaja.Model.Ticket>>(list);
+            return _mapper.Map<List<eTickets.Model.Ticket>>(list);
         }
     }
 }

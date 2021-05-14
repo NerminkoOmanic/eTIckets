@@ -2,11 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using eProdaja.Model.Requests;
+using eTickets.Model;
+using eTickets.Model.Requests;
 
 namespace eTicketsAPI.Services
 {
-    public interface ITicketService : ICrudService<eProdaja.Model.Ticket, eProdaja.Model.TicketSearchObject,TicketInsertRequest,TicketUpdateRequest>
+    public interface ITicketService : ICrudService<eTickets.Model.Ticket, TicketSearchObject,TicketInsertRequest,TicketUpdateRequest>
     {
     }
 }

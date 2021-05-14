@@ -23,7 +23,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\eProdaja.Model\eProdaja.Model.csproj" />
+    <ProjectReference Include="..\eProdaja.Model\eTickets.Model.csproj" />
   </ItemGroup>
 
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using eProdaja.Model.Requests;
+using eTickets.Model.Requests;
 
 namespace eTicketsAPI.Mapping
 {
@@ -11,10 +11,10 @@ namespace eTicketsAPI.Mapping
     {
         public eProdajaProfile()
         {
-            CreateMap<Database.Korisnik, eProdaja.Model.Korisnik>();
-            CreateMap<Database.Drzava, eProdaja.Model.Drzava>();
-            CreateMap<Database.Grad, eProdaja.Model.Grad>();
-            CreateMap<Database.Ticket, eProdaja.Model.Ticket>();
+            CreateMap<Database.Korisnik, eTickets.Model.Korisnik>();
+            CreateMap<Database.Drzava, eTickets.Model.Drzava>();
+            CreateMap<Database.Grad, eTickets.Model.Grad>();
+            CreateMap<Database.Ticket, eTickets.Model.Ticket>();
             CreateMap<TicketInsertRequest , Database.Ticket>();
             CreateMap<TicketUpdateRequest, Database.Ticket>();
         }
