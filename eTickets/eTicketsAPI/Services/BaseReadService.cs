@@ -25,7 +25,6 @@ namespace eTicketsAPI.Services
 
             return _mapper.Map<List<T>>(list);
         }
-
         public virtual T GetById(int id)
         {
             var dbSet = Context.Set<TDb>();

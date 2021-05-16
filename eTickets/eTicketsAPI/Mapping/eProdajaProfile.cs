@@ -17,6 +17,9 @@ namespace eTicketsAPI.Mapping
             CreateMap<Database.Ticket, eTickets.Model.Ticket>();
             CreateMap<TicketInsertRequest , Database.Ticket>();
             CreateMap<TicketUpdateRequest, Database.Ticket>();
+            CreateMap<KorisnikInsertRequest, Database.Korisnik>();
+            CreateMap<KorisnikUpdateRequest, Database.Korisnik>();
+
         }
     }
 }
