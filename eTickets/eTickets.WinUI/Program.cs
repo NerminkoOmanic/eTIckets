@@ -17,7 +17,7 @@ namespace eTickets.WinUI
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmKlijenti());
+            Application.Run(new frmIndex());
         }
     }
 }

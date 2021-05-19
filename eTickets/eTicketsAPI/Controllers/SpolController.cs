@@ -8,13 +8,14 @@ using Microsoft.EntityFrameworkCore;
 using eTicketsAPI.Database;
 using eTicketsAPI.Services;
 
+
 namespace eTicketsAPI.Controllers
 {
- 
-    public class GradController : BaseReadController<eTickets.Model.Grad, object>
+    public class SpolController : BaseReadController<eTickets.Model.Spol, object>
     {
 
-        public GradController(IGradService gradService) : base(gradService)
+        public SpolController(ISpolService spolService)
+        :base(spolService)
         {
         }
 

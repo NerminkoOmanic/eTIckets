@@ -41,10 +41,14 @@
     <Reference Include="Flurl.Http, Version=3.2.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Flurl.Http.3.2.0\lib\net472\Flurl.Http.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Annotations, Version=4.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ComponentModel.Annotations.5.0.0\lib\net461\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,19 +68,82 @@
     <Compile Include="frmIndex.Designer.cs">
       <DependentUpon>frmIndex.cs</DependentUpon>
     </Compile>
+    <Compile Include="Kategorija\frmKategorije.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kategorija\frmKategorije.Designer.cs">
+      <DependentUpon>frmKategorije.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Kategorija\frmPodKategorija.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Kategorija\frmPodKategorija.Designer.cs">
+      <DependentUpon>frmPodKategorija.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\frmAdministratori.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\frmAdministratori.Designer.cs">
+      <DependentUpon>frmAdministratori.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\frmEditAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\frmEditAdmin.Designer.cs">
+      <DependentUpon>frmEditAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Korisnik\frmKlijenti.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Korisnik\frmKlijenti.Designer.cs">
       <DependentUpon>frmKlijenti.cs</DependentUpon>
     </Compile>
+    <Compile Include="Korisnik\frmDodajAdmina.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\frmDodajAdmina.Designer.cs">
+      <DependentUpon>frmDodajAdmina.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\frmProfil.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\frmProfil.Designer.cs">
+      <DependentUpon>frmProfil.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Korisnik\frmSelectedAdmin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Korisnik\frmSelectedAdmin.Designer.cs">
+      <DependentUpon>frmSelectedAdmin.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="frmIndex.resx">
       <DependentUpon>frmIndex.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Kategorija\frmKategorije.resx">
+      <DependentUpon>frmKategorije.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Kategorija\frmPodKategorija.resx">
+      <DependentUpon>frmPodKategorija.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\frmAdministratori.resx">
+      <DependentUpon>frmAdministratori.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\frmDodajAdmina.resx">
+      <DependentUpon>frmDodajAdmina.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\frmEditAdmin.resx">
+      <DependentUpon>frmEditAdmin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Korisnik\frmKlijenti.resx">
       <DependentUpon>frmKlijenti.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\frmProfil.resx">
+      <DependentUpon>frmProfil.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Korisnik\frmSelectedAdmin.resx">
+      <DependentUpon>frmSelectedAdmin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -105,8 +172,11 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\eProdaja.Model\eTickets.Model.csproj">
-      <Project>{ade37adc-9c49-4032-9077-5f1ff44b4cb9}</Project>
+    <Folder Include="Ticket\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\eTickets.Model\eTickets.Model.csproj">
+      <Project>{0F08A8B9-F5B5-4C9B-A899-ECC4A95E4EE0}</Project>
       <Name>eTickets.Model</Name>
     </ProjectReference>
   </ItemGroup>

@@ -1,0 +1,119 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using eTickets.Model.Requests;
+
+namespace eTickets.WinUI.Korisnik
+{
+    public partial class frmEditAdmin : Form
+    {
+        private readonly APIService _korisnikService = new APIService("korisnik");
+        private readonly APIService _gradService = new APIService("grad");
+        private readonly APIService _spolService = new APIService("spol");
+
+
+        private int? _id = null;
+        private int _gradID;
+        public frmEditAdmin(int korisnikId)
+        {
+            InitializeComponent();
+            _id = korisnikId;
+        }
+
+        private async void frmEditAdmin_Load(object sender, EventArgs e)
+        {
+            BindGrad();
+
+            var entity = await _korisnikService.GetById<eTickets.Model.Korisnik>(_id);
+
+            txtbEmail.Text = entity.Email;
+            txtbTelefon.Text = entity.Telefon;
+            _gradID = entity.GradId;
+        }
+        private async void BindGrad()
+        {
+            var lst = await _gradService.Get<List<eTickets.Model.Grad>>(null);
+            
+            lst.Insert(0,new Model.Grad());
+
+            cmbGrad.DataSource = lst;
+            cmbGrad.DisplayMember = "Naziv";
+            cmbGrad.ValueMember = "GradId";
+        }
+        
+        private async void btnSave_Click(object sender, EventArgs e)
+        {
+            if (this.ValidateChildren())
+            {
+                var request = new KorisnikUpdateRequest()
+                {
+                    Email = txtbEmail.Text,
+                    Telefon = txtbTelefon.Text,
+                };
+
+                if (txtbLozinka.TextLength>4)
+                    request.Lozinka = txtbLozinka.Text;
+            
+
+                request.GradId = cmbGrad.SelectedIndex > 0 ? cmbGrad.SelectedIndex : _gradID;
+
+                await _korisnikService.Update<Model.Korisnik>(_id, request);
+
+                MessageBox.Show("Successfully edited personal datas");
+                this.Close();
+            }
+            
+        }
+
+
+        #region Validation
+        private void txtbEmail_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtbEmail.Text))
+            {
+                errorProvider.SetError(txtbEmail,"*Required field");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtbEmail,null);
+            }
+        }
+        private void txtbLozinka_Validating(object sender, CancelEventArgs e)
+        {
+            
+        }
+        private void txtbPotvrdaLozinke_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtbPotvrdaLozinke.Text != txtbLozinka.Text)
+            {
+                errorProvider.SetError(txtbPotvrdaLozinke,"Password and confirmation does not match !!");
+                e.Cancel = true;
+            }
+        }
+        private void txtbTelefon_Validating(object sender, CancelEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(txtbTelefon.Text))
+            {
+                errorProvider.SetError(txtbTelefon,"*Required field");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtbTelefon,null);
+            }
+        }
+        private void cmbGrad_Validating(object sender, CancelEventArgs e)
+        {
+            
+        }
+        #endregion
+        
+    }
+}

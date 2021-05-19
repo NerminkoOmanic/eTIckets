@@ -41,6 +41,13 @@ namespace eTicketsAPI
             services.AddScoped<IDrzavaService, DrzavaService>();
             services.AddScoped<IGradService, GradService>();
             services.AddScoped<ITicketService, TicketService>();
+            services.AddScoped<IUlogaService, UlogaService>();
+            services.AddScoped<ISpolService, SpolService>();
+            services.AddScoped<IKategorijaService, KategorijaService>();
+            services.AddScoped<IPodKategorijaService, PodKategorijaService>();
+
+
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

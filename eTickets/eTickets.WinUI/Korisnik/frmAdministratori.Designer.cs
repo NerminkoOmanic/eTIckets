@@ -1,7 +1,7 @@
 ﻿
 namespace eTickets.WinUI.Korisnik
 {
-    partial class frmKlijenti
+    partial class frmAdministratori
     {
         /// <summary>
         /// Required designer variable.
@@ -29,125 +29,130 @@ namespace eTickets.WinUI.Korisnik
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtbSearch = new System.Windows.Forms.TextBox();
+            this.dgvAdministratori = new System.Windows.Forms.DataGridView();
             this.BtnSearch = new System.Windows.Forms.Button();
+            this.txtbSearch = new System.Windows.Forms.TextBox();
+            this.btnDodaj = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
-            this.dgvKlijenti = new System.Windows.Forms.DataGridView();
-            this.ID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.AdminId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefon = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKlijenti)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAdministratori)).BeginInit();
             this.SuspendLayout();
             // 
-            // txtbSearch
+            // dgvAdministratori
             // 
-            this.txtbSearch.Location = new System.Drawing.Point(15, 53);
-            this.txtbSearch.Name = "txtbSearch";
-            this.txtbSearch.Size = new System.Drawing.Size(182, 20);
-            this.txtbSearch.TabIndex = 0;
-            // 
-            // BtnSearch
-            // 
-            this.BtnSearch.Location = new System.Drawing.Point(224, 52);
-            this.BtnSearch.Name = "BtnSearch";
-            this.BtnSearch.Size = new System.Drawing.Size(75, 21);
-            this.BtnSearch.TabIndex = 1;
-            this.BtnSearch.Text = "Search";
-            this.BtnSearch.UseVisualStyleBackColor = true;
-            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 37);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(61, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Username :";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
-            // dgvKlijenti
-            // 
-            this.dgvKlijenti.AllowUserToAddRows = false;
-            this.dgvKlijenti.AllowUserToDeleteRows = false;
-            this.dgvKlijenti.AllowUserToResizeColumns = false;
-            this.dgvKlijenti.AllowUserToResizeRows = false;
-            this.dgvKlijenti.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dgvKlijenti.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvKlijenti.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.ID,
+            this.dgvAdministratori.AllowUserToAddRows = false;
+            this.dgvAdministratori.AllowUserToDeleteRows = false;
+            this.dgvAdministratori.AllowUserToResizeColumns = false;
+            this.dgvAdministratori.AllowUserToResizeRows = false;
+            this.dgvAdministratori.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvAdministratori.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvAdministratori.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.AdminId,
             this.KorisnickoIme,
             this.Ime,
             this.Prezime,
             this.Email,
             this.Telefon});
-            this.dgvKlijenti.Location = new System.Drawing.Point(15, 90);
-            this.dgvKlijenti.Name = "dgvKlijenti";
-            this.dgvKlijenti.ReadOnly = true;
-            this.dgvKlijenti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvKlijenti.Size = new System.Drawing.Size(642, 291);
-            this.dgvKlijenti.TabIndex = 3;
-            this.dgvKlijenti.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvKlijenti_MouseDoubleClick);
+            this.dgvAdministratori.Location = new System.Drawing.Point(15, 93);
+            this.dgvAdministratori.Name = "dgvAdministratori";
+            this.dgvAdministratori.ReadOnly = true;
+            this.dgvAdministratori.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvAdministratori.Size = new System.Drawing.Size(657, 272);
+            this.dgvAdministratori.TabIndex = 7;
+            this.dgvAdministratori.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvAdministratori_MouseDoubleClick);
             // 
-            // ID
+            // BtnSearch
             // 
-            this.ID.DataPropertyName = "KorisnikId";
-            this.ID.HeaderText = "ID";
-            this.ID.Name = "ID";
-            this.ID.ReadOnly = true;
-            this.ID.Visible = false;
+            this.BtnSearch.Location = new System.Drawing.Point(222, 51);
+            this.BtnSearch.Name = "BtnSearch";
+            this.BtnSearch.Size = new System.Drawing.Size(76, 20);
+            this.BtnSearch.TabIndex = 5;
+            this.BtnSearch.Text = "Search";
+            this.BtnSearch.UseVisualStyleBackColor = true;
+            this.BtnSearch.Click += new System.EventHandler(this.BtnSearch_Click);
+            // 
+            // txtbSearch
+            // 
+            this.txtbSearch.Location = new System.Drawing.Point(15, 51);
+            this.txtbSearch.Name = "txtbSearch";
+            this.txtbSearch.Size = new System.Drawing.Size(187, 20);
+            this.txtbSearch.TabIndex = 4;
+            // 
+            // btnDodaj
+            // 
+            this.btnDodaj.Location = new System.Drawing.Point(599, 48);
+            this.btnDodaj.Name = "btnDodaj";
+            this.btnDodaj.Size = new System.Drawing.Size(73, 23);
+            this.btnDodaj.TabIndex = 8;
+            this.btnDodaj.Text = "Add";
+            this.btnDodaj.UseVisualStyleBackColor = true;
+            this.btnDodaj.Click += new System.EventHandler(this.btnDodaj_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 35);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(61, 13);
+            this.label1.TabIndex = 9;
+            this.label1.Text = "Username :";
+            // 
+            // AdminId
+            // 
+            this.AdminId.DataPropertyName = "KorisnikId";
+            this.AdminId.HeaderText = "Id";
+            this.AdminId.Name = "AdminId";
+            this.AdminId.Visible = false;
             // 
             // KorisnickoIme
             // 
             this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
             this.KorisnickoIme.HeaderText = "Username";
             this.KorisnickoIme.Name = "KorisnickoIme";
-            this.KorisnickoIme.ReadOnly = true;
             // 
             // Ime
             // 
             this.Ime.DataPropertyName = "Ime";
             this.Ime.HeaderText = "First name";
             this.Ime.Name = "Ime";
-            this.Ime.ReadOnly = true;
             // 
             // Prezime
             // 
             this.Prezime.DataPropertyName = "Prezime";
             this.Prezime.HeaderText = "Last name";
             this.Prezime.Name = "Prezime";
-            this.Prezime.ReadOnly = true;
             // 
             // Email
             // 
             this.Email.DataPropertyName = "Email";
             this.Email.HeaderText = "Email";
             this.Email.Name = "Email";
-            this.Email.ReadOnly = true;
             // 
             // Telefon
             // 
             this.Telefon.DataPropertyName = "Telefon";
             this.Telefon.HeaderText = "Phone number";
             this.Telefon.Name = "Telefon";
-            this.Telefon.ReadOnly = true;
             // 
-            // frmKlijenti
+            // frmAdministratori
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(740, 488);
-            this.Controls.Add(this.dgvKlijenti);
+            this.ClientSize = new System.Drawing.Size(819, 484);
             this.Controls.Add(this.label1);
+            this.Controls.Add(this.btnDodaj);
+            this.Controls.Add(this.dgvAdministratori);
             this.Controls.Add(this.BtnSearch);
             this.Controls.Add(this.txtbSearch);
-            this.Name = "frmKlijenti";
-            this.Text = "Klijenti";
-            this.Load += new System.EventHandler(this.frmKlijenti_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvKlijenti)).EndInit();
+            this.Name = "frmAdministratori";
+            this.Text = "Administratori";
+            this.Load += new System.EventHandler(this.frmAdministratori_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvAdministratori)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,11 +160,12 @@ namespace eTickets.WinUI.Korisnik
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtbSearch;
+        private System.Windows.Forms.DataGridView dgvAdministratori;
         private System.Windows.Forms.Button BtnSearch;
+        private System.Windows.Forms.TextBox txtbSearch;
+        private System.Windows.Forms.Button btnDodaj;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dgvKlijenti;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn AdminId;
         private System.Windows.Forms.DataGridViewTextBoxColumn KorisnickoIme;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ime;
         private System.Windows.Forms.DataGridViewTextBoxColumn Prezime;

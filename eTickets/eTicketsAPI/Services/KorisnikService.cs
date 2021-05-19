@@ -22,10 +22,16 @@ namespace eTicketsAPI.Services
         {
                 var dbSet = Context.Korisnik.AsQueryable();
 
+                if (search.UlogaId != 0)
+                {
+                dbSet = dbSet.Where(x => x.UlogaId == search.UlogaId);
+
+                }
                 if (!String.IsNullOrWhiteSpace(search?.KorisnickoIme))
                 {
                     dbSet = dbSet.Where(x => x.KorisnickoIme.Contains(search.KorisnickoIme));
                 }
+                
 
                 var list = dbSet.ToList();
                 return _mapper.Map<List<eTickets.Model.Korisnik>>(list);
@@ -48,6 +54,12 @@ namespace eTicketsAPI.Services
 
         public override eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest request)
         {
+            if (!string.IsNullOrWhiteSpace(request.Lozinka))
+            {
+                request.PasswordSalt = GenerateSalt();
+                request.PasswordHash = GenerateHash(request.PasswordSalt, request.Lozinka);
+            }
+            
             var entity = Context.Korisnik.Find(id);
             _mapper.Map(request, entity);
 

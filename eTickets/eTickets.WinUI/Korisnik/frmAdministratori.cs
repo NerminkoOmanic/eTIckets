@@ -7,27 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using eTickets.Model;
 using eTickets.Model.Requests;
-using Flurl;
-using Flurl.Http;
 
 namespace eTickets.WinUI.Korisnik
 {
-    public partial class frmKlijenti : Form
+    public partial class frmAdministratori : Form
     {
         private readonly APIService _apiService = new APIService("korisnik");
-        public frmKlijenti()
+
+        public frmAdministratori()
         {
             InitializeComponent();
-            dgvKlijenti.AutoGenerateColumns = false;
-        }
-        private  void GenerateGrid(KorisnikSearchRequest search)
-        {
-            
+            dgvAdministratori.AutoGenerateColumns = false;
         }
 
-        private void label1_Click(object sender, EventArgs e)
+        private void btnDodaj_Click(object sender, EventArgs e)
+        {
+            frmDodajAdmina frm = new frmDodajAdmina();
+            frm.Show();
+        }
+
+        private void frmAdministratori_Load(object sender, EventArgs e)
         {
 
         }
@@ -37,24 +37,19 @@ namespace eTickets.WinUI.Korisnik
             var search = new KorisnikSearchRequest()
             {
                 KorisnickoIme = txtbSearch.Text,
-                UlogaId = 2 //Klijenti uloga id = 2, prikaz klijenata
+                UlogaId = 1 //Admin uloga id = 1, prikaz admina
             };
             var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
 
-            dgvKlijenti.DataSource = result;
+            dgvAdministratori.DataSource = result;
         }
 
-        private void frmKlijenti_Load(object sender, EventArgs e)
+        private void dgvAdministratori_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            
-        }
+            var id = dgvAdministratori.SelectedRows[0].Cells[0].Value;
 
-        private void dgvKlijenti_MouseDoubleClick(object sender, MouseEventArgs e)
-        {
-            var id = dgvKlijenti.SelectedRows[0].Cells[0].Value;
-
-            //frmDodajAdmina frm = new frmDodajAdmina(int.Parse(id.ToString()));
-            //frm.Show();
+            frmEditAdmin frm = new frmEditAdmin(int.Parse(id.ToString()));
+            frm.Show();
         }
     }
 }

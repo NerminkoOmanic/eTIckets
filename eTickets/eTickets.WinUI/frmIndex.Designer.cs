@@ -36,6 +36,8 @@ namespace eTickets.WinUI
             this.clientsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.administratorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator8 = new System.Windows.Forms.ToolStripSeparator();
+            this.profileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ticketsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator5 = new System.Windows.Forms.ToolStripSeparator();
             this.requestsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -70,7 +72,9 @@ namespace eTickets.WinUI
             this.toolStripSeparator1,
             this.clientsToolStripMenuItem,
             this.toolStripSeparator2,
-            this.administratorsToolStripMenuItem});
+            this.administratorsToolStripMenuItem,
+            this.toolStripSeparator8,
+            this.profileToolStripMenuItem});
             this.usersToolStripMenuItem.Name = "usersToolStripMenuItem";
             this.usersToolStripMenuItem.Size = new System.Drawing.Size(47, 20);
             this.usersToolStripMenuItem.Text = "&Users";
@@ -78,25 +82,38 @@ namespace eTickets.WinUI
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // clientsToolStripMenuItem
             // 
             this.clientsToolStripMenuItem.Name = "clientsToolStripMenuItem";
-            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clientsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.clientsToolStripMenuItem.Text = "Clients";
             this.clientsToolStripMenuItem.Click += new System.EventHandler(this.clientsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(149, 6);
             // 
             // administratorsToolStripMenuItem
             // 
             this.administratorsToolStripMenuItem.Name = "administratorsToolStripMenuItem";
-            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.administratorsToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.administratorsToolStripMenuItem.Text = "Administrators";
+            this.administratorsToolStripMenuItem.Click += new System.EventHandler(this.administratorsToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator8
+            // 
+            this.toolStripSeparator8.Name = "toolStripSeparator8";
+            this.toolStripSeparator8.Size = new System.Drawing.Size(149, 6);
+            // 
+            // profileToolStripMenuItem
+            // 
+            this.profileToolStripMenuItem.Name = "profileToolStripMenuItem";
+            this.profileToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.profileToolStripMenuItem.Text = "Profile";
+            this.profileToolStripMenuItem.Click += new System.EventHandler(this.profileToolStripMenuItem_Click);
             // 
             // ticketsToolStripMenuItem
             // 
@@ -110,6 +127,7 @@ namespace eTickets.WinUI
             this.ticketsToolStripMenuItem.Name = "ticketsToolStripMenuItem";
             this.ticketsToolStripMenuItem.Size = new System.Drawing.Size(55, 20);
             this.ticketsToolStripMenuItem.Text = "&Tickets";
+            this.ticketsToolStripMenuItem.Click += new System.EventHandler(this.ticketsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
@@ -165,6 +183,7 @@ namespace eTickets.WinUI
             this.categoriesToolStripMenuItem1.Name = "categoriesToolStripMenuItem1";
             this.categoriesToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
             this.categoriesToolStripMenuItem1.Text = "Categories";
+            this.categoriesToolStripMenuItem1.Click += new System.EventHandler(this.categoriesToolStripMenuItem1_Click);
             // 
             // toolStripSeparator4
             // 
@@ -176,17 +195,20 @@ namespace eTickets.WinUI
             this.subcategoriesToolStripMenuItem.Name = "subcategoriesToolStripMenuItem";
             this.subcategoriesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.subcategoriesToolStripMenuItem.Text = "Subcategories";
+            this.subcategoriesToolStripMenuItem.Click += new System.EventHandler(this.subcategoriesToolStripMenuItem_Click);
             // 
             // frmIndex
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ControlLight;
             this.ClientSize = new System.Drawing.Size(632, 453);
             this.Controls.Add(this.menuStrip);
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip;
             this.Name = "frmIndex";
-            this.Text = "frmIndex";
+            this.Text = "Admin panel";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip.ResumeLayout(false);
             this.menuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -215,6 +237,8 @@ namespace eTickets.WinUI
         private System.Windows.Forms.ToolStripMenuItem categoriesToolStripMenuItem1;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem subcategoriesToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator8;
+        private System.Windows.Forms.ToolStripMenuItem profileToolStripMenuItem;
     }
 }
 

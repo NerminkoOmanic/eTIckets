@@ -11,10 +11,10 @@ using eTicketsAPI.Services;
 namespace eTicketsAPI.Controllers
 {
  
-    public class GradController : BaseReadController<eTickets.Model.Grad, object>
+    public class PodKategorijaController : BaseReadController<eTickets.Model.PodKategorija, object>
     {
 
-        public GradController(IGradService gradService) : base(gradService)
+        public PodKategorijaController(IPodKategorijaService podKategorijaService) : base(podKategorijaService)
         {
         }
 

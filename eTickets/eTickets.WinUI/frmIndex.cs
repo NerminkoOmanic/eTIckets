@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using eTickets.WinUI.Kategorija;
+using eTickets.WinUI.Korisnik;
 
 namespace eTickets.WinUI
 {
@@ -106,7 +108,47 @@ namespace eTickets.WinUI
 
         private void clientsToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            frmKlijenti frm = new frmKlijenti();
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
 
+        private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void administratorsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmAdministratori frm = new frmAdministratori();
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void categoriesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            frmKategorije frm = new frmKategorije();
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void subcategoriesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmPodKategorija frm = new frmPodKategorija();
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void profileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmProfil frm = new frmProfil(1);
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
         }
     }
 }

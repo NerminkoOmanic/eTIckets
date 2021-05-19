@@ -4,7 +4,7 @@ using System.Text;
 
 namespace eTickets.Model
 {
-    public class Uloga
+    public partial class Uloga
     {
         public int UlogaId { get; set; }
         public string Naziv { get; set; }
