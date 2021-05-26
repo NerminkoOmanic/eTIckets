@@ -8,7 +8,5 @@ namespace eTickets.Model.Requests
     {
         public string KorisnickoIme { get; set; }
         public int UlogaId { get; set; }
-        //public string Ime { get; set; }
-        //public string Prezime { get; set; }
     }
 }

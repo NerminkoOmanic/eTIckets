@@ -16,13 +16,12 @@ namespace eTickets.Model
         public int GradId { get; set; }
         public int PodKategorijaId { get; set; }
         public int? AdminId { get; set; }
-        public bool Odobreno { get; set; }
         public bool Prodano { get; set; }
 
         public virtual Korisnik Admin { get; set; }
         public virtual Grad Grad { get; set; }
-        ////public virtual PodKategorija PodKategorija { get; set; }
-        //public virtual Korisnik Prodavac { get; set; }
-        //public virtual Slika Slika { get; set; }
+        public virtual PodKategorija PodKategorija { get; set; }
+        public virtual Korisnik Prodavac { get; set; }
+        public virtual Slika Slika { get; set; }
     }
 }

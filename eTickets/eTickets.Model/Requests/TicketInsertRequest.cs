@@ -17,13 +17,11 @@ namespace eTickets.Model.Requests
 
         [Required]
         public string Sektor { get; set; }
-
+        
         public int? Red { get; set; }
 
-        [Required]
         public string Sjedalo { get; set; }
 
-        [Required]
         public decimal Cijena { get; set; }
 
         [Required]

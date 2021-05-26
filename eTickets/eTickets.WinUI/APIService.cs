@@ -13,46 +13,61 @@ namespace eTickets.WinUI
 {
     public class APIService
     {
-        private string _route = null;
-        //public string endpoint = $"{Resources.ApiUrl}";
+        private string _resource = null;
 
-        public APIService(string route)
+        private string _endpoint = $"{Properties.Settings.Default.APIUrl}";
+
+        public static string Username { get; set; }
+        public static string Password { get; set; }
+        public static eTickets.Model.Korisnik PrijavljeniKorisnik { get; set; }
+
+        public APIService(string resource)
         {
-            _route = route;
+            _resource = resource;
         }
 
-        public async Task<T> Get<T>(object search)
+        public async Task<T> Get<T>(object search,  string actionName = "")
         {
 
-            var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
+            var url = $"{_endpoint}{_resource}";
+
+            if (actionName != null)
+            {
+                url += "/";
+                url += actionName;
+            }
 
             if (search != null)
             {
                 url += "?";
                 url += await search.ToQueryString();
             }
-            return await url.GetJsonAsync<T>();;
+            return await url.WithBasicAuth(Username,Password).GetJsonAsync<T>();
         }
 
         public async Task<T> GetById<T>(object id)
         {
-            var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
+            var url = $"{_endpoint}{_resource}/{id}";
 
-            return await url.GetJsonAsync<T>();
+            return await url.WithBasicAuth(Username,Password).GetJsonAsync<T>();
         }
 
         public async Task<T> Insert<T>(object request)
         {
-            var url = $"{Properties.Settings.Default.APIUrl}/{_route}";
+            var url = $"{_endpoint}{_resource}";
 
-            return await url.PostJsonAsync(request).ReceiveJson<T>();
+            return await url.WithBasicAuth(Username,Password).PostJsonAsync(request).ReceiveJson<T>();
         }
 
         public async Task<T> Update<T>(object id,object request)
         {
-            var url = $"{Properties.Settings.Default.APIUrl}/{_route}/{id}";
+            var url = $"{_endpoint}{_resource}/{id}";
 
-            return await url.PutJsonAsync(request).ReceiveJson<T>();
+            return await url.WithBasicAuth(Username,Password).PutJsonAsync(request).ReceiveJson<T>();
+
+            
         }
+
+      
     }
 }

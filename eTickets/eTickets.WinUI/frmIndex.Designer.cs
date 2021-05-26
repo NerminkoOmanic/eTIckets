@@ -132,34 +132,35 @@ namespace eTickets.WinUI
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // requestsToolStripMenuItem
             // 
             this.requestsToolStripMenuItem.Name = "requestsToolStripMenuItem";
-            this.requestsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.requestsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.requestsToolStripMenuItem.Text = "Requests";
+            this.requestsToolStripMenuItem.Click += new System.EventHandler(this.requestsToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
             // 
             // activeTicketsToolStripMenuItem
             // 
             this.activeTicketsToolStripMenuItem.Name = "activeTicketsToolStripMenuItem";
-            this.activeTicketsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.activeTicketsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.activeTicketsToolStripMenuItem.Text = "Active tickets";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // historyOfSellingToolStripMenuItem
             // 
             this.historyOfSellingToolStripMenuItem.Name = "historyOfSellingToolStripMenuItem";
-            this.historyOfSellingToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.historyOfSellingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.historyOfSellingToolStripMenuItem.Text = "History of selling";
             // 
             // categoriesToolStripMenuItem

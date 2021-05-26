@@ -27,9 +27,13 @@ namespace eTickets.WinUI.Korisnik
             frm.Show();
         }
 
-        private void frmAdministratori_Load(object sender, EventArgs e)
+        private async void frmAdministratori_Load(object sender, EventArgs e)
         {
-
+            var search = new KorisnikSearchRequest()
+            {
+                UlogaId = 1 //Admin uloga id = 1, prikaz admina
+            };
+            await GenerateGrid(search);
         }
 
         private async void BtnSearch_Click(object sender, EventArgs e)
@@ -39,17 +43,22 @@ namespace eTickets.WinUI.Korisnik
                 KorisnickoIme = txtbSearch.Text,
                 UlogaId = 1 //Admin uloga id = 1, prikaz admina
             };
-            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
-
-            dgvAdministratori.DataSource = result;
+            await GenerateGrid(search);
         }
 
         private void dgvAdministratori_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             var id = dgvAdministratori.SelectedRows[0].Cells[0].Value;
 
-            frmEditAdmin frm = new frmEditAdmin(int.Parse(id.ToString()));
+            frmResetPassword frm = new frmResetPassword(int.Parse(id.ToString()));
             frm.Show();
+        }
+
+        private async Task GenerateGrid(KorisnikSearchRequest search)
+        {
+            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
+
+            dgvAdministratori.DataSource = result;
         }
     }
 }

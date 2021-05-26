@@ -165,7 +165,7 @@ namespace eTickets.WinUI.Korisnik
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Name = "frmEditAdmin";
-            this.Text = "frmEditAdmin";
+            this.Text = "Edit";
             this.Load += new System.EventHandler(this.frmEditAdmin_Load);
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).EndInit();
             this.ResumeLayout(false);

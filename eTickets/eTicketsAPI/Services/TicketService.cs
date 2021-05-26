@@ -10,46 +10,74 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTicketsAPI.Services
 {
-    public class TicketService 
-        : BaseCrudService<eTickets.Model.Ticket, Database.Ticket , TicketSearchObject, TicketInsertRequest,TicketUpdateRequest>,
-            ITicketService
+    public class TicketService : ITicketService
     {
+        public IB3012Context Context { get; set; }
+        protected readonly IMapper _mapper;
         public TicketService(IB3012Context context, IMapper mapper)
-            : base(context, mapper)
         {
+            Context = context;
+            _mapper = mapper;
         }
 
-        public override IEnumerable<eTickets.Model.Ticket> Get(TicketSearchObject search = null)
+        public IEnumerable<eTickets.Model.Ticket> Get(TicketSearchRequest search = null)
         {
             var dbSet = Context.Set<Database.Ticket>().AsQueryable();
 
-            if (!string.IsNullOrWhiteSpace(search?.Naziv))
+            if (search?.Zahtjev == true)
             {
-                dbSet = dbSet.Where(x => x.NazivDogadjaja.Contains(search.Naziv));
+                dbSet = dbSet.Where(x => x.AdminId == null);
             }
 
-            if (search.PodKategorijaId.HasValue)
+            if (search?.AktivnaProdaja == true)
             {
-                dbSet = dbSet.Where(x => x.PodKategorijaId == search.PodKategorijaId);
+                dbSet = dbSet.Where(x => x.Prodano == false);
             }
 
-            if (search.AdminId.HasValue)
+            if (search?.SlikaRequired == true)
             {
-                dbSet = dbSet.Where(x => x.AdminId == search.AdminId);
-            }
-            if (search.ProdavacId.HasValue)
-            {
-                dbSet = dbSet.Where(x => x.ProdavacId == search.ProdavacId);
+                dbSet = dbSet.Include(x=>x.Slika);
             }
 
-            if (search?.IncludeGrad == true)
+            if (search?.OrderByDatum == true)
             {
-                dbSet = dbSet.Include(x=>x.Grad).Include(x=>x.Grad.Drzava);
+                dbSet = dbSet.OrderBy(x => x.Datum);
             }
 
             var list = dbSet.ToList();
 
             return _mapper.Map<List<eTickets.Model.Ticket>>(list);
         }
+
+        public eTickets.Model.Ticket GetById(int id)
+        {
+            var entity = Context.Ticket.FirstOrDefault(x => x.TicketId == id);
+
+            var dbSet = Context.Set<Database.Ticket>().AsQueryable();
+
+
+            dbSet = dbSet.Include(x => x.Slika)
+                .Include(x => x.Grad)
+                .Include(x => x.Prodavac)
+                .Include(x => x.PodKategorija)
+                .Include(x => x.PodKategorija.Kategorija)
+                .Include(x => x.Prodavac.Spol)
+                .Include(x => x.Prodavac.Grad);
+
+
+            if (entity?.AdminId != null)
+            {
+                dbSet = dbSet.Include(x => x.Admin)
+                    .Include(x => x.Admin.Grad)
+                    .Include(x => x.Admin.Spol);
+
+            }
+
+            entity = dbSet.FirstOrDefault(x => x.TicketId == id);
+
+            return _mapper.Map<eTickets.Model.Ticket>(entity);
+        }
+
+        
     }
 }

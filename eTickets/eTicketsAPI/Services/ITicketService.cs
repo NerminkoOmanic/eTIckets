@@ -7,7 +7,9 @@ using eTickets.Model.Requests;
 
 namespace eTicketsAPI.Services
 {
-    public interface ITicketService : ICrudService<eTickets.Model.Ticket, TicketSearchObject,TicketInsertRequest,TicketUpdateRequest>
+    public interface ITicketService
     {
+        IEnumerable<eTickets.Model.Ticket> Get(TicketSearchRequest search);
+        eTickets.Model.Ticket GetById(int id);
     }
 }

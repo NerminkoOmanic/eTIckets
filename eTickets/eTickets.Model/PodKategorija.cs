@@ -9,7 +9,11 @@ namespace eTickets.Model
         public int PodKategorijaId { get; set; }
         public int KategorijaId { get; set; }
         public string Naziv { get; set; }
-
         public virtual Kategorija Kategorija { get; set; }
+
+
+        //nested prop za dgv
+        public string KategorijaString => this.Kategorija.Naziv;
+
     }
 }

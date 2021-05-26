@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eTickets.Model.Requests;
+using eTicketsAPI.Database;
 
 namespace eTicketsAPI.Mapping
 {
@@ -20,15 +21,21 @@ namespace eTicketsAPI.Mapping
             CreateMap<Database.PodKategorija, eTickets.Model.PodKategorija>();
             CreateMap<Database.Spol, eTickets.Model.Spol>();
             CreateMap<Database.Uloga, eTickets.Model.Uloga>();
-            CreateMap<Database.Komentar, eTickets.Model.Komentar>();
-            CreateMap<Database.Transakcija, eTickets.Model.Transakcija>();
-            CreateMap<Database.Slika, eTickets.Model.Slika>();
+            CreateMap<Database.Kupovine, eTickets.Model.Kupovine>();
+            CreateMap<Database.Slika, eTickets.Model.Slika>()
+                .ForMember(dest=>dest.SlikaBytes,
+                    opt=> opt.MapFrom(src=>src.Slika1));
 
             //Mapping model requests
             CreateMap<TicketInsertRequest , Database.Ticket>();
             CreateMap<TicketUpdateRequest, Database.Ticket>();
             CreateMap<KorisnikInsertRequest, Database.Korisnik>();
             CreateMap<KorisnikUpdateRequest, Database.Korisnik>();
+            CreateMap<KategorijaRequest, Database.Kategorija>();
+            CreateMap<PodKategorijaRequest, Database.PodKategorija>();
+            CreateMap<SlikaInsertRequest, Database.Slika>()
+                .ForMember(dest=>dest.Slika1,
+                    opt=> opt.MapFrom(src=>src.SlikaBytes));
 
 
         }

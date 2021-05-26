@@ -30,16 +30,16 @@ namespace eTickets.WinUI.Korisnik
         private void InitializeComponent()
         {
             this.dgvAdministratori = new System.Windows.Forms.DataGridView();
-            this.BtnSearch = new System.Windows.Forms.Button();
-            this.txtbSearch = new System.Windows.Forms.TextBox();
-            this.btnDodaj = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.AdminId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.KorisnickoIme = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Ime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnSearch = new System.Windows.Forms.Button();
+            this.txtbSearch = new System.Windows.Forms.TextBox();
+            this.btnDodaj = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvAdministratori)).BeginInit();
             this.SuspendLayout();
             // 
@@ -59,12 +59,56 @@ namespace eTickets.WinUI.Korisnik
             this.Email,
             this.Telefon});
             this.dgvAdministratori.Location = new System.Drawing.Point(15, 93);
+            this.dgvAdministratori.MultiSelect = false;
             this.dgvAdministratori.Name = "dgvAdministratori";
             this.dgvAdministratori.ReadOnly = true;
             this.dgvAdministratori.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvAdministratori.Size = new System.Drawing.Size(657, 272);
             this.dgvAdministratori.TabIndex = 7;
             this.dgvAdministratori.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvAdministratori_MouseDoubleClick);
+            // 
+            // AdminId
+            // 
+            this.AdminId.DataPropertyName = "KorisnikId";
+            this.AdminId.HeaderText = "Id";
+            this.AdminId.Name = "AdminId";
+            this.AdminId.ReadOnly = true;
+            this.AdminId.Visible = false;
+            // 
+            // KorisnickoIme
+            // 
+            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
+            this.KorisnickoIme.HeaderText = "Username";
+            this.KorisnickoIme.Name = "KorisnickoIme";
+            this.KorisnickoIme.ReadOnly = true;
+            // 
+            // Ime
+            // 
+            this.Ime.DataPropertyName = "Ime";
+            this.Ime.HeaderText = "First name";
+            this.Ime.Name = "Ime";
+            this.Ime.ReadOnly = true;
+            // 
+            // Prezime
+            // 
+            this.Prezime.DataPropertyName = "Prezime";
+            this.Prezime.HeaderText = "Last name";
+            this.Prezime.Name = "Prezime";
+            this.Prezime.ReadOnly = true;
+            // 
+            // Email
+            // 
+            this.Email.DataPropertyName = "Email";
+            this.Email.HeaderText = "Email";
+            this.Email.Name = "Email";
+            this.Email.ReadOnly = true;
+            // 
+            // Telefon
+            // 
+            this.Telefon.DataPropertyName = "Telefon";
+            this.Telefon.HeaderText = "Phone number";
+            this.Telefon.Name = "Telefon";
+            this.Telefon.ReadOnly = true;
             // 
             // BtnSearch
             // 
@@ -101,43 +145,6 @@ namespace eTickets.WinUI.Korisnik
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 9;
             this.label1.Text = "Username :";
-            // 
-            // AdminId
-            // 
-            this.AdminId.DataPropertyName = "KorisnikId";
-            this.AdminId.HeaderText = "Id";
-            this.AdminId.Name = "AdminId";
-            this.AdminId.Visible = false;
-            // 
-            // KorisnickoIme
-            // 
-            this.KorisnickoIme.DataPropertyName = "KorisnickoIme";
-            this.KorisnickoIme.HeaderText = "Username";
-            this.KorisnickoIme.Name = "KorisnickoIme";
-            // 
-            // Ime
-            // 
-            this.Ime.DataPropertyName = "Ime";
-            this.Ime.HeaderText = "First name";
-            this.Ime.Name = "Ime";
-            // 
-            // Prezime
-            // 
-            this.Prezime.DataPropertyName = "Prezime";
-            this.Prezime.HeaderText = "Last name";
-            this.Prezime.Name = "Prezime";
-            // 
-            // Email
-            // 
-            this.Email.DataPropertyName = "Email";
-            this.Email.HeaderText = "Email";
-            this.Email.Name = "Email";
-            // 
-            // Telefon
-            // 
-            this.Telefon.DataPropertyName = "Telefon";
-            this.Telefon.HeaderText = "Phone number";
-            this.Telefon.Name = "Telefon";
             // 
             // frmAdministratori
             // 

@@ -15,11 +15,9 @@ namespace eTickets.WinUI.Korisnik
     {
         private readonly APIService _korisnikService = new APIService("korisnik");
         private readonly APIService _gradService = new APIService("grad");
-        private readonly APIService _spolService = new APIService("spol");
 
 
-        private int? _id = null;
-        private int _gradID;
+        private int _id;
         public frmEditAdmin(int korisnikId)
         {
             InitializeComponent();
@@ -28,15 +26,15 @@ namespace eTickets.WinUI.Korisnik
 
         private async void frmEditAdmin_Load(object sender, EventArgs e)
         {
-            BindGrad();
+            await BindGrad();
 
             var entity = await _korisnikService.GetById<eTickets.Model.Korisnik>(_id);
 
             txtbEmail.Text = entity.Email;
             txtbTelefon.Text = entity.Telefon;
-            _gradID = entity.GradId;
+            cmbGrad.SelectedIndex = entity.GradId;
         }
-        private async void BindGrad()
+        private async Task BindGrad()
         {
             var lst = await _gradService.Get<List<eTickets.Model.Grad>>(null);
             
@@ -55,17 +53,17 @@ namespace eTickets.WinUI.Korisnik
                 {
                     Email = txtbEmail.Text,
                     Telefon = txtbTelefon.Text,
+                    GradId = cmbGrad.SelectedIndex
                 };
 
                 if (txtbLozinka.TextLength>4)
                     request.Lozinka = txtbLozinka.Text;
             
-
-                request.GradId = cmbGrad.SelectedIndex > 0 ? cmbGrad.SelectedIndex : _gradID;
+                
 
                 await _korisnikService.Update<Model.Korisnik>(_id, request);
 
-                MessageBox.Show("Successfully edited personal datas");
+                MessageBox.Show(Properties.Resources.msgSuccessEdit);
                 this.Close();
             }
             
@@ -77,7 +75,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
-                errorProvider.SetError(txtbEmail,"*Required field");
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -85,9 +83,10 @@ namespace eTickets.WinUI.Korisnik
                 errorProvider.SetError(txtbEmail,null);
             }
         }
+        
         private void txtbLozinka_Validating(object sender, CancelEventArgs e)
         {
-            
+            //need to be implemented
         }
         private void txtbPotvrdaLozinke_Validating(object sender, CancelEventArgs e)
         {
@@ -101,7 +100,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbTelefon.Text))
             {
-                errorProvider.SetError(txtbTelefon,"*Required field");
+                errorProvider.SetError(txtbTelefon,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -111,7 +110,15 @@ namespace eTickets.WinUI.Korisnik
         }
         private void cmbGrad_Validating(object sender, CancelEventArgs e)
         {
-            
+            if (cmbGrad.SelectedIndex <1)
+            {
+                errorProvider.SetError(cmbGrad,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtbTelefon,null);
+            }
         }
         #endregion
         

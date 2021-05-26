@@ -8,21 +8,28 @@ using Microsoft.EntityFrameworkCore;
 using eTickets.Model.Requests;
 using System.Security.Cryptography;
 using System.Text;
+using eTicketsAPI.Filters;
 
 
 namespace eTicketsAPI.Services
 {
-    public class KorisnikService : BaseCrudService<eTickets.Model.Korisnik, Database.Korisnik, KorisnikSearchRequest, KorisnikInsertRequest, KorisnikUpdateRequest>, IKorisnikService
+    public class KorisnikService : IKorisnikService
     {
-        public KorisnikService(IB3012Context context, IMapper mapper) : base(context,mapper)
+        public IB3012Context Context { get; set; }
+        protected readonly IMapper _mapper;
+        public KorisnikService(IB3012Context context, IMapper mapper)
         {
+            Context = context;
+            _mapper = mapper;
         }
 
-        public override IEnumerable<eTickets.Model.Korisnik> Get(KorisnikSearchRequest search = null)
+        public IEnumerable<eTickets.Model.Korisnik> Get(KorisnikSearchRequest search = null)
         {
-                var dbSet = Context.Korisnik.AsQueryable();
+            var dbSet = Context.Korisnik.Include(x => x.Grad)
+                                                        .Include(x => x.Spol)
+                                                        .AsQueryable();
 
-                if (search.UlogaId != 0)
+            if (search.UlogaId != 0)
                 {
                 dbSet = dbSet.Where(x => x.UlogaId == search.UlogaId);
 
@@ -38,7 +45,16 @@ namespace eTicketsAPI.Services
 
         }
 
-        public override eTickets.Model.Korisnik Insert(KorisnikInsertRequest request)
+        public eTickets.Model.Korisnik GetById(int id)
+        {
+            var dbSet = Context.Korisnik.Where(x => x.KorisnikId == id)
+                                                .Include(x => x.Grad)
+                                                .Include(x => x.Spol)
+                                                .FirstOrDefault();
+            return _mapper.Map<eTickets.Model.Korisnik>(dbSet);
+        }
+
+        public eTickets.Model.Korisnik Insert(KorisnikInsertRequest request)
         {
             var entity = _mapper.Map<Database.Korisnik>(request);
 
@@ -49,25 +65,82 @@ namespace eTicketsAPI.Services
 
             Context.SaveChanges();
 
+            entity = Context.Korisnik.Where(x => x.KorisnikId == entity.KorisnikId)
+                .Include(x => x.Grad)
+                .Include(x => x.Spol)
+                .FirstOrDefault();
             return _mapper.Map<eTickets.Model.Korisnik>(entity);
         }
 
-        public override eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest request)
+        public eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest request)
         {
+            var entity = Context.Korisnik.Find(id);
+
             if (!string.IsNullOrWhiteSpace(request.Lozinka))
             {
-                request.PasswordSalt = GenerateSalt();
-                request.PasswordHash = GenerateHash(request.PasswordSalt, request.Lozinka);
+                request.LozinkaSalt = GenerateSalt();
+                request.LozinkaHash = GenerateHash(request.LozinkaSalt, request.Lozinka);
             }
-            
-            var entity = Context.Korisnik.Find(id);
+            else
+            {
+                request.LozinkaSalt = entity.LozinkaSalt;
+                request.LozinkaHash = entity.LozinkaHash;
+            }
+
+
             _mapper.Map(request, entity);
+
 
             Context.SaveChanges();
 
+            entity = Context.Korisnik.Where(x=>x.KorisnikId == id)
+                .Include(x => x.Grad)
+                .Include(x => x.Spol)
+                .FirstOrDefault();
+
             return _mapper.Map<eTickets.Model.Korisnik>(entity);
         }
 
+        public async Task<eTickets.Model.Korisnik> Login(string username, string password)
+        {
+            var entity = await Context.Korisnik
+                                                .Include(x=>x.Uloga)
+                                                .FirstOrDefaultAsync(x => x.KorisnickoIme == username);
+
+            if (entity == null)
+            {
+                throw new UserException("Pogrešan username ili password");
+            }
+
+            var hash = GenerateHash(entity.LozinkaSalt, password);
+
+            if (hash != entity.LozinkaHash)
+            {
+                throw new UserException("Pogrešan username ili password");
+            }
+
+            return _mapper.Map<eTickets.Model.Korisnik>(entity);
+        }
+
+        public eTickets.Model.Korisnik Profil()
+        {
+
+            var entity =  Context.Korisnik
+                .Include(x => x.Grad)
+                .Include(x => x.Spol)
+                .Include(x=>x.Uloga)
+                .FirstOrDefault(x => x.KorisnikId == Security.BasicAuthenticationHandler.User.KorisnikId);
+
+
+            return _mapper.Map<eTickets.Model.Korisnik>(entity);
+            //var querryDb =  Context.Korisnik.AsQueryable();
+
+            //querryDb = querryDb.Where(x => x.KorisnikId == Security.BasicAuthenticationHandler.User.KorisnikId);
+            //querryDb = querryDb.Include(x => x.Grad).Include(x => x.Spol);
+
+            //var enttiy = querryDb.FirstOrDefault();
+
+        }
 
         #region Password
 

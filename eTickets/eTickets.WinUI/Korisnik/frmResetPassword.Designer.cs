@@ -1,7 +1,7 @@
 ﻿
 namespace eTickets.WinUI.Korisnik
 {
-    partial class frmSelectedAdmin
+    partial class frmResetPassword
     {
         /// <summary>
         /// Required designer variable.
@@ -29,45 +29,45 @@ namespace eTickets.WinUI.Korisnik
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnDelete = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.BackColor = System.Drawing.Color.IndianRed;
-            this.btnDelete.Location = new System.Drawing.Point(85, 83);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(113, 37);
-            this.btnDelete.TabIndex = 1;
-            this.btnDelete.Text = "Delete user";
-            this.btnDelete.UseVisualStyleBackColor = false;
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(85, 31);
+            this.btnReset.Location = new System.Drawing.Point(86, 56);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(113, 37);
             this.btnReset.TabIndex = 2;
             this.btnReset.Text = "Reset password";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
-            // frmSelectedAdmin
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 123);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(146, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "*Universal password : Reset1";
+            // 
+            // frmResetPassword
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(289, 148);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnReset);
-            this.Controls.Add(this.btnDelete);
-            this.Name = "frmSelectedAdmin";
-            this.Text = "Option box";
+            this.Name = "frmResetPassword";
+            this.Text = "Reset password";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Label label1;
     }
 }

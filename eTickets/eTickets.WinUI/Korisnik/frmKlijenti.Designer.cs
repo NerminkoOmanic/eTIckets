@@ -39,6 +39,8 @@ namespace eTickets.WinUI.Korisnik
             this.Prezime = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Telefon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Grad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Spol = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKlijenti)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,8 +85,11 @@ namespace eTickets.WinUI.Korisnik
             this.Ime,
             this.Prezime,
             this.Email,
-            this.Telefon});
+            this.Telefon,
+            this.Grad,
+            this.Spol});
             this.dgvKlijenti.Location = new System.Drawing.Point(15, 90);
+            this.dgvKlijenti.MultiSelect = false;
             this.dgvKlijenti.Name = "dgvKlijenti";
             this.dgvKlijenti.ReadOnly = true;
             this.dgvKlijenti.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -135,6 +140,20 @@ namespace eTickets.WinUI.Korisnik
             this.Telefon.Name = "Telefon";
             this.Telefon.ReadOnly = true;
             // 
+            // Grad
+            // 
+            this.Grad.DataPropertyName = "GradString";
+            this.Grad.HeaderText = "City";
+            this.Grad.Name = "Grad";
+            this.Grad.ReadOnly = true;
+            // 
+            // Spol
+            // 
+            this.Spol.DataPropertyName = "SpolString";
+            this.Spol.HeaderText = "Gender";
+            this.Spol.Name = "Spol";
+            this.Spol.ReadOnly = true;
+            // 
             // frmKlijenti
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -165,5 +184,7 @@ namespace eTickets.WinUI.Korisnik
         private System.Windows.Forms.DataGridViewTextBoxColumn Prezime;
         private System.Windows.Forms.DataGridViewTextBoxColumn Email;
         private System.Windows.Forms.DataGridViewTextBoxColumn Telefon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Grad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Spol;
     }
 }

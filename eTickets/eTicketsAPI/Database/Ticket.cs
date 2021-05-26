@@ -11,7 +11,7 @@ namespace eTicketsAPI.Database
     {
         public Ticket()
         {
-            Transakcija = new HashSet<Transakcija>();
+            Kupovine = new HashSet<Kupovine>();
         }
 
         public int TicketId { get; set; }
@@ -26,7 +26,6 @@ namespace eTicketsAPI.Database
         public int GradId { get; set; }
         public int PodKategorijaId { get; set; }
         public int? AdminId { get; set; }
-        public bool Odobreno { get; set; }
         public bool Prodano { get; set; }
 
         public virtual Korisnik Admin { get; set; }
@@ -34,6 +33,6 @@ namespace eTicketsAPI.Database
         public virtual PodKategorija PodKategorija { get; set; }
         public virtual Korisnik Prodavac { get; set; }
         public virtual Slika Slika { get; set; }
-        public virtual ICollection<Transakcija> Transakcija { get; set; }
+        public virtual ICollection<Kupovine> Kupovine { get; set; }
     }
 }

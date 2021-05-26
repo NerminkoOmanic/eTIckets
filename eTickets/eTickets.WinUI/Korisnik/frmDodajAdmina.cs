@@ -25,30 +25,10 @@ namespace eTickets.WinUI.Korisnik
             InitializeComponent();
         }
 
-        private void frmDodajAdmina_Load(object sender, EventArgs e)
+        private async void frmDodajAdmina_Load(object sender, EventArgs e)
         {
-            BindGrad();
-            BindSpol();
-
-            //if (_id.HasValue)
-            //{
-            //    var entity = await _korisnikService.GetById<Model.Korisnik>(_id);
-
-            //    txtbIme.Text = entity.Ime;
-            //    txtbIme.ReadOnly = true;
-                
-            //    txtbPrezime.Text = entity.Prezime;
-            //    txtbPrezime.ReadOnly = true;
-
-            //    txtbDatumRod.Text = entity.DatumRodjenja.ToShortDateString();
-            //    txtbDatumRod.ReadOnly = true;
-
-            //    txtbKorisnickoIme.Text = entity.KorisnickoIme;
-            //    txtbKorisnickoIme.ReadOnly = true;
-
-            //    txtbEmail.Text = entity.Email;
-            //    txtbTelefon.Text = entity.Telefon;
-            //}
+           await BindGrad();
+           await BindSpol();
         }
 
 
@@ -72,14 +52,14 @@ namespace eTickets.WinUI.Korisnik
                 };
 
                 await _korisnikService.Insert<Model.Korisnik>(request);
-                MessageBox.Show("New admin added");
+                MessageBox.Show(Properties.Resources.msgSuccessAdd);
 
             }
             
         }
 
         #region BindDataGrids
-        private async void BindGrad()
+        private async Task BindGrad()
         {
             var lst = await _gradService.Get<List<eTickets.Model.Grad>>(null);
             
@@ -89,7 +69,7 @@ namespace eTickets.WinUI.Korisnik
             cmbGrad.DisplayMember = "Naziv";
             cmbGrad.ValueMember = "GradId";
         }
-        private async void BindSpol()
+        private async Task BindSpol()
         {
             var lst = await _spolService.Get<List<eTickets.Model.Spol>>(null);
             
@@ -107,7 +87,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbKorisnickoIme.Text))
             {
-                errorProvider.SetError(txtbKorisnickoIme,"*Required field");
+                errorProvider.SetError(txtbKorisnickoIme,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -119,7 +99,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbIme.Text))
             {
-                errorProvider.SetError(txtbIme,"*Required field");
+                errorProvider.SetError(txtbIme,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -131,7 +111,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbPrezime.Text))
             {
-                errorProvider.SetError(txtbPrezime,"*Required field");
+                errorProvider.SetError(txtbPrezime,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
 
             }
@@ -144,7 +124,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
-                errorProvider.SetError(txtbEmail,"*Required field");
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -156,7 +136,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbTelefon.Text))
             {
-                errorProvider.SetError(txtbTelefon,"*Required field");
+                errorProvider.SetError(txtbTelefon,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -168,7 +148,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (cmbGrad.SelectedIndex<1)
             {
-                errorProvider.SetError(cmbGrad,"*Required field");
+                errorProvider.SetError(cmbGrad,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -181,7 +161,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (cmbSpol.SelectedIndex<1)
             {
-                errorProvider.SetError(cmbSpol,"*Required field");
+                errorProvider.SetError(cmbSpol,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -193,7 +173,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbLozinka.Text))
             {
-                errorProvider.SetError(txtbLozinka,"*Required field");
+                errorProvider.SetError(txtbLozinka,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
             }
             else
@@ -205,7 +185,7 @@ namespace eTickets.WinUI.Korisnik
         {
             if (txtbPotvrdaLozinke.Text != txtbLozinka.Text)
             {
-                errorProvider.SetError(txtbPotvrdaLozinke,"Password and confirmation does not match !!");
+                errorProvider.SetError(txtbPotvrdaLozinke,Properties.Resources.msgPasswordMatch);
                 e.Cancel = true;
             }
         }

@@ -9,80 +9,45 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using eTicketsAPI.Database;
 using eTicketsAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace eTicketsAPI.Controllers
 {
-    public class TicketController : 
-        BaseCrudController<eTickets.Model.Ticket, TicketSearchObject, TicketInsertRequest, TicketUpdateRequest>
+    [ApiController]
+    [Route("api/[controller]")]
+    [Authorize]
+    public class TicketController : ControllerBase
     {
-        public TicketController(ITicketService ticketService) : base(ticketService)
+        private readonly ITicketService _ticketService;
+
+        public TicketController(ITicketService ticketService)
         {
+            _ticketService = ticketService;
         }
 
+        [HttpGet]
+        public IEnumerable<eTickets.Model.Ticket> Get([FromQuery] TicketSearchRequest request)
+        {
+            return _ticketService.Get(request);
+        }
 
-        //// PUT: api/Korisnik/5
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutKorisnik(int id, Korisnik korisnik)
-        //{
-        //    if (id != korisnik.KorisnikId)
-        //    {
-        //        return BadRequest();
-        //    }
+        [HttpGet("{id}")]
+        public eTickets.Model.Ticket GetById(int id)
+        {
+            return _ticketService.GetById(id);
+        }
 
-        //    _context.Entry(korisnik).State = EntityState.Modified;
-
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!KorisnikExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
-
-        //    return NoContent();
-        //}
-
-        //// POST: api/Korisnik
-        //// To protect from overposting attacks, enable the specific properties you want to bind to, for
-        //// more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         //[HttpPost]
-        //public async Task<ActionResult<Korisnik>> PostKorisnik(Korisnik korisnik)
+        //public eTickets.Model.Ticket Insert(KorisnikInsertRequest korisnici)
         //{
-        //    _context.Korisnik.Add(korisnik);
-        //    await _context.SaveChangesAsync();
-
-        //    return CreatedAtAction("GetKorisnik", new { id = korisnik.KorisnikId }, korisnik);
+        //    return _ticketService.Insert(korisnici);
         //}
 
-        //// DELETE: api/Korisnik/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Korisnik>> DeleteKorisnik(int id)
+        //[HttpPut("{id}")]
+        //public eTickets.Model.Ticket Update(int id, [FromBody] KorisnikUpdateRequest request)
         //{
-        //    var korisnik = await _context.Korisnik.FindAsync(id);
-        //    if (korisnik == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Korisnik.Remove(korisnik);
-        //    await _context.SaveChangesAsync();
-
-        //    return korisnik;
+        //    return _ticketService.Update(id, request);
         //}
-
-        //private bool KorisnikExists(int id)
-        //{
-        //    return _context.Korisnik.Any(e => e.KorisnikId == id);
-        //}
+       
     }
 }

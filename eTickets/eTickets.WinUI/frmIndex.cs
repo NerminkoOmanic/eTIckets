@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using eTickets.WinUI.Kategorija;
 using eTickets.WinUI.Korisnik;
+using eTickets.WinUI.Ticket;
 
 namespace eTickets.WinUI
 {
@@ -116,7 +117,7 @@ namespace eTickets.WinUI
 
         private void ticketsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+           
         }
 
         private void administratorsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -145,7 +146,15 @@ namespace eTickets.WinUI
 
         private void profileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmProfil frm = new frmProfil(1);
+            frmProfil frm = new frmProfil(APIService.PrijavljeniKorisnik.KorisnikId);
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void requestsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmZahtjevi frm = new frmZahtjevi();
             frm.MdiParent = this;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();

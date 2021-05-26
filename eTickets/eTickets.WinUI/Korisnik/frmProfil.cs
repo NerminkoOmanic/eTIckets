@@ -27,16 +27,14 @@ namespace eTickets.WinUI.Korisnik
         private async void frmProfil_Load(object sender, EventArgs e)
         {
             var entity = await _korisnikService.GetById<eTickets.Model.Korisnik>(_id);
-            var grad = await _gradService.GetById<eTickets.Model.Grad>(entity.GradId);
-            var spol = await _spolService.GetById<eTickets.Model.Spol>(entity.SpolId);
 
             lbIme.Text = entity.Ime;
             lbPrezime.Text = entity.Prezime;
             lbDatum.Text = entity.DatumRodjenja.ToShortDateString();
             lbTelefon.Text = entity.Telefon;
             lbEmail.Text = entity.Email;
-            lbGrad.Text = grad.Naziv;
-            lbSpol.Text = spol.Naziv;
+            lbGrad.Text = entity.GradString;
+            lbSpol.Text = entity.SpolString;
         }
 
         private void btnEdit_Click(object sender, EventArgs e)

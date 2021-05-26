@@ -11,11 +11,9 @@ namespace eTicketsAPI.Database
     {
         public Korisnik()
         {
-            KomentarKomentator = new HashSet<Komentar>();
-            KomentarKomentirani = new HashSet<Komentar>();
+            Kupovine = new HashSet<Kupovine>();
             TicketAdmin = new HashSet<Ticket>();
             TicketProdavac = new HashSet<Ticket>();
-            Transakcija = new HashSet<Transakcija>();
         }
 
         public int KorisnikId { get; set; }
@@ -30,14 +28,13 @@ namespace eTicketsAPI.Database
         public int UlogaId { get; set; }
         public int GradId { get; set; }
         public int SpolId { get; set; }
+        public string BankAccount { get; set; }
 
         public virtual Grad Grad { get; set; }
         public virtual Spol Spol { get; set; }
         public virtual Uloga Uloga { get; set; }
-        public virtual ICollection<Komentar> KomentarKomentator { get; set; }
-        public virtual ICollection<Komentar> KomentarKomentirani { get; set; }
+        public virtual ICollection<Kupovine> Kupovine { get; set; }
         public virtual ICollection<Ticket> TicketAdmin { get; set; }
         public virtual ICollection<Ticket> TicketProdavac { get; set; }
-        public virtual ICollection<Transakcija> Transakcija { get; set; }
     }
 }

@@ -30,9 +30,9 @@ namespace eTickets.WinUI.Kategorija
         private void InitializeComponent()
         {
             this.dgvKategorija = new System.Windows.Forms.DataGridView();
-            this.BtnAdd = new System.Windows.Forms.Button();
             this.KategorijaId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Naziv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BtnAdd = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvKategorija)).BeginInit();
             this.SuspendLayout();
             // 
@@ -46,40 +46,48 @@ namespace eTickets.WinUI.Kategorija
             this.KategorijaId,
             this.Naziv});
             this.dgvKategorija.Location = new System.Drawing.Point(12, 93);
+            this.dgvKategorija.MultiSelect = false;
             this.dgvKategorija.Name = "dgvKategorija";
             this.dgvKategorija.ReadOnly = true;
-            this.dgvKategorija.Size = new System.Drawing.Size(219, 334);
+            this.dgvKategorija.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvKategorija.Size = new System.Drawing.Size(236, 334);
             this.dgvKategorija.TabIndex = 7;
+            // 
+            // KategorijaId
+            // 
+            this.KategorijaId.DataPropertyName = "KategorijaId";
+            this.KategorijaId.HeaderText = "KategorijaId";
+            this.KategorijaId.Name = "KategorijaId";
+            this.KategorijaId.ReadOnly = true;
+            this.KategorijaId.Visible = false;
+            // 
+            // Naziv
+            // 
+            this.Naziv.DataPropertyName = "Naziv";
+            this.Naziv.HeaderText = "Category name";
+            this.Naziv.Name = "Naziv";
+            this.Naziv.ReadOnly = true;
             // 
             // BtnAdd
             // 
-            this.BtnAdd.Location = new System.Drawing.Point(151, 51);
+            this.BtnAdd.Location = new System.Drawing.Point(168, 49);
             this.BtnAdd.Name = "BtnAdd";
             this.BtnAdd.Size = new System.Drawing.Size(80, 24);
             this.BtnAdd.TabIndex = 5;
             this.BtnAdd.Text = "Add";
             this.BtnAdd.UseVisualStyleBackColor = true;
-            // 
-            // KategorijaId
-            // 
-            this.KategorijaId.HeaderText = "KategorijaId";
-            this.KategorijaId.Name = "KategorijaId";
-            this.KategorijaId.Visible = false;
-            // 
-            // Naziv
-            // 
-            this.Naziv.HeaderText = "Category name";
-            this.Naziv.Name = "Naziv";
+            this.BtnAdd.Click += new System.EventHandler(this.BtnAdd_Click);
             // 
             // frmKategorije
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(270, 450);
+            this.ClientSize = new System.Drawing.Size(284, 450);
             this.Controls.Add(this.dgvKategorija);
             this.Controls.Add(this.BtnAdd);
             this.Name = "frmKategorije";
             this.Text = "Kategorije";
+            this.Load += new System.EventHandler(this.frmKategorije_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvKategorija)).EndInit();
             this.ResumeLayout(false);
 

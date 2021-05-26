@@ -3,17 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using eTickets.Model.Requests;
 using eTicketsAPI.Database;
 using Microsoft.EntityFrameworkCore;
+using PodKategorija = eTickets.Model.PodKategorija;
 
 namespace eTicketsAPI.Services
 {
-    public class PodKategorijaService : BaseReadService<eTickets.Model.PodKategorija,Database.PodKategorija, object>, IPodKategorijaService
+    public class PodKategorijaService :
+        BaseCrudService<eTickets.Model.PodKategorija,Database.PodKategorija, object,PodKategorijaRequest,PodKategorijaRequest>,
+        IPodKategorijaService
     {
 
         public PodKategorijaService(IB3012Context context, IMapper mapper) : base(context,mapper)
         {
         }
 
+        public override IEnumerable<PodKategorija> Get(object search = null)
+        {
+                var list = Context.PodKategorija.Include(x=>x.Kategorija).ToList();
+
+                return _mapper.Map<List<eTickets.Model.PodKategorija>>(list);
+
+        }
     }
 }

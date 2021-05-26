@@ -22,9 +22,11 @@ namespace eTickets.WinUI.Korisnik
             InitializeComponent();
             dgvKlijenti.AutoGenerateColumns = false;
         }
-        private  void GenerateGrid(KorisnikSearchRequest search)
+        private async Task GenerateGrid(KorisnikSearchRequest search)
         {
-            
+            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
+
+            dgvKlijenti.DataSource = result;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -39,22 +41,26 @@ namespace eTickets.WinUI.Korisnik
                 KorisnickoIme = txtbSearch.Text,
                 UlogaId = 2 //Klijenti uloga id = 2, prikaz klijenata
             };
-            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
 
-            dgvKlijenti.DataSource = result;
+            await GenerateGrid(search);
+
         }
 
-        private void frmKlijenti_Load(object sender, EventArgs e)
+        private async void frmKlijenti_Load(object sender, EventArgs e)
         {
-            
+            var search = new KorisnikSearchRequest()
+            {
+                UlogaId = 2 //Klijenti uloga id = 2, prikaz klijenata
+            };
+            await GenerateGrid(search);
         }
 
         private void dgvKlijenti_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             var id = dgvKlijenti.SelectedRows[0].Cells[0].Value;
 
-            //frmDodajAdmina frm = new frmDodajAdmina(int.Parse(id.ToString()));
-            //frm.Show();
+            frmResetPassword frm = new frmResetPassword(int.Parse(id.ToString()));
+            frm.Show();
         }
     }
 }
