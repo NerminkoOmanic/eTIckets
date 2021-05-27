@@ -7,6 +7,7 @@ using eTickets.Model;
 using eTickets.Model.Requests;
 using eTicketsAPI.Database;
 using Microsoft.EntityFrameworkCore;
+using Ticket = eTickets.Model.Ticket;
 
 namespace eTicketsAPI.Services
 {
@@ -23,7 +24,7 @@ namespace eTicketsAPI.Services
         public IEnumerable<eTickets.Model.Ticket> Get(TicketSearchRequest search = null)
         {
             var dbSet = Context.Set<Database.Ticket>().AsQueryable();
-
+                
             if (search?.Zahtjev == true)
             {
                 dbSet = dbSet.Where(x => x.AdminId == null);
@@ -31,7 +32,7 @@ namespace eTicketsAPI.Services
 
             if (search?.AktivnaProdaja == true)
             {
-                dbSet = dbSet.Where(x => x.Prodano == false);
+                dbSet = dbSet.Where(x => x.Prodano == false && x.AdminId!=null);
             }
 
             if (search?.SlikaRequired == true)
@@ -49,7 +50,9 @@ namespace eTicketsAPI.Services
             return _mapper.Map<List<eTickets.Model.Ticket>>(list);
         }
 
-        public eTickets.Model.Ticket GetById(int id)
+        #region Utility
+
+        private Database.Ticket PrepareEntity(int id)
         {
             var entity = Context.Ticket.FirstOrDefault(x => x.TicketId == id);
 
@@ -60,24 +63,58 @@ namespace eTicketsAPI.Services
                 .Include(x => x.Grad)
                 .Include(x => x.Prodavac)
                 .Include(x => x.PodKategorija)
-                .Include(x => x.PodKategorija.Kategorija)
-                .Include(x => x.Prodavac.Spol)
-                .Include(x => x.Prodavac.Grad);
+                .Include(x => x.PodKategorija.Kategorija);
 
 
             if (entity?.AdminId != null)
             {
-                dbSet = dbSet.Include(x => x.Admin)
-                    .Include(x => x.Admin.Grad)
-                    .Include(x => x.Admin.Spol);
+                dbSet = dbSet.Include(x => x.Admin);
 
             }
+            return dbSet.FirstOrDefault(x => x.TicketId == id);
 
-            entity = dbSet.FirstOrDefault(x => x.TicketId == id);
+        }
+
+        #endregion
+        public eTickets.Model.Ticket GetById(int id)
+        {
+            
+            var entity = PrepareEntity(id);
 
             return _mapper.Map<eTickets.Model.Ticket>(entity);
         }
 
-        
+        public eTickets.Model.Ticket Update(int id, TicketUpdateRequest request)
+        {
+            var entity = PrepareEntity(id);
+
+            request.Cijena ??= entity?.Cijena;
+            if (request.Datum == DateTime.MinValue)
+                request.Datum = entity.Datum;
+            if (request.AdminId == null && entity?.AdminId != null)
+                request.AdminId = entity.AdminId;
+            
+
+            _mapper.Map(request, entity);
+
+            Context.SaveChanges();
+
+            return _mapper.Map<eTickets.Model.Ticket>(entity);
+        }
+
+        public bool Remove(int id)
+        {
+            var entity = Context.Ticket.Find(id);
+            if (entity!=null)
+            {
+                Context.Remove(entity);
+                Context.SaveChanges();
+
+                return true;
+            }
+            
+            return false;
+            
+        }
     }
 }

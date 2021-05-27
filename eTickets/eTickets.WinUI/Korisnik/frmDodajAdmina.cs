@@ -83,11 +83,22 @@ namespace eTickets.WinUI.Korisnik
         #endregion
 
         #region Validation
-        private void txtbKorisnickoIme_Validating(object sender, CancelEventArgs e)
+        private async void txtbKorisnickoIme_Validating(object sender, CancelEventArgs e)
         {
+            var search = new KorisnikSearchRequest()
+            {
+                KorisnickoImeValidacija = txtbKorisnickoIme.Text
+            };
+            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
+
             if (string.IsNullOrWhiteSpace(txtbKorisnickoIme.Text))
             {
                 errorProvider.SetError(txtbKorisnickoIme,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+            else if (lst.Count>0)
+            {
+                errorProvider.SetError(txtbKorisnickoIme,Properties.Resources.msgUsernameExist);
                 e.Cancel = true;
             }
             else
@@ -120,11 +131,26 @@ namespace eTickets.WinUI.Korisnik
                 errorProvider.SetError(txtbPrezime,null);
             }
         }
-        private void txtbEmail_Validating(object sender, CancelEventArgs e)
+        private async void txtbEmail_Validating(object sender, CancelEventArgs e)
         {
+            var search = new KorisnikSearchRequest()
+            {
+                EmailValidacija = txtbEmail.Text
+            };
+            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+            else if (lst.Count>0)
+            {
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailExist);
+                e.Cancel = true;
+            }
+            else if (!(txtbEmail.Text.Contains("@") && txtbEmail.Text.Contains(".")) )
+            {
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailFormat);
                 e.Cancel = true;
             }
             else
@@ -174,6 +200,12 @@ namespace eTickets.WinUI.Korisnik
             if (string.IsNullOrWhiteSpace(txtbLozinka.Text))
             {
                 errorProvider.SetError(txtbLozinka,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+
+            if (txtbLozinka.Text.Length < 6 )
+            {
+                errorProvider.SetError(txtbLozinka,Properties.Resources.msgPasswordWeak);
                 e.Cancel = true;
             }
             else

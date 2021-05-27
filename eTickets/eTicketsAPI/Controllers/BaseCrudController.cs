@@ -28,5 +28,11 @@ namespace eTicketsAPI.Controllers
         {
             return _crudService.Update(id,request);
         }
+
+        [HttpDelete("{id}")]
+        public bool Remove(int id)
+        {
+            return _crudService.Remove(id);
+        }
     }
 }

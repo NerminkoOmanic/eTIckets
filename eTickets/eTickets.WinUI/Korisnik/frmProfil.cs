@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using eTickets.Model.Requests;
 
 namespace eTickets.WinUI.Korisnik
 {
@@ -26,7 +27,7 @@ namespace eTickets.WinUI.Korisnik
 
         private async void frmProfil_Load(object sender, EventArgs e)
         {
-            var entity = await _korisnikService.GetById<eTickets.Model.Korisnik>(_id);
+            var entity = await _korisnikService.GetById<KorisnikViewExtension>(_id);
 
             lbIme.Text = entity.Ime;
             lbPrezime.Text = entity.Prezime;

@@ -43,11 +43,15 @@ namespace eTicketsAPI.Controllers
         //    return _ticketService.Insert(korisnici);
         //}
 
-        //[HttpPut("{id}")]
-        //public eTickets.Model.Ticket Update(int id, [FromBody] KorisnikUpdateRequest request)
-        //{
-        //    return _ticketService.Update(id, request);
-        //}
-       
+        [HttpPut("{id}")]
+        public eTickets.Model.Ticket Update(int id, [FromBody] TicketUpdateRequest request)
+        {
+            return _ticketService.Update(id, request);
+        }
+        [HttpDelete("{id}")]
+        public bool Remove(int id)
+        {
+            return _ticketService.Remove(id);
+        }
     }
 }

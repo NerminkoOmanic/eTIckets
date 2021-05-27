@@ -30,7 +30,7 @@ namespace eTickets.WinUI.Kategorija
                 };
 
                 await _kategorijaService.Insert<Model.Kategorija>(request);
-                MessageBox.Show(Properties.Resources.msgSuccessAdd);
+                MessageBox.Show(Properties.Resources.msgSuccessAddItem);
                 this.Close();
             }
            

@@ -15,11 +15,13 @@ namespace eTickets.WinUI.Ticket
     public partial class frmZahtjevi : Form
     {
         private readonly APIService _ticketService = new APIService("ticket");
-        
-        public frmZahtjevi()
+
+        private string _tipForme { get; set; }
+        public frmZahtjevi(string tipForme)
         {
             InitializeComponent();
             dgvZahtjevi.AutoGenerateColumns = false;
+            _tipForme = tipForme;
 
         }
 
@@ -35,8 +37,19 @@ namespace eTickets.WinUI.Ticket
             var search = new TicketSearchRequest()
             {
                 OrderByDatum = true,
-                Zahtjev = true //prikaz zahtjeva za prodajama
-            };
+            }; 
+            if (_tipForme.Contains("request"))
+            {
+                search.Zahtjev = true;//prikaz zahtjeva za prodajama
+               
+            }
+            else
+            {
+                this.Text = "Active tickets";
+                search.AktivnaProdaja = true;//prikaz aktivnih prodaja
+
+            }
+            
             await GenerateGrid(search);
         }
 
@@ -47,5 +60,7 @@ namespace eTickets.WinUI.Ticket
             frmZahtjevDetalji frm = new frmZahtjevDetalji(int.Parse(id.ToString()));
             frm.Show();
         }
+
+       
     }
 }

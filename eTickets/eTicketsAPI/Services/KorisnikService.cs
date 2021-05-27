@@ -23,7 +23,7 @@ namespace eTicketsAPI.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<eTickets.Model.Korisnik> Get(KorisnikSearchRequest search = null)
+        public IEnumerable<KorisnikViewExtension> Get(KorisnikSearchRequest search = null)
         {
             var dbSet = Context.Korisnik.Include(x => x.Grad)
                                                         .Include(x => x.Spol)
@@ -38,38 +38,50 @@ namespace eTicketsAPI.Services
                 {
                     dbSet = dbSet.Where(x => x.KorisnickoIme.Contains(search.KorisnickoIme));
                 }
-                
+                if (!String.IsNullOrWhiteSpace(search?.KorisnickoImeValidacija))
+                {
+                    dbSet = dbSet.Where(x => x.KorisnickoIme.Equals(search.KorisnickoImeValidacija));
+                }
+                if (!String.IsNullOrWhiteSpace(search?.EmailValidacija))
+                {
+                    dbSet = dbSet.Where(x => x.KorisnickoIme.Equals(search.EmailValidacija));
+                }
 
                 var list = dbSet.ToList();
-                return _mapper.Map<List<eTickets.Model.Korisnik>>(list);
+                return _mapper.Map<List<KorisnikViewExtension>>(list);
 
         }
 
-        public eTickets.Model.Korisnik GetById(int id)
+        public KorisnikViewExtension GetById(int id)
         {
             var dbSet = Context.Korisnik.Where(x => x.KorisnikId == id)
                                                 .Include(x => x.Grad)
                                                 .Include(x => x.Spol)
                                                 .FirstOrDefault();
-            return _mapper.Map<eTickets.Model.Korisnik>(dbSet);
+            return _mapper.Map<KorisnikViewExtension>(dbSet);
         }
 
         public eTickets.Model.Korisnik Insert(KorisnikInsertRequest request)
         {
-            var entity = _mapper.Map<Database.Korisnik>(request);
+            try
+            {
+                var entity = _mapper.Map<Database.Korisnik>(request);
 
-            Context.Korisnik.Add(entity);
+                Context.Korisnik.Add(entity);
 
-            entity.LozinkaSalt = GenerateSalt();
-            entity.LozinkaHash = GenerateHash(entity.LozinkaSalt, request.Lozinka);
+                entity.LozinkaSalt = GenerateSalt();
+                entity.LozinkaHash = GenerateHash(entity.LozinkaSalt, request.Lozinka);
 
-            Context.SaveChanges();
+                Context.SaveChanges();
 
-            entity = Context.Korisnik.Where(x => x.KorisnikId == entity.KorisnikId)
-                .Include(x => x.Grad)
-                .Include(x => x.Spol)
-                .FirstOrDefault();
-            return _mapper.Map<eTickets.Model.Korisnik>(entity);
+                entity = Context.Korisnik.FirstOrDefault(x => x.KorisnikId == entity.KorisnikId);
+                return _mapper.Map<eTickets.Model.Korisnik>(entity);
+            }
+            catch (Exception e)
+            {
+                throw new UserException("Username or email is already taken");
+            }
+            
         }
 
         public eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest request)
@@ -93,10 +105,7 @@ namespace eTicketsAPI.Services
 
             Context.SaveChanges();
 
-            entity = Context.Korisnik.Where(x=>x.KorisnikId == id)
-                .Include(x => x.Grad)
-                .Include(x => x.Spol)
-                .FirstOrDefault();
+            entity = Context.Korisnik.FirstOrDefault(x=>x.KorisnikId == id);
 
             return _mapper.Map<eTickets.Model.Korisnik>(entity);
         }
@@ -133,12 +142,7 @@ namespace eTicketsAPI.Services
 
 
             return _mapper.Map<eTickets.Model.Korisnik>(entity);
-            //var querryDb =  Context.Korisnik.AsQueryable();
 
-            //querryDb = querryDb.Where(x => x.KorisnikId == Security.BasicAuthenticationHandler.User.KorisnikId);
-            //querryDb = querryDb.Include(x => x.Grad).Include(x => x.Spol);
-
-            //var enttiy = querryDb.FirstOrDefault();
 
         }
 

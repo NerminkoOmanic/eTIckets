@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using eTickets.Model.Requests;
+using eTickets.WinUI.Properties;
 
 namespace eTickets.WinUI.Korisnik
 {
@@ -71,11 +72,21 @@ namespace eTickets.WinUI.Korisnik
 
 
         #region Validation
-        private void txtbEmail_Validating(object sender, CancelEventArgs e)
+        private async void txtbEmail_Validating(object sender, CancelEventArgs e)
         {
+            var search = new KorisnikSearchRequest()
+            {
+                EmailValidacija = txtbEmail.Text
+            };
+            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+            else if (lst.Count>0)
+            {
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailExist);
                 e.Cancel = true;
             }
             else
@@ -86,13 +97,27 @@ namespace eTickets.WinUI.Korisnik
         
         private void txtbLozinka_Validating(object sender, CancelEventArgs e)
         {
-            //need to be implemented
+            if (string.IsNullOrWhiteSpace(txtbLozinka.Text))
+            {
+                errorProvider.SetError(txtbLozinka,Properties.Resources.msgValidation_ReqField);
+                e.Cancel = true;
+            }
+
+            if (txtbLozinka.Text.Length < 6 )
+            {
+                errorProvider.SetError(txtbLozinka,Properties.Resources.msgPasswordWeak);
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider.SetError(txtbLozinka,null);
+            }
         }
         private void txtbPotvrdaLozinke_Validating(object sender, CancelEventArgs e)
         {
             if (txtbPotvrdaLozinke.Text != txtbLozinka.Text)
             {
-                errorProvider.SetError(txtbPotvrdaLozinke,"Password and confirmation does not match !!");
+                errorProvider.SetError(txtbPotvrdaLozinke,Resources.msgPasswordMatch);
                 e.Cancel = true;
             }
         }

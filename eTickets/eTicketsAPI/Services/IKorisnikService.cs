@@ -11,13 +11,13 @@ namespace eTicketsAPI.Services
 {
     public interface IKorisnikService 
     {
-        IEnumerable<eTickets.Model.Korisnik> Get(KorisnikSearchRequest search);
+        IEnumerable<KorisnikViewExtension> Get(KorisnikSearchRequest search);
 
-        eTickets.Model.Korisnik GetById(int id);
+        KorisnikViewExtension GetById(int id);
 
-        eTickets.Model.Korisnik Insert(KorisnikInsertRequest korisnici);
+        eTickets.Model.Korisnik Insert(KorisnikInsertRequest request);
 
-        eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest korisnici);
+        eTickets.Model.Korisnik Update(int id, KorisnikUpdateRequest request);
 
         Task<eTickets.Model.Korisnik> Login(string username, string password);
         eTickets.Model.Korisnik Profil();

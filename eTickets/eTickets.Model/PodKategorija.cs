@@ -11,8 +11,6 @@ namespace eTickets.Model
         public string Naziv { get; set; }
         public virtual Kategorija Kategorija { get; set; }
 
-
-        //nested prop za dgv
         public string KategorijaString => this.Kategorija.Naziv;
 
     }

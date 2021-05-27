@@ -59,6 +59,7 @@ namespace eTickets.WinUI.Korisnik
             var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
 
             dgvAdministratori.DataSource = result;
+
         }
     }
 }

@@ -38,7 +38,7 @@ namespace eTickets.WinUI.Kategorija
                 };
 
                 await _podkategorijaService.Insert<Model.PodKategorija>(request);
-                MessageBox.Show(Properties.Resources.msgSuccessAdd);
+                MessageBox.Show(Properties.Resources.msgSuccessAddItem);
                 this.Close();
             }
         }
@@ -88,5 +88,6 @@ namespace eTickets.WinUI.Kategorija
 
         #endregion
 
+        
     }
 }

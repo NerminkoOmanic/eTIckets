@@ -24,7 +24,7 @@ namespace eTickets.WinUI.Korisnik
         }
         private async Task GenerateGrid(KorisnikSearchRequest search)
         {
-            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
+            var result = await _apiService.Get<List<KorisnikViewExtension>>(search);
 
             dgvKlijenti.DataSource = result;
         }

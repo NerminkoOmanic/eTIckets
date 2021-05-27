@@ -30,11 +30,10 @@ namespace eTickets.WinUI.Ticket
         private void InitializeComponent()
         {
             this.dgvZahtjevi = new System.Windows.Forms.DataGridView();
-            this.label1 = new System.Windows.Forms.Label();
-            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.TicketId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NazivDogadjaja = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Datum = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgvZahtjevi)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,19 +55,6 @@ namespace eTickets.WinUI.Ticket
             this.dgvZahtjevi.Size = new System.Drawing.Size(416, 275);
             this.dgvZahtjevi.TabIndex = 0;
             this.dgvZahtjevi.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.dgvZahtjevi_MouseDoubleClick);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(70, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(195, 13);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "*Double click on row to preview request";
-            // 
-            // openFileDialog
-            // 
-            this.openFileDialog.FileName = "openFileDialog";
             // 
             // TicketId
             // 
@@ -92,11 +78,20 @@ namespace eTickets.WinUI.Ticket
             this.Datum.Name = "Datum";
             this.Datum.ReadOnly = true;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(70, 53);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(186, 13);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "*Double click on row to preview ticket";
+            // 
             // frmZahtjevi
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(561, 450);
+            this.ClientSize = new System.Drawing.Size(561, 405);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.dgvZahtjevi);
             this.Name = "frmZahtjevi";
@@ -112,7 +107,6 @@ namespace eTickets.WinUI.Ticket
 
         private System.Windows.Forms.DataGridView dgvZahtjevi;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.OpenFileDialog openFileDialog;
         private System.Windows.Forms.DataGridViewTextBoxColumn TicketId;
         private System.Windows.Forms.DataGridViewTextBoxColumn NazivDogadjaja;
         private System.Windows.Forms.DataGridViewTextBoxColumn Datum;

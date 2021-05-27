@@ -154,7 +154,23 @@ namespace eTickets.WinUI
 
         private void requestsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            frmZahtjevi frm = new frmZahtjevi();
+            frmZahtjevi frm = new frmZahtjevi("request");
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void activeTicketsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmZahtjevi frm = new frmZahtjevi("active");
+            frm.MdiParent = this;
+            frm.WindowState = FormWindowState.Maximized;
+            frm.Show();
+        }
+
+        private void historyOfSellingToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmKupovine frm = new frmKupovine();
             frm.MdiParent = this;
             frm.WindowState = FormWindowState.Maximized;
             frm.Show();

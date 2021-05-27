@@ -117,20 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="msgEmailExist" xml:space="preserve">
+    <value>*Email already exists</value>
+  </data>
+  <data name="msgEmailFormat" xml:space="preserve">
+    <value>*Email needs to be in valid format "xxx@xxx.xxx"</value>
+  </data>
+  <data name="msgError" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="msgFailedAuthorization" xml:space="preserve">
+    <value>Wrong login details </value>
+  </data>
   <data name="msgFailedLogin" xml:space="preserve">
     <value>Wrong username or password </value>
+  </data>
+  <data name="msgForbbiden" xml:space="preserve">
+    <value>Not authorized </value>
   </data>
   <data name="msgPasswordMatch" xml:space="preserve">
     <value>*Password and confirmation does not match</value>
   </data>
+  <data name="msgPasswordWeak" xml:space="preserve">
+    <value>*Password is too weak, at least 6 characters</value>
+  </data>
+  <data name="msgRequestDenied" xml:space="preserve">
+    <value>Successfully denied</value>
+  </data>
   <data name="msgSucccessPasswordReset" xml:space="preserve">
     <value>Successfully reseted password</value>
+  </data>
+  <data name="msgSuccesApproved" xml:space="preserve">
+    <value>Successfully approved ticket</value>
   </data>
   <data name="msgSuccessAdd" xml:space="preserve">
     <value>Successfully added new admin</value>
   </data>
+  <data name="msgSuccessAddItem" xml:space="preserve">
+    <value>Successfully added </value>
+  </data>
   <data name="msgSuccessEdit" xml:space="preserve">
     <value>Successfully changed personal data</value>
+  </data>
+  <data name="msgUsernameExist" xml:space="preserve">
+    <value>*Username already exists</value>
   </data>
   <data name="msgValidation_ReqField" xml:space="preserve">
     <value>*Required field</value>

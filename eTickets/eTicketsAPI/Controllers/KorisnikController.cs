@@ -25,21 +25,21 @@ namespace eTicketsAPI.Controllers
 
     
         [HttpGet]
-        public IEnumerable<eTickets.Model.Korisnik> Get([FromQuery] KorisnikSearchRequest request)
+        public IEnumerable<KorisnikViewExtension> Get([FromQuery] KorisnikSearchRequest request)
         {
             return _korisnikService.Get(request);
         }
 
         [HttpGet("{id}")]
-        public eTickets.Model.Korisnik GetById(int id)
+        public KorisnikViewExtension GetById(int id)
         {
             return _korisnikService.GetById(id);
         }
 
         [HttpPost]
-        public eTickets.Model.Korisnik Insert(KorisnikInsertRequest korisnici)
+        public eTickets.Model.Korisnik Insert(KorisnikInsertRequest request)
         {
-            return _korisnikService.Insert(korisnici);
+            return _korisnikService.Insert(request);
         }
 
         [HttpPut("{id}")]

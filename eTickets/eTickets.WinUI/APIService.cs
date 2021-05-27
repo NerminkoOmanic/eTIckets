@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using Flurl;
 using Flurl.Http;
 using eTickets;
@@ -68,6 +69,34 @@ namespace eTickets.WinUI
             
         }
 
+        public async Task<bool> Remove(int id)
+        {
+            var url = $"{_endpoint}{_resource}/{id}";
+
+            try
+            {
+                return await url.WithBasicAuth(Username, Password).DeleteAsync().ReceiveJson<bool>();
+            }
+            catch (FlurlHttpException ex)
+            {
+                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Unauthorized)
+                {
+                    MessageBox.Show(Resources.msgFailedAuthorization);
+
+                    return false;
+                }
+                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Forbidden)
+                {
+                    MessageBox.Show(Resources.msgForbbiden);
+                }
+
+                var stringBuilder = new StringBuilder();
+
+
+                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return false;
+            }
+        }
       
     }
 }

@@ -10,5 +10,6 @@ namespace eTicketsAPI.Services
     {
         T Insert(TInsert request);
         T Update(int id, TUpdate request);
+        bool Remove(int id);
     }
 } 

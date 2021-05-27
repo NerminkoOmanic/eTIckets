@@ -20,10 +20,7 @@ namespace eTickets.Model
         public virtual Uloga Uloga { get; set; }
 
 
-        //nested props za dgv
-        public string GradString => this.Grad.Naziv;
-        public string SpolString => this.Spol.Naziv;
-
+       
 
 
     }

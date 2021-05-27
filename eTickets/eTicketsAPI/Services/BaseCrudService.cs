@@ -41,5 +41,21 @@ namespace eTicketsAPI.Services
             return _mapper.Map<T>(entity);
 
         }
+
+        public virtual bool Remove(int id)
+        {
+            var dbSet = Context.Set<TDb>();
+            TDb entity = dbSet.Find(id);
+
+            if (entity != null)
+            {
+                dbSet.Remove(entity);
+                Context.SaveChanges();
+                return true;
+            }
+            
+            return false;
+            
+        }
     }
 }

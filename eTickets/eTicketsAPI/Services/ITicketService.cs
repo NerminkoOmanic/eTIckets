@@ -11,5 +11,7 @@ namespace eTicketsAPI.Services
     {
         IEnumerable<eTickets.Model.Ticket> Get(TicketSearchRequest search);
         eTickets.Model.Ticket GetById(int id);
+        eTickets.Model.Ticket Update(int id, TicketUpdateRequest request);
+        bool Remove(int id);
     }
 }

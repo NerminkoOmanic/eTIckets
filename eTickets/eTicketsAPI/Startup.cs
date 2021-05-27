@@ -87,6 +87,10 @@ namespace eTicketsAPI
             services.AddScoped<IKategorijaService, KategorijaService>();
             services.AddScoped<IPodKategorijaService, PodKategorijaService>();
             services.AddScoped<ISlikaService, SlikaService>();
+            services.AddScoped<IKupovineService, KupovineService>();
+            services.AddScoped<IBankService, BankService>();
+
+
 
 
 

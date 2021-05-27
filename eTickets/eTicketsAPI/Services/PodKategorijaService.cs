@@ -6,7 +6,6 @@ using AutoMapper;
 using eTickets.Model.Requests;
 using eTicketsAPI.Database;
 using Microsoft.EntityFrameworkCore;
-using PodKategorija = eTickets.Model.PodKategorija;
 
 namespace eTicketsAPI.Services
 {
@@ -19,7 +18,7 @@ namespace eTicketsAPI.Services
         {
         }
 
-        public override IEnumerable<PodKategorija> Get(object search = null)
+        public override IEnumerable<eTickets.Model.PodKategorija> Get(object search = null)
         {
                 var list = Context.PodKategorija.Include(x=>x.Kategorija).ToList();
 

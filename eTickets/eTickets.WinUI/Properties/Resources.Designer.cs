@@ -61,11 +61,56 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Email already exists.
+        /// </summary>
+        public static string msgEmailExist {
+            get {
+                return ResourceManager.GetString("msgEmailExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Email needs to be in valid format &quot;xxx@xxx.xxx&quot;.
+        /// </summary>
+        public static string msgEmailFormat {
+            get {
+                return ResourceManager.GetString("msgEmailFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string msgError {
+            get {
+                return ResourceManager.GetString("msgError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong login details .
+        /// </summary>
+        public static string msgFailedAuthorization {
+            get {
+                return ResourceManager.GetString("msgFailedAuthorization", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Wrong username or password .
         /// </summary>
         public static string msgFailedLogin {
             get {
                 return ResourceManager.GetString("msgFailedLogin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not authorized .
+        /// </summary>
+        public static string msgForbbiden {
+            get {
+                return ResourceManager.GetString("msgForbbiden", resourceCulture);
             }
         }
         
@@ -79,11 +124,38 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Password is too weak, at least 6 characters.
+        /// </summary>
+        public static string msgPasswordWeak {
+            get {
+                return ResourceManager.GetString("msgPasswordWeak", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully denied.
+        /// </summary>
+        public static string msgRequestDenied {
+            get {
+                return ResourceManager.GetString("msgRequestDenied", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully reseted password.
         /// </summary>
         public static string msgSucccessPasswordReset {
             get {
                 return ResourceManager.GetString("msgSucccessPasswordReset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Successfully approved ticket.
+        /// </summary>
+        public static string msgSuccesApproved {
+            get {
+                return ResourceManager.GetString("msgSuccesApproved", resourceCulture);
             }
         }
         
@@ -97,11 +169,29 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Successfully added .
+        /// </summary>
+        public static string msgSuccessAddItem {
+            get {
+                return ResourceManager.GetString("msgSuccessAddItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully changed personal data.
         /// </summary>
         public static string msgSuccessEdit {
             get {
                 return ResourceManager.GetString("msgSuccessEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Username already exists.
+        /// </summary>
+        public static string msgUsernameExist {
+            get {
+                return ResourceManager.GetString("msgUsernameExist", resourceCulture);
             }
         }
         

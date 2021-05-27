@@ -151,6 +151,7 @@ namespace eTickets.WinUI
             this.activeTicketsToolStripMenuItem.Name = "activeTicketsToolStripMenuItem";
             this.activeTicketsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.activeTicketsToolStripMenuItem.Text = "Active tickets";
+            this.activeTicketsToolStripMenuItem.Click += new System.EventHandler(this.activeTicketsToolStripMenuItem_Click);
             // 
             // toolStripSeparator7
             // 
@@ -162,6 +163,7 @@ namespace eTickets.WinUI
             this.historyOfSellingToolStripMenuItem.Name = "historyOfSellingToolStripMenuItem";
             this.historyOfSellingToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.historyOfSellingToolStripMenuItem.Text = "History of selling";
+            this.historyOfSellingToolStripMenuItem.Click += new System.EventHandler(this.historyOfSellingToolStripMenuItem_Click);
             // 
             // categoriesToolStripMenuItem
             // 
@@ -177,24 +179,24 @@ namespace eTickets.WinUI
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // categoriesToolStripMenuItem1
             // 
             this.categoriesToolStripMenuItem1.Name = "categoriesToolStripMenuItem1";
-            this.categoriesToolStripMenuItem1.Size = new System.Drawing.Size(148, 22);
+            this.categoriesToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.categoriesToolStripMenuItem1.Text = "Categories";
             this.categoriesToolStripMenuItem1.Click += new System.EventHandler(this.categoriesToolStripMenuItem1_Click);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(145, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // subcategoriesToolStripMenuItem
             // 
             this.subcategoriesToolStripMenuItem.Name = "subcategoriesToolStripMenuItem";
-            this.subcategoriesToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.subcategoriesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.subcategoriesToolStripMenuItem.Text = "Subcategories";
             this.subcategoriesToolStripMenuItem.Click += new System.EventHandler(this.subcategoriesToolStripMenuItem_Click);
             // 
