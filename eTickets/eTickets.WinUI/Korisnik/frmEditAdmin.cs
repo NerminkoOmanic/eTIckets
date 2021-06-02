@@ -99,11 +99,11 @@ namespace eTickets.WinUI.Korisnik
         {
             if (string.IsNullOrWhiteSpace(txtbLozinka.Text))
             {
-                errorProvider.SetError(txtbLozinka,Properties.Resources.msgValidation_ReqField);
-                e.Cancel = true;
+                errorProvider.SetError(txtbLozinka,null);
+
             }
 
-            if (txtbLozinka.Text.Length < 6 )
+            if (txtbLozinka.Text.Length > 0 && txtbLozinka.Text.Length < 6 )
             {
                 errorProvider.SetError(txtbLozinka,Properties.Resources.msgPasswordWeak);
                 e.Cancel = true;

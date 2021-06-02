@@ -14,5 +14,12 @@ namespace eTickets.Model
 
         public virtual Korisnik Kupac { get; set; }
         public virtual Ticket Ticket { get; set; }
+
+        //nested props
+        public string ProdavacString => Ticket?.Prodavac.KorisnickoIme;
+        public string KupacString => Kupac?.KorisnickoIme;
+        public string CijenaString => Ticket?.Cijena.ToString();
+
+        public string NazivDogadjaja => Ticket?.NazivDogadjaja;
     }
 }

@@ -338,6 +338,8 @@ namespace eTicketsAPI.Database
                     .HasMaxLength(20);
             });
 
+            //modelBuilder.Entity<Blog>().HasData(new Blog { BlogId = 1, Url = "http://sample.com" });
+
             OnModelCreatingPartial(modelBuilder);
         }
 

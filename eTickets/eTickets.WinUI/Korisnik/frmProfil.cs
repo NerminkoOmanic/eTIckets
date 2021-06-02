@@ -27,7 +27,7 @@ namespace eTickets.WinUI.Korisnik
 
         private async void frmProfil_Load(object sender, EventArgs e)
         {
-            var entity = await _korisnikService.GetById<KorisnikViewExtension>(_id);
+            var entity = await _korisnikService.GetById<eTickets.Model.Korisnik>(_id);
 
             lbIme.Text = entity.Ime;
             lbPrezime.Text = entity.Prezime;

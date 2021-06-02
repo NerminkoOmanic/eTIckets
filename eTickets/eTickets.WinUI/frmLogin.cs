@@ -31,20 +31,20 @@ namespace eTickets.WinUI
 
                 if (APIService.PrijavljeniKorisnik.Uloga.Naziv == "Administrator")
                 {
-                    this.Hide();
+                    Hide();
 
                     frmIndex frm = new frmIndex();
                     frm.Show();
                 }
                 else
                 {
-                    MessageBox.Show(Resources.msgFailedLogin, "Login error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(Resources.msgFailedAuthorization, "Authorization", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
                
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Authentication", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(Resources.msgFailedLogin, "Authentication", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

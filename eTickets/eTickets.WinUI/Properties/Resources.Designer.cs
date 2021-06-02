@@ -88,7 +88,7 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wrong login details .
+        ///   Looks up a localized string similar to Not authorized, you need to be administrator..
         /// </summary>
         public static string msgFailedAuthorization {
             get {
@@ -192,6 +192,15 @@ namespace eTickets.WinUI.Properties {
         public static string msgUsernameExist {
             get {
                 return ResourceManager.GetString("msgUsernameExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to *Username can contain only letters and numbers.
+        /// </summary>
+        public static string msgUsernameNotLetterOrDigit {
+            get {
+                return ResourceManager.GetString("msgUsernameNotLetterOrDigit", resourceCulture);
             }
         }
         

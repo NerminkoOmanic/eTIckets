@@ -49,33 +49,6 @@ namespace eTicketsAPI.Services
 
             return _mapper.Map<List<eTickets.Model.Ticket>>(list);
         }
-
-        #region Utility
-
-        private Database.Ticket PrepareEntity(int id)
-        {
-            var entity = Context.Ticket.FirstOrDefault(x => x.TicketId == id);
-
-            var dbSet = Context.Set<Database.Ticket>().AsQueryable();
-
-
-            dbSet = dbSet.Include(x => x.Slika)
-                .Include(x => x.Grad)
-                .Include(x => x.Prodavac)
-                .Include(x => x.PodKategorija)
-                .Include(x => x.PodKategorija.Kategorija);
-
-
-            if (entity?.AdminId != null)
-            {
-                dbSet = dbSet.Include(x => x.Admin);
-
-            }
-            return dbSet.FirstOrDefault(x => x.TicketId == id);
-
-        }
-
-        #endregion
         public eTickets.Model.Ticket GetById(int id)
         {
             
@@ -84,6 +57,28 @@ namespace eTicketsAPI.Services
             return _mapper.Map<eTickets.Model.Ticket>(entity);
         }
 
+        public eTickets.Model.Ticket Insert(TicketInsertRequest request)
+        {
+            var entitySlika = new Database.Slika();
+
+            _mapper.Map(request, entitySlika);
+
+            Context.Slika.Add(entitySlika);
+            Context.SaveChanges();
+
+            //ako mapper preslikavao null na ostale property probaj ovo
+            //request.SlikaId = entitySlika.SlikaId;
+            _mapper.Map(entitySlika, request);
+
+            var entityTicket = new Database.Ticket();
+
+            _mapper.Map(request, entitySlika);
+
+            Context.Ticket.Add(entityTicket);
+            Context.SaveChanges();
+
+            return _mapper.Map<eTickets.Model.Ticket>(entityTicket);
+        }
         public eTickets.Model.Ticket Update(int id, TicketUpdateRequest request)
         {
             var entity = PrepareEntity(id);
@@ -116,5 +111,33 @@ namespace eTicketsAPI.Services
             return false;
             
         }
+
+        #region Utility
+
+        private Database.Ticket PrepareEntity(int id)
+        {
+            var entity = Context.Ticket.FirstOrDefault(x => x.TicketId == id);
+
+            var dbSet = Context.Set<Database.Ticket>().AsQueryable();
+
+
+            dbSet = dbSet.Include(x => x.Slika)
+                .Include(x => x.Grad)
+                .Include(x => x.Prodavac)
+                .Include(x => x.PodKategorija)
+                .Include(x => x.PodKategorija.Kategorija);
+
+
+            if (entity?.AdminId != null)
+            {
+                dbSet = dbSet.Include(x => x.Admin);
+
+            }
+            return dbSet.FirstOrDefault(x => x.TicketId == id);
+
+        }
+
+        #endregion
+
     }
 }

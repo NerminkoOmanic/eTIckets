@@ -21,13 +21,13 @@ namespace eTicketsAPI.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<KupovineDgvExtension> Get()
+        public IEnumerable<eTickets.Model.Kupovine> Get()
         {
             var list = Context.Kupovine.Include(x=>x.Ticket)
                 .Include(x=>x.Kupac)
                 .Include(x=>x.Ticket.Prodavac).ToList();
             
-            return _mapper.Map<List<KupovineDgvExtension>>(list);
+            return _mapper.Map<List<eTickets.Model.Kupovine>>(list);
         }
 
 

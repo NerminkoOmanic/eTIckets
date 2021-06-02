@@ -19,6 +19,10 @@ namespace eTickets.Model
         public virtual Spol Spol { get; set; }
         public virtual Uloga Uloga { get; set; }
 
+        //nested props
+
+        public string GradString => Grad?.Naziv;
+        public string SpolString => Spol?.Naziv;
 
        
 

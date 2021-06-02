@@ -4,17 +4,16 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using eTickets.Model.Requests;
-using eTicketsAPI.Database;
+
 
 namespace eTicketsAPI.Mapping
 {
-    public class eProdajaProfile:Profile
+    public class eTicketsProfile : Profile
     {
-        public eProdajaProfile()
+        public eTicketsProfile()
         {
             //Mapping models
             CreateMap<Database.Korisnik, eTickets.Model.Korisnik>();
-            CreateMap<Database.Korisnik, KorisnikViewExtension>();
             CreateMap<Database.Drzava, eTickets.Model.Drzava>();
             CreateMap<Database.Grad, eTickets.Model.Grad>();
             CreateMap<Database.Ticket, eTickets.Model.Ticket>();
@@ -22,7 +21,6 @@ namespace eTicketsAPI.Mapping
             CreateMap<Database.PodKategorija, eTickets.Model.PodKategorija>();
             CreateMap<Database.Spol, eTickets.Model.Spol>();
             CreateMap<Database.Uloga, eTickets.Model.Uloga>();
-            CreateMap<Database.Kupovine, KupovineDgvExtension>();
             CreateMap<Database.Kupovine, eTickets.Model.Kupovine>();
             CreateMap<Database.Slika, eTickets.Model.Slika>()
                 .ForMember(dest=>dest.SlikaBytes,
@@ -30,6 +28,8 @@ namespace eTicketsAPI.Mapping
 
             //Mapping model requests
             CreateMap<TicketInsertRequest , Database.Ticket>();
+            CreateMap<TicketInsertRequest, Database.Slika>().ForMember(dest=>dest.Slika1,
+                opt=> opt.MapFrom(src=>src.SlikaBytes));
             CreateMap<TicketUpdateRequest, Database.Ticket>();
             CreateMap<KorisnikInsertRequest, Database.Korisnik>();
             CreateMap<KorisnikUpdateRequest, Database.Korisnik>();

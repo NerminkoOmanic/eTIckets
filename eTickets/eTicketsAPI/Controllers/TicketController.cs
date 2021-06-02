@@ -38,9 +38,9 @@ namespace eTicketsAPI.Controllers
         }
 
         //[HttpPost]
-        //public eTickets.Model.Ticket Insert(KorisnikInsertRequest korisnici)
+        //public eTickets.Model.Ticket Insert([FromBody]TicketInsertRequest request)
         //{
-        //    return _ticketService.Insert(korisnici);
+        //    return _ticketService.Insert(request);
         //}
 
         [HttpPut("{id}")]
@@ -48,6 +48,8 @@ namespace eTicketsAPI.Controllers
         {
             return _ticketService.Update(id, request);
         }
+
+
         [HttpDelete("{id}")]
         public bool Remove(int id)
         {

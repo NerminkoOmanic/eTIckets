@@ -23,7 +23,7 @@ namespace eTickets.WinUI.Ticket
 
         private async Task GenerateGrid()
         {
-            var result = await _kupovineService.Get<List<KupovineDgvExtension>>(null);
+            var result = await _kupovineService.Get<List<eTickets.Model.Kupovine>>(null);
 
             dgvKupovine.DataSource = result;
         }

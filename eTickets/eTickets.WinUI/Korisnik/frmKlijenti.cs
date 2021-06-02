@@ -16,7 +16,10 @@ namespace eTickets.WinUI.Korisnik
 {
     public partial class frmKlijenti : Form
     {
-        private readonly APIService _apiService = new APIService("korisnik");
+        private readonly APIService _korisnikService = new APIService("korisnik");
+        private readonly APIService _ulogaService = new APIService("uloga");
+
+        private int klijentUlogaId = 0;
         public frmKlijenti()
         {
             InitializeComponent();
@@ -24,7 +27,7 @@ namespace eTickets.WinUI.Korisnik
         }
         private async Task GenerateGrid(KorisnikSearchRequest search)
         {
-            var result = await _apiService.Get<List<KorisnikViewExtension>>(search);
+            var result = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
 
             dgvKlijenti.DataSource = result;
         }
@@ -36,10 +39,11 @@ namespace eTickets.WinUI.Korisnik
 
         private async void BtnSearch_Click(object sender, EventArgs e)
         {
+            
             var search = new KorisnikSearchRequest()
             {
                 KorisnickoIme = txtbSearch.Text,
-                UlogaId = 2 //Klijenti uloga id = 2, prikaz klijenata
+                UlogaId = klijentUlogaId 
             };
 
             await GenerateGrid(search);
@@ -48,9 +52,22 @@ namespace eTickets.WinUI.Korisnik
 
         private async void frmKlijenti_Load(object sender, EventArgs e)
         {
+            var lstUloge = await _ulogaService.Get<List<eTickets.Model.Uloga>>(null);
+
+            foreach (var uloga in lstUloge)
+            {
+                if(uloga.Naziv.Equals("Klijent"))
+                    klijentUlogaId = uloga.UlogaId;
+            }
+
             var search = new KorisnikSearchRequest()
             {
-                UlogaId = 2 //Klijenti uloga id = 2, prikaz klijenata
+                UlogaId = klijentUlogaId,
+                IncludeList = new string[]
+                {
+                    "Grad",
+                    "Spol"
+                }
             };
             await GenerateGrid(search);
         }

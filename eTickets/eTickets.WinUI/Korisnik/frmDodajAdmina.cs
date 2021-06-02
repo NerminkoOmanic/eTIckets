@@ -18,6 +18,8 @@ namespace eTickets.WinUI.Korisnik
         private readonly APIService _korisnikService = new APIService("korisnik");
         private readonly APIService _gradService = new APIService("grad");
         private readonly APIService _spolService = new APIService("spol");
+        private readonly APIService _ulogaService = new APIService("uloga");
+
 
 
         public frmDodajAdmina()
@@ -34,8 +36,19 @@ namespace eTickets.WinUI.Korisnik
 
         private async void btnAdd_Click(object sender, EventArgs e)
         {
+            
             if (this.ValidateChildren())
             {
+                int ulogaid = 1;
+              
+                var lstUloge = await _ulogaService.Get<List<eTickets.Model.Uloga>>(null);
+
+                foreach (var uloga in lstUloge)
+                {
+                    if(uloga.Naziv.Equals("Administrator"))
+                        ulogaid = uloga.UlogaId;
+                }
+
                 var request = new KorisnikInsertRequest()
                 {
                     Ime = txtbIme.Text,
@@ -48,7 +61,7 @@ namespace eTickets.WinUI.Korisnik
                     DatumRodjenja = dtpDatum.Value,
                     GradId = cmbGrad.SelectedIndex,
                     SpolId = cmbSpol.SelectedIndex,
-                    UlogaId = 1
+                    UlogaId = ulogaid
                 };
 
                 await _korisnikService.Insert<Model.Korisnik>(request);
@@ -57,6 +70,21 @@ namespace eTickets.WinUI.Korisnik
             }
             
         }
+
+        #region Utility
+
+        private bool IsLettersAndNumbersOnly(string request)
+        {
+            foreach (var x in request)
+            {
+                if (!Char.IsLetterOrDigit(x))
+                    return false;
+            }
+
+            return true;
+        }
+
+        #endregion
 
         #region BindDataGrids
         private async Task BindGrad()
@@ -99,6 +127,11 @@ namespace eTickets.WinUI.Korisnik
             else if (lst.Count>0)
             {
                 errorProvider.SetError(txtbKorisnickoIme,Properties.Resources.msgUsernameExist);
+                e.Cancel = true;
+            }
+            else if (!IsLettersAndNumbersOnly(txtbKorisnickoIme.Text))
+            {
+                errorProvider.SetError(txtbKorisnickoIme,Properties.Resources.msgUsernameNotLetterOrDigit);
                 e.Cancel = true;
             }
             else

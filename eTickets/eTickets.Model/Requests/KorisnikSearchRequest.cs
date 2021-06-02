@@ -10,5 +10,7 @@ namespace eTickets.Model.Requests
         public int UlogaId { get; set; }
         public string KorisnickoImeValidacija { get; set; }
         public string EmailValidacija { get; set; }
+
+        public string[] IncludeList { get; set; }
     }
 }

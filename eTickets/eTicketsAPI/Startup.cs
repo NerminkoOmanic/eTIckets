@@ -11,27 +11,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eTicketsAPI.Database;
+using eTicketsAPI.Filters;
 using eTicketsAPI.Security;
 using eTicketsAPI.Services;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace eTicketsAPI
 {
-    //public class BasicAuthDocumentFilter : IDocumentFilter
-    //{
-    //    public void Apply(OpenApiDocument swaggerDoc, DocumentFilterContext context)
-    //    {
-    //        var securityRequirements = new Dictionary<string, IEnumerable<string>>()
-    //        {
-    //            {"basic", new string[]{ }} //in swagger you specify empty list unless using OAuth2 scopes
-    //        };
-    //        swaggerDoc.SecurityRequirements = new[] {securityRequirements};
-    //    }
-    //}
     public class Startup
     {
         public Startup(IConfiguration configuration)
@@ -44,8 +35,18 @@ namespace eTicketsAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            
             services.AddAutoMapper(typeof(Startup));
-            services.AddControllers();
+            services.AddControllers(x =>
+            {
+                x.Filters.Add<ErrorFilter>();
+            })
+                .AddNewtonsoftJson(options =>
+                {
+                    options.SerializerSettings.DateTimeZoneHandling = DateTimeZoneHandling.Local;
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                    options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
+                });
 
             services.AddDbContext<IB3012Context>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -53,7 +54,7 @@ namespace eTicketsAPI
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo{Title = "My API", Version = "v1"});
-                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme()
+                c.AddSecurityDefinition("basic", new OpenApiSecurityScheme
                 {
                     Type = SecuritySchemeType.Http,
                     Scheme = "basic"
@@ -72,7 +73,6 @@ namespace eTicketsAPI
                         new string[] {}  
                     }  
                 });  
-                //c.DocumentFilter<BasicAuthDocumentFilter>();
             });
 
             services.AddAuthentication("BasicAuthentication")
@@ -91,7 +91,7 @@ namespace eTicketsAPI
             services.AddScoped<IBankService, BankService>();
 
 
-
+            
 
 
 

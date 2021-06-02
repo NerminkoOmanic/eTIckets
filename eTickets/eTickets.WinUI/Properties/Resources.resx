@@ -127,7 +127,7 @@
     <value>Error</value>
   </data>
   <data name="msgFailedAuthorization" xml:space="preserve">
-    <value>Wrong login details </value>
+    <value>Not authorized, you need to be administrator.</value>
   </data>
   <data name="msgFailedLogin" xml:space="preserve">
     <value>Wrong username or password </value>
@@ -161,6 +161,9 @@
   </data>
   <data name="msgUsernameExist" xml:space="preserve">
     <value>*Username already exists</value>
+  </data>
+  <data name="msgUsernameNotLetterOrDigit" xml:space="preserve">
+    <value>*Username can contain only letters and numbers</value>
   </data>
   <data name="msgValidation_ReqField" xml:space="preserve">
     <value>*Required field</value>

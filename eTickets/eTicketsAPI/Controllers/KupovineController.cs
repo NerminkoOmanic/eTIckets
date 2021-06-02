@@ -26,7 +26,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<KupovineDgvExtension> Get()
+        public IEnumerable<eTickets.Model.Kupovine> Get()
         {
             return _kupovineService.Get();
         }
@@ -38,7 +38,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpPost]
-        public eTickets.Model.Kupovine Insert(KupovineInsertRequest request)
+        public eTickets.Model.Kupovine Insert([FromBody]KupovineInsertRequest request)
         {
             return _kupovineService.Insert(request);
         }

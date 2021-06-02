@@ -13,7 +13,10 @@ namespace eTickets.WinUI.Korisnik
 {
     public partial class frmAdministratori : Form
     {
-        private readonly APIService _apiService = new APIService("korisnik");
+        private readonly APIService _korisnikService = new APIService("korisnik");
+        private readonly APIService _ulogaService = new APIService("uloga");
+
+        private int adminUlogaId = 0;
 
         public frmAdministratori()
         {
@@ -29,9 +32,18 @@ namespace eTickets.WinUI.Korisnik
 
         private async void frmAdministratori_Load(object sender, EventArgs e)
         {
+              
+            var lstUloge = await _ulogaService.Get<List<eTickets.Model.Uloga>>(null);
+
+            foreach (var uloga in lstUloge)
+            {
+                if(uloga.Naziv.Equals("Administrator"))
+                    adminUlogaId = uloga.UlogaId;
+            }
+
             var search = new KorisnikSearchRequest()
             {
-                UlogaId = 1 //Admin uloga id = 1, prikaz admina
+                UlogaId = adminUlogaId,
             };
             await GenerateGrid(search);
         }
@@ -56,10 +68,12 @@ namespace eTickets.WinUI.Korisnik
 
         private async Task GenerateGrid(KorisnikSearchRequest search)
         {
-            var result = await _apiService.Get<List<eTickets.Model.Korisnik>>(search);
+            var result = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
 
             dgvAdministratori.DataSource = result;
 
         }
+
+        
     }
 }

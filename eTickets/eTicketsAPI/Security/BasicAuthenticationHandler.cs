@@ -15,13 +15,13 @@ namespace eTicketsAPI.Security
 {
     public class BasicAuthenticationHandler : AuthenticationHandler<AuthenticationSchemeOptions>
     {
-                private readonly IKorisnikService _korisniciService;
+                private readonly IKorisnikService _korisnikService;
                 public static eTickets.Model.Korisnik User;
         public BasicAuthenticationHandler(IOptionsMonitor<AuthenticationSchemeOptions> options,
-            ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IKorisnikService korisniciService)
+            ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IKorisnikService korisnikService)
             : base(options, logger, encoder, clock)
         {
-            _korisniciService = korisniciService;
+            _korisnikService = korisnikService;
         }
 
         protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
@@ -34,14 +34,13 @@ namespace eTicketsAPI.Security
 
             try
             {
-                //QWxhZGRpbjpvcGVuIHNlc2FtZQ==
                 var authHeader = AuthenticationHeaderValue.Parse(Request.Headers["Authorization"]);
                 var credentialBytes = Convert.FromBase64String(authHeader.Parameter);
                 var credentials = Encoding.UTF8.GetString(credentialBytes).Split(':');
                 var username = credentials[0];
                 var password = credentials[1];
 
-                User = await _korisniciService.Login(username, password);
+                User = await _korisnikService.Login(username, password);
 
             }
             catch (Exception ex)

@@ -11,9 +11,9 @@ namespace eTicketsAPI.Services
 {
     public interface IKorisnikService 
     {
-        IEnumerable<KorisnikViewExtension> Get(KorisnikSearchRequest search);
+        IEnumerable<eTickets.Model.Korisnik> Get(KorisnikSearchRequest search);
 
-        KorisnikViewExtension GetById(int id);
+        eTickets.Model.Korisnik GetById(int id);
 
         eTickets.Model.Korisnik Insert(KorisnikInsertRequest request);
 

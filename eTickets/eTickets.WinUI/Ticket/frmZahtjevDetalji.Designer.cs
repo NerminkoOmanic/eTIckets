@@ -263,7 +263,7 @@ namespace eTickets.WinUI.Ticket
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "frmZahtjevDetalji";
-            this.Text = "Request details";
+            this.Text = "Ticket details";
             this.Load += new System.EventHandler(this.frmZahtjevDetalji_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pbSlika)).EndInit();
             this.ResumeLayout(false);

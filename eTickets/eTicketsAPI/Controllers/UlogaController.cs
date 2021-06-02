@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eTickets.Model;
+using eTickets.Model.Requests;
 using eTicketsAPI.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace eTicketsAPI.Controllers
 {
@@ -12,5 +14,6 @@ namespace eTicketsAPI.Controllers
         public UlogaController(IUlogaService ulogaService) : base(ulogaService)
         {
         }
+
     }
 }

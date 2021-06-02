@@ -35,5 +35,8 @@ namespace eTickets.Model.Requests
         public int? AdminId { get; set; }
         public bool Odobreno { get; set; }
         public bool Prodano { get; set; }
+
+        public byte[] SlikaBytes { get; set; }
+
     }
 }

@@ -20,7 +20,7 @@ namespace eTicketsAPI.Controllers
     {
         private readonly IBankService _bankService;
 
-        public BankController(IBankService bankService)
+        public BankController([FromQuery]IBankService bankService)
         {
             _bankService = bankService;
         }
@@ -32,7 +32,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpPost]
-        public int Insert(OnlinePaymentRequest request)
+        public int Insert([FromBody]OnlinePaymentRequest request)
         {
             return _bankService.Insert(request);
         }
