@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
+             mc:Ignorable="d"
+             x:Class="eTickets.MobileApp.Views.LoginPage"
+             xmlns:local ="clr-namespace:eTickets.MobileApp.Utility;assembly=eTickets.MobileApp"
+             Shell.NavBarIsVisible="False">
+    <ContentPage.BindingContext>
+        <viewModels:LoginViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout VerticalOptions="CenterAndExpand" Padding="10" >
+
+            <Label FontSize="40"
+                   Text="eTickets"
+                   HorizontalOptions="Center"/>
+            
+            <Entry x:Name="KorisnickoIme" Text="{Binding Username}"
+                   Placeholder="Username"></Entry>
+
+            <Grid>
+                <Entry x:Name="Lozinka" IsPassword="{Binding Source={x:Reference ShowPasswordActualTrigger}, Path=HidePassword}"
+                       Text="{Binding Password}"
+                       Placeholder="Password"></Entry>
+                <ImageButton VerticalOptions="Center" Margin="0,0,10,0"
+                             HeightRequest ="20"
+                             HorizontalOptions ="End"
+                             Source="ic_eye_hide.png">
+                    <ImageButton.Triggers>
+                        <EventTrigger Event="Clicked">
+                            <local:ShowPasswordTriggerAction ShowIcon="ic_eye.png"
+                                                             HideIcon="ic_eye_hide.png"
+                                                             x:Name="ShowPasswordActualTrigger"/>
+                        </EventTrigger>
+                    </ImageButton.Triggers>
+                </ImageButton>
+            </Grid>
+            <Button Text="Login" Command="{Binding LoginCommand}" BackgroundColor="RoyalBlue" TextColor="White"/>
+            <Button Text="Register" Command="{Binding LoginCommand}" BackgroundColor="RoyalBlue" TextColor="White"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>  

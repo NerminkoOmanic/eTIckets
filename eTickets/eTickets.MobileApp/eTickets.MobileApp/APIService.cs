@@ -1,26 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Net.Mime;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using Flurl;
-using Flurl.Http;
-using eTickets;
-using eTickets.WinUI.Properties;
 using eTickets.Model;
+using Flurl.Http;
+using Xamarin.Forms;
 
-namespace eTickets.WinUI
+
+namespace eTickets.MobileApp
 {
     public class APIService
     {
         private string _resource = null;
-
-        private string _endpoint = $"{Properties.Settings.Default.APIUrl}";
-
         public static string Username { get; set; }
         public static string Password { get; set; }
         public static eTickets.Model.Korisnik PrijavljeniKorisnik { get; set; }
+
+#if DEBUG
+        private string _apiUrl = "http://localhost:1838/api/";
+#endif
+#if RELEASE
+        private string _apiUrl = "https://mywebsite.com/api/";
+#endif
 
         public APIService(string resource)
         {
@@ -30,7 +32,7 @@ namespace eTickets.WinUI
         public async Task<T> Get<T>(object search,  string actionName = "")
         {
 
-            var url = $"{_endpoint}{_resource}";
+            var url = $"{_apiUrl}{_resource}";
 
             try
             {
@@ -49,32 +51,45 @@ namespace eTickets.WinUI
             }
             catch (FlurlHttpException ex)
             {
-                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Unauthorized)
+                //var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                //var stringBuilder = new StringBuilder();
+                //foreach (var error in errors)
+                //{
+                //    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                //}
+
+                //await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
+                //throw;
+                if (ex.Call.Response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized)
                 {
-                    MessageBox.Show(Resources.msgForbbiden);
+                    await Application.Current.MainPage.DisplayAlert("Error", "Not authentificated", "OK");
                 }
                 throw;
             }
-            
         }
 
         public async Task<T> GetById<T>(object id)
         {
+
             try
             {
-                var url = $"{_endpoint}{_resource}/{id}";
-
+                var url = $"{_apiUrl}{_resource}/{id}";
                 return await url.WithBasicAuth(Username,Password).GetJsonAsync<T>();
             }
             catch (FlurlHttpException ex)
             {
-                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Unauthorized)
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
+
+                var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
                 {
-                    MessageBox.Show(Resources.msgForbbiden);
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
                 }
+
+                await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
                 throw;
             }
-            
         }
 
         public async Task<T> Insert<T>(object request)
@@ -82,7 +97,7 @@ namespace eTickets.WinUI
 
             try
             {
-                var url = $"{_endpoint}{_resource}";
+                var url = $"{_apiUrl}{_resource}";
 
                 return await url.WithBasicAuth(Username,Password).PostJsonAsync(request).ReceiveJson<T>();
 
@@ -97,7 +112,7 @@ namespace eTickets.WinUI
                     stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
                 }
 
-                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
                 return default(T);
             }
         }
@@ -107,7 +122,7 @@ namespace eTickets.WinUI
             
             try
             {
-                var url = $"{_endpoint}{_resource}/{id}";
+                var url = $"{_apiUrl}{_resource}/{id}";
 
                 return await url.WithBasicAuth(Username,Password).PutJsonAsync(request).ReceiveJson<T>();
             }
@@ -121,7 +136,8 @@ namespace eTickets.WinUI
                     stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
                 }
 
-                MessageBox.Show(stringBuilder.ToString(), "Greška", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
+
                 return default(T);
             }
             
@@ -129,7 +145,7 @@ namespace eTickets.WinUI
 
         public async Task<bool> Remove(int id)
         {
-            var url = $"{_endpoint}{_resource}/{id}";
+            var url = $"{_apiUrl}{_resource}/{id}";
 
             try
             {
@@ -137,21 +153,15 @@ namespace eTickets.WinUI
             }
             catch (FlurlHttpException ex)
             {
-                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Unauthorized)
-                {
-                    MessageBox.Show(Resources.msgFailedAuthorization);
-
-                    return false;
-                }
-                if (ex.Call.Response.StatusCode == (int) System.Net.HttpStatusCode.Forbidden)
-                {
-                    MessageBox.Show(Resources.msgForbbiden);
-                }
+                var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
 
                 var stringBuilder = new StringBuilder();
+                foreach (var error in errors)
+                {
+                    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
+                }
 
-
-                MessageBox.Show(stringBuilder.ToString(), "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
                 return false;
             }
         }

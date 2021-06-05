@@ -117,7 +117,7 @@ namespace eTicketsAPI
 
             app.UseAuthentication();
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
 
