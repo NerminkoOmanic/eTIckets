@@ -8,8 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace eTickets.MobileApp.Views
-{
-    [XamlCompilation(XamlCompilationOptions.Compile)]
+{ 
+    //[XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class TicketsPage : ContentPage
     {
         private TicketsViewModel _model = null;

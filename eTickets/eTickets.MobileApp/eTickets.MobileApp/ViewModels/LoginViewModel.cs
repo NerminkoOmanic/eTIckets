@@ -14,6 +14,7 @@ namespace eTickets.MobileApp.ViewModels
         public LoginViewModel()
         {
             LoginCommand = new Command(async() => await OnLoginClicked());
+            RegisterCommand = new Command(OnRegisterClicked);
         }
 
 
@@ -31,6 +32,8 @@ namespace eTickets.MobileApp.ViewModels
             set => SetProperty(ref _password, value);
         }
         public ICommand LoginCommand { get; set; }
+        public ICommand RegisterCommand { get; set; }
+
 
         async Task OnLoginClicked()
         {
@@ -61,12 +64,17 @@ namespace eTickets.MobileApp.ViewModels
             }
             catch (Exception e)
             {
-                Console.WriteLine(e);
-                throw;
+                await Application.Current.MainPage.DisplayAlert("Error", "Wrong username or password", "OK");
+
             }
 
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
+        }
+
+        private void OnRegisterClicked()
+        {
+            Application.Current.MainPage = new RegisterPage();
         }
     }
 }

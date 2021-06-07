@@ -44,6 +44,10 @@ namespace eTicketsAPI.Services
             {
                 dbSet = dbSet.OrderBy(x => x.Datum);
             }
+            if (search?.KorisnikId != null)
+            {
+                dbSet = dbSet.OrderBy(x => x.Datum);
+            }
 
             var list = dbSet.ToList();
 

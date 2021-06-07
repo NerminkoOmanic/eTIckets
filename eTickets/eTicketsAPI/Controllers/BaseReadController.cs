@@ -8,7 +8,6 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace eTicketsAPI.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class BaseReadController<T, TSearch> : ControllerBase where T:class where TSearch:class

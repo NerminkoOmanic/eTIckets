@@ -66,6 +66,7 @@ namespace eTickets.WinUI.Korisnik
 
                 await _korisnikService.Insert<Model.Korisnik>(request);
                 MessageBox.Show(Properties.Resources.msgSuccessAdd);
+                Close();
 
             }
             
@@ -255,10 +256,10 @@ namespace eTickets.WinUI.Korisnik
             }
         }
 
-        //need Implementation
+        
         private void dtpDatum_Validating(object sender, CancelEventArgs e)
         {
-            
+            //
         }
 
         #endregion

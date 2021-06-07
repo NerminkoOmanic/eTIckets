@@ -1,12 +1,56 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
              x:Class="eTickets.MobileApp.Views.RegisterPage">
-    <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+    <ContentPage.BindingContext>
+        <viewModels:RegisterViewModel />
+    </ContentPage.BindingContext>
+   <ContentPage.Content>
+       <ScrollView>
+           <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+                <Label Text="First name :" />
+                <Entry  x:Name="Ime"  TextChanged="ime_changed" Text="{Binding Ime}" ReturnType="Next" Unfocused="ime_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_Ime" TextColor="Red" FontSize="13" />
+
+                <Label Text="Last name :" />
+                <Entry x:Name="Prezime" Text="{Binding Prezime}" TextChanged="prezime_changed"  Unfocused="prezime_unfocused" ReturnType="Next"></Entry>
+                <Label x:Name="ErrorLabel_Prezime" TextColor="Red" FontSize="13" />
+
+                <Label Text="Username :" />
+                <Entry x:Name="KorisnickoIme" Text="{Binding KorisnickoIme}" TextChanged="korisnickoime_changed"  Unfocused="korisnickoime_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_KorisnickoIme" TextColor="Red" FontSize="13" />
+
+                <Label Text="Email :" />
+                <Entry x:Name="Email" Text="{Binding Email}" TextChanged="email_changed"  Unfocused="email_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_Email" TextColor="Red" FontSize="13" />
+
+                <Label Text="Phone nr. :" />
+                <Entry x:Name="Telefon" Text="{Binding Telefon}" TextChanged="telefon_changed"  Unfocused="telefon_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_Telefon" TextColor="Red" FontSize="13" />
+
+                <Label Text="Date of birth :" />
+                <DatePicker x:Name="Datum" Date="{Binding DatumRodenja}" />
+
+                <Label Text="Password :"/>
+                <Entry x:Name="Lozinka" Text="{Binding Lozinka}" IsPassword="True" TextChanged="lozinka_changed"  Unfocused="lozinka_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_Lozinka"  TextColor="Red" FontSize="13" />
+
+                <Label Text="Password confirmation :"/>
+                <Entry x:Name="Lozinkap" Text="{Binding LozinkaProvjera}" IsPassword="True" TextChanged="lozinkap_changed"  Unfocused="lozinkap_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_LozinkaProvjera" TextColor="Red" FontSize="13" />
+
+                <Label Text="City :"/>
+                <Picker ItemsSource="{Binding GradoviList}" SelectedItem="{Binding SelectedGrad}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+
+                <Label Text="Gender :"/>
+                <Picker ItemsSource="{Binding SpolList}" SelectedItem="{Binding SelectedSpol}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+
+                <Button Command="{Binding RegistrationCommand}"  Text="Submit"
+                        BackgroundColor="RoyalBlue"
+                        TextColor="White">
+                </Button>
+            </StackLayout> 
+       </ScrollView>
     </ContentPage.Content>
 </ContentPage>

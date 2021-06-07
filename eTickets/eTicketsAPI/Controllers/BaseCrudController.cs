@@ -3,10 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using eTicketsAPI.Services;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace eTicketsAPI.Controllers
 {
+    [Authorize]
     public class BaseCrudController<T, TSearch, TInsert, TUpdate> : BaseReadController<T, TSearch> 
         where T:class where TSearch:class where TInsert:class where TUpdate:class
     {

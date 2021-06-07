@@ -36,7 +36,7 @@ namespace eTickets.MobileApp
 
             try
             {
-                if (actionName != null)
+                if (!actionName.Equals(""))
                 {
                     url += "/";
                     url += actionName;
@@ -46,6 +46,10 @@ namespace eTickets.MobileApp
                 {
                     url += "?";
                     url += await search.ToQueryString();
+                }
+                if (_resource.Equals("korisnik") && string.IsNullOrEmpty(actionName) )
+                {
+                    return await url.GetJsonAsync<T>();
                 }
                 return await url.WithBasicAuth(Username,Password).GetJsonAsync<T>();
             }
@@ -98,6 +102,11 @@ namespace eTickets.MobileApp
             try
             {
                 var url = $"{_apiUrl}{_resource}";
+
+                if (_resource.Equals("korisnik"))
+                {
+                    return  await url.PostJsonAsync(request).ReceiveJson<T>();
+                }
 
                 return await url.WithBasicAuth(Username,Password).PostJsonAsync(request).ReceiveJson<T>();
 

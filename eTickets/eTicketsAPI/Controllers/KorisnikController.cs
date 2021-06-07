@@ -14,7 +14,6 @@ namespace eTicketsAPI.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
     public class KorisnikController : ControllerBase
     {
         private readonly IKorisnikService _korisnikService;
@@ -31,6 +30,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpGet("{id}")]
+        [Authorize]
         public eTickets.Model.Korisnik GetById(int id)
         {
             return _korisnikService.GetById(id);
@@ -43,12 +43,14 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpPut("{id}")]
+        [Authorize]
         public eTickets.Model.Korisnik Update(int id, [FromBody] KorisnikUpdateRequest request)
         {
             return _korisnikService.Update(id, request);
         }
 
         [HttpGet("profil")]
+        [Authorize]
         public eTickets.Model.Korisnik Profil()
         {
             return _korisnikService.Profil();

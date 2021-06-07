@@ -216,6 +216,7 @@ namespace eTickets.WinUI.Korisnik
             // 
             // cmbGrad
             // 
+            this.cmbGrad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbGrad.FormattingEnabled = true;
             this.cmbGrad.Location = new System.Drawing.Point(128, 300);
             this.cmbGrad.Name = "cmbGrad";
@@ -225,6 +226,7 @@ namespace eTickets.WinUI.Korisnik
             // 
             // cmbSpol
             // 
+            this.cmbSpol.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbSpol.FormattingEnabled = true;
             this.cmbSpol.Location = new System.Drawing.Point(128, 338);
             this.cmbSpol.Name = "cmbSpol";
