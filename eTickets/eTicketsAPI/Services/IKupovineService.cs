@@ -9,7 +9,7 @@ namespace eTicketsAPI.Services
 {
     public interface IKupovineService
     {
-        IEnumerable<eTickets.Model.Kupovine> Get();
+        IEnumerable<eTickets.Model.Kupovine> Get(KupovineSearchRequest request);
         eTickets.Model.Kupovine GetById(int id);
         eTickets.Model.Kupovine Insert(KupovineInsertRequest request);
     }

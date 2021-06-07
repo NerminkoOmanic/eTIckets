@@ -6,6 +6,9 @@
     <ContentPage.BindingContext>
         <viewModels:TicketsViewModel />
     </ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem x:Name="AddToolBar" IconImageSource="btnAdd.png" Text="Make new request" Command="{Binding AddItemCommand}" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Tickets"
@@ -33,6 +36,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

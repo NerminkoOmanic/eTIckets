@@ -11,52 +11,81 @@ using Xamarin.Forms;
 
 namespace eTickets.MobileApp.ViewModels
 {
-    
+
     public class TicketsViewModel
     {
         private readonly APIService _ticketsService = new APIService("ticket");
+        private readonly APIService _kupovineService = new APIService("kupovine");
+
         private string _vrsta { get; set; }
+
         public TicketsViewModel()
         {
             _vrsta = StaticHelper.VrstaTicket;
             InitCommand = new Command(async () => await Init());
         }
+
         public ObservableCollection<Ticket> TicketsList { get; set; } = new ObservableCollection<Ticket>();
 
         public ICommand InitCommand { get; set; }
 
         public async Task Init()
         {
-            var searchObject = new TicketSearchRequest();
+            var searchObjectTicket = new TicketSearchRequest();
+            var searchObjectKupovine = new KupovineSearchRequest();
 
             if (_vrsta != null)
             {
                 if (_vrsta.Equals("activeAll"))
                 {
-                    searchObject.AktivnaProdaja = true;
+                    searchObjectTicket.AktivnaProdaja = true;
                 }
+
                 if (_vrsta.Equals("active"))
                 {
-                    searchObject.AktivnaProdaja = true;
-                    searchObject.
+                    searchObjectTicket.AktivnaProdaja = true;
+                    searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
                 }
+
                 if (_vrsta.Equals("selling"))
                 {
-                    searchObject.AktivnaProdaja = true;
+                    searchObjectTicket.Prodano = true;
+                    searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
                 }
+
                 if (_vrsta.Equals("buying"))
                 {
-                    searchObject.AktivnaProdaja = true;
+                    searchObjectKupovine.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
+                }
+
+                if (_vrsta.Equals("request"))
+                {
+                    searchObjectTicket.Zahtjev = true;
+                    searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
                 }
             }
 
-            var list = await _ticketsService.Get<List<Ticket>>(searchObject);
-
-            TicketsList.Clear();
-            foreach (var ticket in list)
+            if (_vrsta == "buying")
             {
-                TicketsList.Add(ticket);
+                var list = await _kupovineService.Get<List<Kupovine>>(searchObjectKupovine);
+                TicketsList.Clear();
+                foreach (var kupovina in list)
+                {
+                    TicketsList.Add(kupovina.Ticket);
+                } 
             }
+            else
+            {
+                var list = await _ticketsService.Get<List<Ticket>>(searchObjectTicket);
+
+                TicketsList.Clear();
+                foreach (var ticket in list)
+                {
+                    TicketsList.Add(ticket);
+                } 
+            }
+            
         }
+
     }
 }

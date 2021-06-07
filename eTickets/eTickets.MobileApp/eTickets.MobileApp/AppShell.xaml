@@ -87,26 +87,20 @@
     <FlyoutItem Title="Tickets" Icon="icon_feed.png">
         <ShellContent Route="ActiveTickets" ContentTemplate="{DataTemplate local:TicketsPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Your tickets" Icon="icon_feed.png">
-        <Tab Title="Your active tickets">
-            <ShellContent Route="ActiveRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
-        </Tab>
-        <Tab Title="Bought tickets">
-            <ShellContent Route="BuyingRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
-        </Tab>
-        <Tab Title="Sold tickets">
-            <ShellContent Route="SellingRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
-        </Tab>
+    <FlyoutItem Title="Your pending request" Icon="icon_feed.png">
+        <ShellContent Route="RequestRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Your active tickets" Icon="icon_feed.png">
+        <ShellContent Route="ActiveRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Your buying history" Icon="icon_feed.png">
+        <ShellContent Route="BuyingRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Your selling history" Icon="icon_feed.png">
+        <ShellContent Route="SellingRoute" ContentTemplate="{DataTemplate local:TicketsPage}" />
     </FlyoutItem>
 
-
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
-    <MenuItem Text="Active tickets" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemActiveClicked">
-    </MenuItem>
-    <MenuItem Text="Sold" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemSoldClicked">
-    </MenuItem>
-    <MenuItem Text="Bought" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemBoughtClicked">
-    </MenuItem>
     <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
     </MenuItem>
 

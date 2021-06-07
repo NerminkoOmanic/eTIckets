@@ -9,13 +9,9 @@ namespace eTickets.MobileApp
 {
     public partial class AppShell : Xamarin.Forms.Shell
     {
-        private string _activeTicket = "active";
-        private string _sellingTicket = "selling";
-        private string _boughtTicket = "buying";
         public AppShell()
         {
 
-            //var routeProdaje = $"{nameof(TicketsPage)}?VrstaListe=Prodaja";
             InitializeComponent();
             Routing.RegisterRoute(nameof(TicketsPage),typeof(TicketsPage));
             Routing.RegisterRoute(nameof(ItemDetailPage), typeof(ItemDetailPage));
@@ -36,11 +32,15 @@ namespace eTickets.MobileApp
             }
             else if (args.Target.Location.OriginalString.Contains("BuyingRoute"))
             {
-                StaticHelper.VrstaTicket = "selling";
+                StaticHelper.VrstaTicket = "buying";
             }
             else if (args.Target.Location.OriginalString.Contains("SellingRoute"))
             {
-                StaticHelper.VrstaTicket = "buying";
+                StaticHelper.VrstaTicket = "selling";
+            }
+            else if (args.Target.Location.OriginalString.Contains("RequestRoute"))
+            {
+                StaticHelper.VrstaTicket = "request";
             }
             base.OnNavigating(args);
 
@@ -49,24 +49,6 @@ namespace eTickets.MobileApp
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync("//LoginPage");
-        }
-        private async void OnMenuItemBoughtClicked(object sender, EventArgs e)
-        {
-            var routeKupovine = $"//{nameof(TicketsPage)}?VrstaListe={_boughtTicket}";
-
-            await Shell.Current.GoToAsync(routeKupovine);
-        }
-        private async void OnMenuItemActiveClicked(object sender, EventArgs e)
-        {
-            var routeKupovine = $"//{nameof(TicketsPage)}?VrstaListe={_activeTicket}";
-
-            await Shell.Current.GoToAsync(routeKupovine);
-        }
-        private async void OnMenuItemSoldClicked(object sender, EventArgs e)
-        {
-            var routeKupovine = $"//{nameof(TicketsPage)}?VrstaListe={_sellingTicket}";
-
-            await Shell.Current.GoToAsync(routeKupovine);
         }
     }
 }

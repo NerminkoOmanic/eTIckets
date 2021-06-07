@@ -21,11 +21,20 @@ namespace eTicketsAPI.Services
             _mapper = mapper;
         }
 
-        public IEnumerable<eTickets.Model.Kupovine> Get()
+        public IEnumerable<eTickets.Model.Kupovine> Get(KupovineSearchRequest search = null)
         {
-            var list = Context.Kupovine.Include(x=>x.Ticket)
-                .Include(x=>x.Kupac)
-                .Include(x=>x.Ticket.Prodavac).ToList();
+            var dbSet = Context.Kupovine.AsQueryable();
+
+            dbSet = dbSet.Include(x => x.Ticket)
+                .Include(x => x.Kupac)
+                .Include(x => x.Ticket.Prodavac);
+
+            if (search?.KorisnikId != 0)
+            {
+                dbSet = dbSet.Where(x => x.KupacId == search.KorisnikId);
+            }
+
+            var list = dbSet.ToList();
             
             return _mapper.Map<List<eTickets.Model.Kupovine>>(list);
         }

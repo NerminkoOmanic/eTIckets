@@ -26,9 +26,9 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpGet]
-        public IEnumerable<eTickets.Model.Kupovine> Get()
+        public IEnumerable<eTickets.Model.Kupovine> Get([FromQuery] KupovineSearchRequest request)
         {
-            return _kupovineService.Get();
+            return _kupovineService.Get(request);
         }
 
         [HttpGet("{id}")]
