@@ -16,7 +16,8 @@
 
             <Label FontSize="40"
                    Text="eTickets"
-                   HorizontalOptions="Center"/>
+                   HorizontalOptions="Center"
+                   TextColor="RoyalBlue"/>
             
             <Entry x:Name="KorisnickoIme" Text="{Binding Username}"
                    Placeholder="Username"></Entry>

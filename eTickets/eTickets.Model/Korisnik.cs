@@ -14,6 +14,8 @@ namespace eTickets.Model
         public int UlogaId { get; set; }
         public int GradId { get; set; }
         public int SpolId { get; set; }
+        public string BankAccount { get; set; }
+
 
         public virtual Grad Grad { get; set; }
         public virtual Spol Spol { get; set; }

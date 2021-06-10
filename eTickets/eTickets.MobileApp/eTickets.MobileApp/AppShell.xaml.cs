@@ -48,6 +48,9 @@ namespace eTickets.MobileApp
 
         private async void OnMenuItemClicked(object sender, EventArgs e)
         {
+            APIService.PrijavljeniKorisnik = null;
+            APIService.Password = null;
+            APIService.Username = null;
             await Shell.Current.GoToAsync("//LoginPage");
         }
     }

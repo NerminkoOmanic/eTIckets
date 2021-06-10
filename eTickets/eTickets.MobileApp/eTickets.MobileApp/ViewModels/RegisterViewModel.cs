@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -12,7 +13,7 @@ using Xamarin.Forms;
 
 namespace eTickets.MobileApp.ViewModels
 {
-    class RegisterViewModel : BaseViewModel
+    public class RegisterViewModel : BaseViewModel
     {
         private readonly APIService _korisnikService = new APIService("korisnik");
         private readonly APIService _gradService = new APIService("grad");
@@ -26,18 +27,23 @@ namespace eTickets.MobileApp.ViewModels
         {
 
             InitCommand = new Command(async () => await Init());
-            RegistrationCommand = new Command(async () =>
-            {
-                await Register();
-
-            });
+            RegistrationCommand = new Command(async () => await Register());
+            Title = "Register";
         }
 
         public ObservableCollection<Grad> GradoviList { get; set; } = new ObservableCollection<Grad>();
         public ObservableCollection<Spol> SpolList { get; set; } = new ObservableCollection<Spol>();
 
         #region Properties
-         string _email = string.Empty;
+
+        string _bankaccount = string.Empty;
+        public string BankAccount
+        {
+            get => _bankaccount;
+            set => SetProperty(ref _bankaccount, value);
+        }
+
+        string _email = string.Empty;
         public string Email
         {
             get => _email;
@@ -101,10 +107,10 @@ namespace eTickets.MobileApp.ViewModels
             set
             {
                 SetProperty(ref _selectedGrad, value);
-                if (value != null)
-                {
-                    InitCommand.Execute(null);
-                }
+                //if (value != null)
+                //{
+                //    InitCommand.Execute(null);
+                //}
 
             }
         }
@@ -130,8 +136,64 @@ namespace eTickets.MobileApp.ViewModels
 
 
         public ICommand InitCommand { get; set; }
-
         public ICommand RegistrationCommand { get; set; }
+
+
+        #region Validation
+        private bool ValidateEmptyFields()
+        {
+            if (EditProfile)
+            {
+                if (string.IsNullOrEmpty(Email) || SelectedGrad==null || string.IsNullOrEmpty(Telefon))
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Ime) || string.IsNullOrEmpty(Prezime)
+                    || string.IsNullOrEmpty(KorisnickoIme) || string.IsNullOrEmpty(Lozinka) || string.IsNullOrEmpty(LozinkaProvjera)
+                    || SelectedGrad==null || SelectedSpol ==null || string.IsNullOrEmpty(Telefon))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private bool ValidatePasswordMatch()
+        {
+            if (Lozinka.Equals(LozinkaProvjera))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ValidateEmailFormat()
+        {
+            if (Email.Contains("@") && Email.Contains("."))
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private bool ValidateEmailUniqueEdit(List<Korisnik> lst)
+        {
+            foreach (var korisnik in lst)
+            {
+                if(korisnik.Email == Email && korisnik.KorisnikId != APIService.PrijavljeniKorisnik.KorisnikId)
+                    return false;
+            }
+
+            return true;
+        }
+        
+        #endregion
 
         public async Task Init()
         {
@@ -166,43 +228,13 @@ namespace eTickets.MobileApp.ViewModels
                     }
                 }
             }
+
+            if (APIService.PrijavljeniKorisnik != null)
+            {
+                EditProfileSetProperties();
+            }
             
         }
-
-        #region Validation
-        private bool ValidateEmptyFields()
-        {
-            if (string.IsNullOrEmpty(Email) || string.IsNullOrEmpty(Ime) || string.IsNullOrEmpty(Prezime)
-                || string.IsNullOrEmpty(KorisnickoIme) || string.IsNullOrEmpty(Lozinka) || string.IsNullOrEmpty(LozinkaProvjera)
-                || SelectedGrad==null || SelectedSpol ==null || string.IsNullOrEmpty(Telefon))
-            {
-                return false;
-            }
-            return true;
-        }
-
-        private bool ValidatePasswordMatch()
-        {
-            if (Lozinka.Equals(LozinkaProvjera))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        private bool ValidateEmail()
-        {
-            if (Email.Contains("@") && Email.Contains("."))
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        #endregion
-
         async Task Register()
         {
 
@@ -218,7 +250,7 @@ namespace eTickets.MobileApp.ViewModels
                 return;
             }
 
-            if (ValidateEmail()==false)
+            if (ValidateEmailFormat()==false)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Email needs to be in format xxx@xxx.xxx", "OK");
                 return;
@@ -230,24 +262,51 @@ namespace eTickets.MobileApp.ViewModels
                 EmailValidacija = Email
             };
             var emailLst = await _korisnikService.Get<List<Korisnik>>(searchRequest);
-            if (emailLst.Count > 0)
+            if (emailLst.Count > 0 && !EditProfile)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", "Email already exist", "OK");
                 return;
             }
-
-
-            searchRequest.EmailValidacija = null;
-            searchRequest.KorisnickoIme = KorisnickoIme;
-            var usernameList = await _korisnikService.Get<List<Korisnik>>(searchRequest);
-            if (usernameList.Count > 0)
+            if (emailLst.Count > 0 && EditProfile)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Username already exist", "OK");
-                return;
+                if (!ValidateEmailUniqueEdit(emailLst))
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Email already exist", "OK");
+                    return;
+                }
             }
 
+            if (EditProfile)
+            {
+                var request = new KorisnikUpdateRequest()
+                {
+                    Email = Email,
+                    BankAccount = BankAccount,
+                    GradId = SelectedGrad.GradId,
+                    Lozinka = Lozinka,
+                    Telefon = Telefon
+                };
 
-            var request = new KorisnikInsertRequest()
+                var updatedKorisnik = await _korisnikService.Update<Korisnik>(APIService.PrijavljeniKorisnik.KorisnikId, request);
+                await Application.Current.MainPage.DisplayAlert("Success", "Profile updated!","OK");
+
+                APIService.PrijavljeniKorisnik = updatedKorisnik;
+                APIService.Password = Lozinka;
+                Application.Current.MainPage = new AppShell();
+
+            }
+            else
+            {
+                searchRequest.EmailValidacija = null;
+                searchRequest.KorisnickoIme = KorisnickoIme;
+                var usernameList = await _korisnikService.Get<List<Korisnik>>(searchRequest);
+                if (usernameList.Count > 0)
+                {
+                    await Application.Current.MainPage.DisplayAlert("Error", "Username already exist", "OK");
+                    return;
+                }
+
+                var request = new KorisnikInsertRequest()
                 {
 
                     DatumRodjenja = DatumRodenja,
@@ -263,24 +322,24 @@ namespace eTickets.MobileApp.ViewModels
                     Telefon = Telefon
                 };
 
-
-            var noviKorisnik = await _korisnikService.Insert<Korisnik>(request);
-
-
-            if (noviKorisnik != null)
-            {
+                await _korisnikService.Insert<Korisnik>(request);
                 await Application.Current.MainPage.DisplayAlert("Success", "You have successfully registered your account! You will now be redirected to login page.", "OK");
-                APIService.PrijavljeniKorisnik = null;
-                APIService.Username = null;
-                APIService.Password = null;
                 Application.Current.MainPage = new LoginPage();
 
             }
-            else
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Registration failed, please try again", "OK");
-            }
+
+            
+
            
+        }
+        private void EditProfileSetProperties()
+        {
+            EditProfile = true;
+            Email = APIService.PrijavljeniKorisnik.Email;
+            Telefon = APIService.PrijavljeniKorisnik.Telefon;
+            if(APIService.PrijavljeniKorisnik.BankAccount!=null)
+                BankAccount = APIService.PrijavljeniKorisnik.BankAccount;
+            SelectedGrad = GradoviList.Where(x => x.GradId == APIService.PrijavljeniKorisnik.GradId).FirstOrDefault();
         }
 
     }

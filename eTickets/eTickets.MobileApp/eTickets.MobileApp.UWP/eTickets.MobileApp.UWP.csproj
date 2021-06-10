@@ -105,6 +105,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="btnAdd.png" />
+    <Content Include="btnBack.png" />
     <Content Include="ic_eye.png" />
     <Content Include="ic_eye_hide.png" />
     <Content Include="Properties\Default.rd.xml" />

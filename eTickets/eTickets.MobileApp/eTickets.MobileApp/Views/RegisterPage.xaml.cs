@@ -18,6 +18,7 @@ namespace eTickets.MobileApp.Views
         {
             InitializeComponent();
             BindingContext = register = new RegisterViewModel();
+            
 
         }
         protected override async void OnAppearing()
@@ -30,9 +31,33 @@ namespace eTickets.MobileApp.Views
             ErrorLabel_Telefon.IsVisible = false;
             ErrorLabel_Lozinka.IsVisible = false;
             ErrorLabel_LozinkaProvjera.IsVisible = false;
+            LabelBank.IsVisible = false;
+            LabelValueBank.IsVisible = false;
+            ButtonBank.IsVisible = false;
             Datum.Date= DateTime.Today;
+            if (APIService.PrijavljeniKorisnik != null)
+            {
+                ButtonGoBack.IsVisible = false;
+                LabelKorisnickoIme.IsVisible = false;
+                KorisnickoIme.IsVisible = false;
+                LabelDatum.IsVisible = false;
+                Datum.IsVisible = false;
+                LabelSpol.IsVisible = false;
+                PickerSpol.IsVisible = false;
+                LabelIme.IsVisible = false;
+                Ime.IsVisible = false;
+                LabelPrezime.IsVisible = false;
+                Prezime.IsVisible = false;
+                LabelTitle.Text = "Edit your profile";
+                LabelTitle.FontSize = 20;
+                LabelBank.IsVisible = true;
+                LabelValueBank.IsVisible = true;
+                ButtonBank.IsVisible = true;
+            }
             await register.Init();
         }
+
+        #region validationLabels
         private void ime_changed(object sender, TextChangedEventArgs e)
         {
             if (string.IsNullOrEmpty(Ime.Text))
@@ -227,6 +252,16 @@ namespace eTickets.MobileApp.Views
             {
                 ErrorLabel_LozinkaProvjera.IsVisible = false;
             }
+        }
+        
+
+        #endregion
+        
+
+        private async void ImageButton_OnClicked(object sender, EventArgs e)
+        {
+            Application.Current.MainPage = new LoginPage();
+           
         }
     }
 }

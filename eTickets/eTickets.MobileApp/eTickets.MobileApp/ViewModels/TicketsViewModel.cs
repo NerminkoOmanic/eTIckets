@@ -12,7 +12,7 @@ using Xamarin.Forms;
 namespace eTickets.MobileApp.ViewModels
 {
 
-    public class TicketsViewModel
+    public class TicketsViewModel : BaseViewModel
     {
         private readonly APIService _ticketsService = new APIService("ticket");
         private readonly APIService _kupovineService = new APIService("kupovine");
@@ -39,29 +39,36 @@ namespace eTickets.MobileApp.ViewModels
                 if (_vrsta.Equals("activeAll"))
                 {
                     searchObjectTicket.AktivnaProdaja = true;
+                    Title = "Tickets";
                 }
 
                 if (_vrsta.Equals("active"))
                 {
                     searchObjectTicket.AktivnaProdaja = true;
                     searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
+                    Title = "Active tickets";
+
                 }
 
                 if (_vrsta.Equals("selling"))
                 {
                     searchObjectTicket.Prodano = true;
                     searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
+                    Title = "Sold tickets";
                 }
 
                 if (_vrsta.Equals("buying"))
                 {
                     searchObjectKupovine.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
+                    Title = "Bought tickets";
+
                 }
 
                 if (_vrsta.Equals("request"))
                 {
                     searchObjectTicket.Zahtjev = true;
                     searchObjectTicket.KorisnikId = APIService.PrijavljeniKorisnik.KorisnikId;
+                    Title = "Requests";
                 }
             }
 

@@ -84,6 +84,9 @@
     <FlyoutItem Title="Browse" Icon="icon_feed.png">
         <ShellContent Route="ItemsPage" ContentTemplate="{DataTemplate local:ItemsPage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Edit profile" Icon="icon_feed.png">
+        <ShellContent Route="EditProfile" ContentTemplate="{DataTemplate local:RegisterPage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Tickets" Icon="icon_feed.png">
         <ShellContent Route="ActiveTickets" ContentTemplate="{DataTemplate local:TicketsPage}" />
     </FlyoutItem>

@@ -16,6 +16,7 @@ namespace eTickets.Model.Requests
         [Phone]
         public string Telefon { get; set; }
         public string Lozinka { get; set; }
+        public string BankAccount { get; set; }
         public int GradId { get; set; }
         public string LozinkaHash { get; set;}
         public string LozinkaSalt { get; set; }

@@ -2,16 +2,19 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
-             x:Class="eTickets.MobileApp.Views.TicketsPage">
+             x:Class="eTickets.MobileApp.Views.TicketsPage"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
         <viewModels:TicketsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name="AddToolBar" IconImageSource="btnAdd.png" Text="Make new request" Command="{Binding AddItemCommand}" />
+        <ToolbarItem x:Name= "AddToolBar" IconImageSource="btnAdd.png" Text="Make new request" Command="{Binding AddItemCommand}" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Tickets"
+                   FontSize="30"
+                   TextColor="RoyalBlue"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
             <ListView ItemsSource="{Binding TicketsList}">

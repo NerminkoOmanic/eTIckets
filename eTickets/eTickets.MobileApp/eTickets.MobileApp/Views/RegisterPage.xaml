@@ -2,22 +2,36 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
-             x:Class="eTickets.MobileApp.Views.RegisterPage">
+             x:Class="eTickets.MobileApp.Views.RegisterPage"
+             Title="{Binding Title}">
     <ContentPage.BindingContext>
         <viewModels:RegisterViewModel />
     </ContentPage.BindingContext>
-   <ContentPage.Content>
+    <ContentPage.Content>
        <ScrollView>
            <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-                <Label Text="First name :" />
+               <ImageButton x:Name="ButtonGoBack"
+                            Source="btnBack.png"
+                            WidthRequest="100"
+                            HeightRequest="100"
+                            VerticalOptions="Start"
+                            HorizontalOptions="Start"
+                            Clicked="ImageButton_OnClicked"></ImageButton>
+               <Label x:Name="LabelTitle" Text="Welcome to register form"
+                      FontSize="30"
+                      TextColor="RoyalBlue"
+                      VerticalOptions="CenterAndExpand" 
+                      HorizontalOptions="CenterAndExpand" />
+               <Label x:Name="LabelIme" Text="First name :" />
                 <Entry  x:Name="Ime"  TextChanged="ime_changed" Text="{Binding Ime}" ReturnType="Next" Unfocused="ime_unfocused"></Entry>
                 <Label x:Name="ErrorLabel_Ime" TextColor="Red" FontSize="13" />
 
-                <Label Text="Last name :" />
+                <Label x:Name="LabelPrezime" Text="Last name :" />
                 <Entry x:Name="Prezime" Text="{Binding Prezime}" TextChanged="prezime_changed"  Unfocused="prezime_unfocused" ReturnType="Next"></Entry>
                 <Label x:Name="ErrorLabel_Prezime" TextColor="Red" FontSize="13" />
 
-                <Label Text="Username :" />
+                <Label x:Name="LabelKorisnickoIme"
+                    Text="Username :" />
                 <Entry x:Name="KorisnickoIme" Text="{Binding KorisnickoIme}" TextChanged="korisnickoime_changed"  Unfocused="korisnickoime_unfocused"></Entry>
                 <Label x:Name="ErrorLabel_KorisnickoIme" TextColor="Red" FontSize="13" />
 
@@ -29,7 +43,8 @@
                 <Entry x:Name="Telefon" Text="{Binding Telefon}" TextChanged="telefon_changed"  Unfocused="telefon_unfocused"></Entry>
                 <Label x:Name="ErrorLabel_Telefon" TextColor="Red" FontSize="13" />
 
-                <Label Text="Date of birth :" />
+                <Label x:Name="LabelDatum"
+                    Text="Date of birth :" />
                 <DatePicker x:Name="Datum" Date="{Binding DatumRodenja}" />
 
                 <Label Text="Password :"/>
@@ -41,10 +56,22 @@
                 <Label x:Name="ErrorLabel_LozinkaProvjera" TextColor="Red" FontSize="13" />
 
                 <Label Text="City :"/>
-                <Picker ItemsSource="{Binding GradoviList}" SelectedItem="{Binding SelectedGrad}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+                <Picker x:Name="PickerGrad"  ItemsSource="{Binding GradoviList}" SelectedItem="{Binding SelectedGrad}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+    
+                <Label x:Name="LabelSpol" Text="Gender :"/>
+                <Picker x:Name="PickerSpol" ItemsSource="{Binding SpolList}" SelectedItem="{Binding SelectedSpol}" ItemDisplayBinding="{Binding Naziv}"></Picker>
 
-                <Label Text="Gender :"/>
-                <Picker ItemsSource="{Binding SpolList}" SelectedItem="{Binding SelectedSpol}" ItemDisplayBinding="{Binding Naziv}"></Picker>
+               <Label x:Name="LabelBank" Text="Bank account nr:"></Label>
+               <Grid>
+                   <Label x:Name="LabelValueBank" 
+                          Text="{Binding BankAccount}"
+                          VerticalOptions="Start"
+                          HorizontalOptions="Start"></Label>
+                   <Button x:Name="ButtonBank" Text="Add/Change bank account number" BackgroundColor="Chartreuse"
+                           VerticalOptions="End"
+                           HorizontalOptions="End"></Button>
+               </Grid>
+                    
 
                 <Button Command="{Binding RegistrationCommand}"  Text="Submit"
                         BackgroundColor="RoyalBlue"
