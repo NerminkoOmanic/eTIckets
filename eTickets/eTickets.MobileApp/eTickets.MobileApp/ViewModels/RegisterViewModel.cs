@@ -28,6 +28,7 @@ namespace eTickets.MobileApp.ViewModels
 
             InitCommand = new Command(async () => await Init());
             RegistrationCommand = new Command(async () => await Register());
+            AddBankCommand = new Command(async () => await OnAddBankClicked());
             Title = "Register";
         }
 
@@ -137,6 +138,7 @@ namespace eTickets.MobileApp.ViewModels
 
         public ICommand InitCommand { get; set; }
         public ICommand RegistrationCommand { get; set; }
+        public ICommand AddBankCommand { get; set; }
 
 
         #region Validation
@@ -332,8 +334,15 @@ namespace eTickets.MobileApp.ViewModels
 
            
         }
+
+        public async Task OnAddBankClicked()
+        {
+            var route = $"{nameof(AddBankAccountPage)}";
+            await Shell.Current.GoToAsync(route);
+        }
         private void EditProfileSetProperties()
         {
+            Title = "Edit profile";
             EditProfile = true;
             Email = APIService.PrijavljeniKorisnik.Email;
             Telefon = APIService.PrijavljeniKorisnik.Telefon;

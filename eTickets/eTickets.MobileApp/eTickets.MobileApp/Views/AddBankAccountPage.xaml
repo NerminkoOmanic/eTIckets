@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
+             x:Class="eTickets.MobileApp.Views.AddBankAccountPage">
+    <ContentPage.BindingContext>
+        <viewModels:AddBankAccountViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Bank account number :" />
+            <Entry Text="{Binding BankAccount}" ></Entry>
+            <Button Command="{Binding AddBankAccountCommand}"
+                    x:Name="ButtonBank" Text="Submit" BackgroundColor="RoyalBlue"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

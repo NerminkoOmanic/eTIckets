@@ -9,7 +9,7 @@ namespace eTicketsAPI.Services
 {
     public interface IBankService
     {
-        bool Get(string accountId);
+        bool Get(BankAccountRequest request);
         int Insert(OnlinePaymentRequest request);
     }
 }

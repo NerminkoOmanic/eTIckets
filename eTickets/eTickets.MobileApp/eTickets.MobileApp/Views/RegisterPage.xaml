@@ -67,7 +67,8 @@
                           Text="{Binding BankAccount}"
                           VerticalOptions="Start"
                           HorizontalOptions="Start"></Label>
-                   <Button x:Name="ButtonBank" Text="Add/Change bank account number" BackgroundColor="Chartreuse"
+                   <Button Command="{Binding AddBankCommand}"
+                            x:Name="ButtonBank" Text="Add/Change bank account number" BackgroundColor="Chartreuse"
                            VerticalOptions="End"
                            HorizontalOptions="End"></Button>
                </Grid>

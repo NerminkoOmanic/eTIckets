@@ -21,12 +21,11 @@ namespace eTicketsAPI.Services
             _mapper = mapper;
         }
 
-        public bool Get(string requestAccount)
+        public bool Get(BankAccountRequest request)
         {
-            if (Context.BankAccounts.FirstOrDefault(x => x.AccountId.Equals(requestAccount)) != null)
+            if (Context.BankAccounts.FirstOrDefault(x => x.AccountId.Equals(request.AccountId)) != null)
                 return true;
             return false;
-            
         }
 
         public int Insert(OnlinePaymentRequest request)

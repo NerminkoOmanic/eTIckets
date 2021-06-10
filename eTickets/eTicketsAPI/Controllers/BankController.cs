@@ -26,7 +26,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpGet]
-        public bool Get(string request)
+        public bool Get([FromQuery] BankAccountRequest request)
         {
             return _bankService.Get(request);
         }

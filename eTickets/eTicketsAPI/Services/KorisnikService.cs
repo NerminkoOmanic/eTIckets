@@ -65,7 +65,7 @@ namespace eTicketsAPI.Services
                                                 .FirstOrDefault();
             return _mapper.Map<eTickets.Model.Korisnik>(dbSet);
         }
-
+        
         public eTickets.Model.Korisnik Insert(KorisnikInsertRequest request)
         {
             try
@@ -104,6 +104,15 @@ namespace eTicketsAPI.Services
                 request.LozinkaHash = entity.LozinkaHash;
             }
 
+            if (!string.IsNullOrWhiteSpace(request.BankAccount))
+            {
+                request.GradId = entity.GradId;
+            }
+
+            if (entity.BankAccount!=null && request.BankAccount==null)
+            {
+                request.BankAccount = entity.BankAccount;
+            }
 
             _mapper.Map(request, entity);
 

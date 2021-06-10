@@ -34,8 +34,7 @@ namespace eTickets.MobileApp
 
             var url = $"{_apiUrl}{_resource}";
 
-            try
-            {
+            
                 if (!actionName.Equals(""))
                 {
                     url += "/";
@@ -52,25 +51,8 @@ namespace eTickets.MobileApp
                     return await url.GetJsonAsync<T>();
                 }
                 return await url.WithBasicAuth(Username,Password).GetJsonAsync<T>();
-            }
-            catch (FlurlHttpException ex)
-            {
-                //var errors = await ex.GetResponseJsonAsync<Dictionary<string, string[]>>();
-
-                //var stringBuilder = new StringBuilder();
-                //foreach (var error in errors)
-                //{
-                //    stringBuilder.AppendLine($"{error.Key}, ${string.Join(",", error.Value)}");
-                //}
-
-                //await Application.Current.MainPage.DisplayAlert("Error", stringBuilder.ToString(), "OK");
-                //throw;
-                if (ex.Call.Response.StatusCode == (int)System.Net.HttpStatusCode.Unauthorized)
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Not authentificated", "OK");
-                }
-                throw;
-            }
+            
+            
         }
 
         public async Task<T> GetById<T>(object id)

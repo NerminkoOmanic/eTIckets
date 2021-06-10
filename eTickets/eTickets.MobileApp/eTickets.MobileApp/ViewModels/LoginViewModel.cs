@@ -71,7 +71,7 @@ namespace eTickets.MobileApp.ViewModels
             // Prefixing with `//` switches to a different navigation stack instead of pushing to the active one
             //await Shell.Current.GoToAsync($"//{nameof(AboutPage)}");
         }
-
+        
         private void OnRegisterClicked()
         {
             Application.Current.MainPage = new RegisterPage();
