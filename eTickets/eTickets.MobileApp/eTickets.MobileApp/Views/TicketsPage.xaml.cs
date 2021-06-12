@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using eTickets.MobileApp.Utility;
 using eTickets.MobileApp.ViewModels;
+using eTickets.Model;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -23,6 +24,7 @@ namespace eTickets.MobileApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            _model.SelectedPodKategorija = null;
             await _model.Init();
             if (!StaticHelper.VrstaTicket.Equals("request"))
             {
@@ -30,11 +32,32 @@ namespace eTickets.MobileApp.Views
                 AddToolBar.Text = "";
                 AddToolBar.IconImageSource = null;
             }
+
+            if (!StaticHelper.VrstaTicket.Equals("activeAll"))
+            {
+                PickerKategorija.IsVisible = false;
+            }
         }
 
         private void ImageButton_OnClicked(object sender, EventArgs e)
         {
             throw new NotImplementedException();
+        }
+        
+        private async void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+        {
+            var ticket = ((ListView) sender).SelectedItem as Ticket;
+
+            if (ticket == null)
+                return;
+
+            await Navigation.PushAsync(new TicketDetailsPage(ticket.TicketId));
+
+        }
+
+        private async void AddToolBar_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new AddTicketPage());
         }
     }
 }

@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
+             x:Class="eTickets.MobileApp.Views.AddTicketPage">
+    <ContentPage.BindingContext>
+        <viewModels:AddTicketViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <ScrollView>
+           <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+               <Label x:Name="LabelTitle" 
+                      Text="Make new selling request"
+                      FontSize="30"
+                      TextColor="RoyalBlue"
+                      VerticalOptions="CenterAndExpand" 
+                      HorizontalOptions="CenterAndExpand"/>
+               <Label x:Name="LabelNaziv" Text="Event :" />
+               <Entry  x:Name="EntryNaziv"
+                       Text="{Binding NazivDogadjaja}" 
+                       TextChanged="naziv_changed" 
+                       ReturnType="Next" 
+                       Unfocused="naziv_unfocused">
+                </Entry>
+                <Label x:Name="ErrorLabel_Naziv" TextColor="Red" FontSize="13" />
+
+               <Label x:Name="LabelDatum"
+                      Text="Date of event :" />
+               <DatePicker x:Name="DtDatum" Date="{Binding Datum}" />
+
+               <Label Text="Chose city :"/>
+               <Picker x:Name="PickerGrad" 
+                       ItemsSource="{Binding GradoviList}"
+                       SelectedItem="{Binding SelectedGrad}" 
+                       ItemDisplayBinding="{Binding Naziv}">
+               </Picker>
+               
+               <Label x:Name="LabelPodKategorija" Text="Choose type of event :"/>
+               <Picker x:Name="PickerPodKategorija" 
+                       ItemsSource="{Binding PodKategorijaList}" 
+                       SelectedItem="{Binding SelectedPodKategorija}" 
+                       ItemDisplayBinding="{Binding Naziv}">
+               </Picker>
+
+
+                <Label x:Name="LabelSektor" Text="Block :" />
+                <Entry x:Name="EntrySektor"
+                       Text="{Binding Sektor}"
+                       TextChanged="sektor_changed" 
+                       Unfocused="sektor_changed" 
+                       ReturnType="Next"></Entry>
+                <Label x:Name="ErrorLabel_Sektor" TextColor="Red" FontSize="13" />
+
+                <Label x:Name="LabelRed"
+                    Text="Row :" />
+                <Entry x:Name="EntryRed" Text="{Binding Red}" ></Entry>
+
+                <Label Text="Seat nr. :" />
+                <Entry x:Name="EntrySjedalo" Text="{Binding Sjedalo}"></Entry>
+
+                <Label Text="Price :" />
+                <Entry x:Name="EntryCijena" 
+                       Text="{Binding Cijena}"
+                       TextChanged="cijena_changed"
+                       Unfocused="cijena_unfocused"></Entry>
+                <Label x:Name="ErrorLabel_Cijena" TextColor="Red" FontSize="13" />
+
+                <Label Text="Add picture :"></Label>
+                <Grid>
+                    <Button x:Name="ButtonPickImage" Text="Pick image"
+                            Clicked="ButtonPickImage_OnClicked"
+                            HorizontalOptions="Start"
+                            VerticalOptions="Start">
+                    </Button>
+                    <Button x:Name="ButtonTakeImage"
+                            Clicked="ButtonTakeImage_OnClicked"
+                            Text="Take image" 
+                            HorizontalOptions="End"
+                            VerticalOptions="End">
+                    </Button>
+                </Grid>
+                <Image x:Name="resultImage"></Image>
+
+                <Button Command="{Binding SubmitCommand}"  Text="Submit"
+                       BackgroundColor="RoyalBlue"
+                       TextColor="White">
+                </Button>
+            </StackLayout> 
+       </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

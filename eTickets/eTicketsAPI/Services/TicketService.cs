@@ -54,6 +54,10 @@ namespace eTicketsAPI.Services
                 dbSet = dbSet.Where(x => x.Prodano);
             }
 
+            if (search?.PodKategorijaId != null)
+            {
+                dbSet = dbSet.Where(x => x.PodKategorijaId == search.PodKategorijaId);
+            }
             var list = dbSet.ToList();
 
             return _mapper.Map<List<eTickets.Model.Ticket>>(list);

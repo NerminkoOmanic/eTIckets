@@ -105,17 +105,9 @@ namespace eTickets.MobileApp.ViewModels
         public Grad SelectedGrad
         {
             get => _selectedGrad;
-            set
-            {
-                SetProperty(ref _selectedGrad, value);
-                //if (value != null)
-                //{
-                //    InitCommand.Execute(null);
-                //}
-
-            }
+            set => SetProperty(ref _selectedGrad, value);
         }
-
+        
         Spol _selectedSpol = null;
         public Spol SelectedSpol
         {
@@ -163,7 +155,7 @@ namespace eTickets.MobileApp.ViewModels
 
             return true;
         }
-
+        
         private bool ValidatePasswordMatch()
         {
             if (Lozinka.Equals(LozinkaProvjera))
@@ -259,6 +251,7 @@ namespace eTickets.MobileApp.ViewModels
             }
 
 
+
             var searchRequest = new KorisnikSearchRequest()
             {
                 EmailValidacija = Email
@@ -323,7 +316,6 @@ namespace eTickets.MobileApp.ViewModels
                     UlogaId = _klijentUlogaId,
                     Telefon = Telefon
                 };
-
                 await _korisnikService.Insert<Korisnik>(request);
                 await Application.Current.MainPage.DisplayAlert("Success", "You have successfully registered your account! You will now be redirected to login page.", "OK");
                 Application.Current.MainPage = new LoginPage();
@@ -348,7 +340,7 @@ namespace eTickets.MobileApp.ViewModels
             Telefon = APIService.PrijavljeniKorisnik.Telefon;
             if(APIService.PrijavljeniKorisnik.BankAccount!=null)
                 BankAccount = APIService.PrijavljeniKorisnik.BankAccount;
-            SelectedGrad = GradoviList.Where(x => x.GradId == APIService.PrijavljeniKorisnik.GradId).FirstOrDefault();
+            SelectedGrad = GradoviList.FirstOrDefault(x => x.GradId == APIService.PrijavljeniKorisnik.GradId);
         }
 
     }

@@ -34,6 +34,14 @@ namespace eTicketsAPI.Services
                 dbSet = dbSet.Where(x => x.KupacId == search.KorisnikId);
             }
 
+            if (search?.PodKategorijaId != 0)
+            {
+                dbSet = dbSet.Where(x => x.Ticket.PodKategorijaId == search.PodKategorijaId);
+            }
+            if (search?.TicketId != 0)
+            {
+                dbSet = dbSet.Where(x => x.Ticket.TicketId == search.TicketId);
+            }
             var list = dbSet.ToList();
             
             return _mapper.Map<List<eTickets.Model.Kupovine>>(list);

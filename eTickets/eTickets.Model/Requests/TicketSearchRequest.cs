@@ -12,5 +12,6 @@ namespace eTickets.Model.Requests
         public bool Prodano { get; set; }
         public bool SlikaRequired { get; set; }
         public bool OrderByDatum { get; set; }
+        public int? PodKategorijaId { get; set; }
     }
 }

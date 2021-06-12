@@ -10,6 +10,12 @@
     <ContentPage.Content>
        <ScrollView>
            <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+               <Frame BackgroundColor="RoyalBlue"
+                      Padding="24"
+                      CornerRadius="0">
+                   <Label x:Name="LabelTitle" Text="Register form" HorizontalTextAlignment="Center" TextColor="White" FontSize="24"></Label>
+               </Frame>
+
                <ImageButton x:Name="ButtonGoBack"
                             Source="btnBack.png"
                             WidthRequest="100"
@@ -17,11 +23,7 @@
                             VerticalOptions="Start"
                             HorizontalOptions="Start"
                             Clicked="ImageButton_OnClicked"></ImageButton>
-               <Label x:Name="LabelTitle" Text="Welcome to register form"
-                      FontSize="30"
-                      TextColor="RoyalBlue"
-                      VerticalOptions="CenterAndExpand" 
-                      HorizontalOptions="CenterAndExpand" />
+               
                <Label x:Name="LabelIme" Text="First name :" />
                 <Entry  x:Name="Ime"  TextChanged="ime_changed" Text="{Binding Ime}" ReturnType="Next" Unfocused="ime_unfocused"></Entry>
                 <Label x:Name="ErrorLabel_Ime" TextColor="Red" FontSize="13" />

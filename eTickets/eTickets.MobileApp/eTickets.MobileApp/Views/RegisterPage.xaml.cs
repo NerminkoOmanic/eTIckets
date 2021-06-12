@@ -49,7 +49,6 @@ namespace eTickets.MobileApp.Views
                 LabelPrezime.IsVisible = false;
                 Prezime.IsVisible = false;
                 LabelTitle.Text = "Edit your profile";
-                LabelTitle.FontSize = 20;
                 LabelBank.IsVisible = true;
                 LabelValueBank.IsVisible = true;
                 ButtonBank.IsVisible = true;
@@ -258,7 +257,7 @@ namespace eTickets.MobileApp.Views
         #endregion
         
 
-        private async void ImageButton_OnClicked(object sender, EventArgs e)
+        private void ImageButton_OnClicked(object sender, EventArgs e)
         {
             Application.Current.MainPage = new LoginPage();
            

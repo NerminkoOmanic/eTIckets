@@ -1,0 +1,108 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
+             xmlns:converters="clr-namespace:eTickets.MobileApp.Converters;assembly=eTickets.MobileApp"
+             x:Class="eTickets.MobileApp.Views.TicketDetailsPage">
+    <ContentPage.BindingContext>
+        <viewModels:TicketDetailsViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ImageConverter x:Key="imgConv"></converters:ImageConverter>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <ScrollView>
+        <StackLayout Spacing="30" Padding="20">
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Event :"
+                       FontSize="Small" />
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding NazivDogadjaja}"
+                       FontSize="Small"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="City :"/>
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Grad}"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Date and time :"/>
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Datum}"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Block :" />
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Sektor}"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Row :" />
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Red}"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Seat :"/>
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Sjedalo}"/>
+            </Grid>
+            <Grid>
+                <Label VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Price :"/>
+                <Label VerticalOptions="Center"
+                       HorizontalOptions="Center"
+                       Text="{Binding Cijena}"/>
+            </Grid>
+            <Grid>
+                <Label x:Name="LabelKupac" 
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Buyer :"/>
+                <Label  x:Name="LabelValueKupac" 
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Text="{Binding Kupac}"/>
+            </Grid>
+            <Grid>
+                <Label x:Name="LabelProdavac" 
+                       VerticalOptions="Start"
+                       HorizontalOptions="Start"
+                       Text="Seller :"/>
+                <Label  x:Name="LabelValueProdavac"
+                        VerticalOptions="Center"
+                        HorizontalOptions="Center"
+                        Text="{Binding Prodavac}"/>
+            </Grid>
+            <Image x:Name="ImageTicekt"
+                   Source="{Binding Slika,Converter={StaticResource imgConv}}"></Image>
+            <Button x:Name="ButtonBuy"
+                    Text="Buy"
+                    BackgroundColor="Chartreuse" 
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"
+                    Command="{Binding BuyCommand}"
+                    CommandParameter="{Binding }"></Button>
+        </StackLayout>
+            </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

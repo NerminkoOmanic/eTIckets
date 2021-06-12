@@ -8,7 +8,7 @@
         <viewModels:TicketsViewModel />
     </ContentPage.BindingContext>
     <ContentPage.ToolbarItems>
-        <ToolbarItem x:Name= "AddToolBar" IconImageSource="btnAdd.png" Text="Make new request" Command="{Binding AddItemCommand}" />
+        <ToolbarItem x:Name= "AddToolBar" IconImageSource="btnAdd.png" Text="Make new request" Clicked="AddToolBar_OnClicked" />
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout>
@@ -17,7 +17,13 @@
                    TextColor="RoyalBlue"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <ListView ItemsSource="{Binding TicketsList}">
+            <Picker x:Name="PickerKategorija" 
+                    ItemsSource="{Binding PodKategorijaList}"
+                    ItemDisplayBinding="{Binding Naziv}"
+                    SelectedItem="{Binding SelectedPodKategorija}"></Picker>
+            <Label BackgroundColor="RoyalBlue"></Label> 
+            <ListView x:Name="ListTickets" ItemsSource="{Binding TicketsList}"
+                      ItemSelected="ListView_OnItemSelected">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

@@ -18,6 +18,8 @@ namespace eTickets.MobileApp
             Routing.RegisterRoute(nameof(NewItemPage), typeof(NewItemPage));
             Routing.RegisterRoute(nameof(AddBankAccountPage),typeof(AddBankAccountPage));
             Routing.RegisterRoute(nameof(RegisterPage),typeof(RegisterPage));
+            Routing.RegisterRoute(nameof(TicketDetailsPage),typeof(TicketDetailsPage));
+            Routing.RegisterRoute(nameof(AddTicketPage),typeof(AddTicketPage));
 
             
         }

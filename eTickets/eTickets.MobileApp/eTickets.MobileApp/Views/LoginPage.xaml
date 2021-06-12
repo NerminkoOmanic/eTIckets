@@ -40,7 +40,12 @@
                 </ImageButton>
             </Grid>
             <Button Text="Login" Command="{Binding LoginCommand}" BackgroundColor="RoyalBlue" TextColor="White"/>
-            <Button Text="Register" Command="{Binding RegisterCommand}" BackgroundColor="RoyalBlue" TextColor="White"/>
+            <Button Text="Register" 
+                    Command="{Binding RegisterCommand}" 
+                    BackgroundColor="RoyalBlue" 
+                    TextColor="White"
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>  

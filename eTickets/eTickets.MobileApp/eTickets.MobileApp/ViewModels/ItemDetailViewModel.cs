@@ -9,7 +9,7 @@ namespace eTickets.MobileApp.ViewModels
     [QueryProperty(nameof(ItemId), nameof(ItemId))]
     public class ItemDetailViewModel : BaseViewModel
     {
-        private string itemId;
+        private string ticketId;
         private string text;
         private string description;
         public string Id { get; set; }
@@ -30,11 +30,11 @@ namespace eTickets.MobileApp.ViewModels
         {
             get
             {
-                return itemId;
+                return ticketId;
             }
             set
             {
-                itemId = value;
+                ticketId = value;
                 LoadItemId(value);
             }
         }
