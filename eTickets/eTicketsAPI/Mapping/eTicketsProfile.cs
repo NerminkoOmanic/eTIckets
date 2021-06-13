@@ -30,6 +30,8 @@ namespace eTicketsAPI.Mapping
             CreateMap<TicketInsertRequest , Database.Ticket>();
             CreateMap<TicketInsertRequest, Database.Slika>().ForMember(dest=>dest.Slika1,
                 opt=> opt.MapFrom(src=>src.SlikaBytes));
+            CreateMap< Database.Slika, TicketInsertRequest>().ForMember(dest=>dest.SlikaBytes,
+                opt=> opt.MapFrom(src=>src.Slika1));
             CreateMap<TicketUpdateRequest, Database.Ticket>();
             CreateMap<KorisnikInsertRequest, Database.Korisnik>();
             CreateMap<KorisnikUpdateRequest, Database.Korisnik>();

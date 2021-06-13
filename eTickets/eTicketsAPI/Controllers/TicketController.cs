@@ -37,11 +37,11 @@ namespace eTicketsAPI.Controllers
             return _ticketService.GetById(id);
         }
 
-        //[HttpPost]
-        //public eTickets.Model.Ticket Insert([FromBody]TicketInsertRequest request)
-        //{
-        //    return _ticketService.Insert(request);
-        //}
+        [HttpPost]
+        public eTickets.Model.Ticket Insert([FromBody] TicketInsertRequest request)
+        {
+            return _ticketService.Insert(request);
+        }
 
         [HttpPut("{id}")]
         public eTickets.Model.Ticket Update(int id, [FromBody] TicketUpdateRequest request)

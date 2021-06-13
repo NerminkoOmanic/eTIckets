@@ -2,19 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
-             x:Class="eTickets.MobileApp.Views.AddTicketPage">
+             x:Class="eTickets.MobileApp.Views.AddTicketPage"
+             Title="Ticket selling request">
     <ContentPage.BindingContext>
         <viewModels:AddTicketViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <ScrollView>
            <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-               <Label x:Name="LabelTitle" 
-                      Text="Make new selling request"
-                      FontSize="30"
-                      TextColor="RoyalBlue"
-                      VerticalOptions="CenterAndExpand" 
-                      HorizontalOptions="CenterAndExpand"/>
+               
                <Label x:Name="LabelNaziv" Text="Event :" />
                <Entry  x:Name="EntryNaziv"
                        Text="{Binding NazivDogadjaja}" 
@@ -26,7 +22,7 @@
 
                <Label x:Name="LabelDatum"
                       Text="Date of event :" />
-               <DatePicker x:Name="DtDatum" Date="{Binding Datum}" />
+               <DatePicker x:Name="DpDatum" Date="{Binding Datum}" />
 
                <Label Text="Chose city :"/>
                <Picker x:Name="PickerGrad" 
@@ -47,7 +43,7 @@
                 <Entry x:Name="EntrySektor"
                        Text="{Binding Sektor}"
                        TextChanged="sektor_changed" 
-                       Unfocused="sektor_changed" 
+                       Unfocused="sektor_unfocused" 
                        ReturnType="Next"></Entry>
                 <Label x:Name="ErrorLabel_Sektor" TextColor="Red" FontSize="13" />
 
@@ -69,14 +65,16 @@
                 <Grid>
                     <Button x:Name="ButtonPickImage" Text="Pick image"
                             Clicked="ButtonPickImage_OnClicked"
-                            HorizontalOptions="Start"
-                            VerticalOptions="Start">
+                            WidthRequest="150"
+                            HorizontalOptions="StartAndExpand"
+                            VerticalOptions="StartAndExpand">
                     </Button>
                     <Button x:Name="ButtonTakeImage"
                             Clicked="ButtonTakeImage_OnClicked"
-                            Text="Take image" 
-                            HorizontalOptions="End"
-                            VerticalOptions="End">
+                            Text="Take image"
+                            WidthRequest="150"
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="EndAndExpand">
                     </Button>
                 </Grid>
                 <Image x:Name="resultImage"></Image>

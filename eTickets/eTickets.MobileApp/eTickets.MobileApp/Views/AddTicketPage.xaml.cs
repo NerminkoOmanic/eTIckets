@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using eTickets.MobileApp.Converters;
 using eTickets.MobileApp.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
@@ -24,25 +26,61 @@ namespace eTickets.MobileApp.Views
         protected override async void OnAppearing()
         {
             base.OnAppearing();
+            DpDatum.Date= DateTime.Today;
             await _model.Init();
         }
 
         private async void ButtonPickImage_OnClicked(object sender, EventArgs e)
         {
-            //MediaPicker.IsCaptureSupported
             var result = await MediaPicker.PickPhotoAsync(new MediaPickerOptions()
             {
                 Title = "Please pick a photo"
             });
 
-            var stream = await result.OpenReadAsync();
+            if (result != null)
+            {
+                var stream = await result.OpenReadAsync();
 
-            resultImage.Source = ImageSource.FromStream(() => stream);
+                resultImage.Source = ImageSource.FromStream(() => stream);
+
+
+               
+                _model.Slika= StreamToByte.ReadFully(stream);
+
+                        //var memorystream = new MemoryStream();
+
+                //await stream.CopyToAsync(memorystream);
+
+                //_model.Slika = memorystream.ToArray();
+            }
+
         }
 
-        private void ButtonTakeImage_OnClicked(object sender, EventArgs e)
+        private async void ButtonTakeImage_OnClicked(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            if (!MediaPicker.IsCaptureSupported)
+                await Shell.Current.DisplayAlert("Error", "Taking picture is not supported", "OK");
+            else
+            {
+                var result = await MediaPicker.CapturePhotoAsync();
+
+                if (result!=null)
+                {
+                    var stream = await result.OpenReadAsync();
+
+                    resultImage.Source = ImageSource.FromStream(() => stream);
+
+                    var memorystream = new MemoryStream();
+
+                    await stream.CopyToAsync(memorystream);
+
+                    _model.Slika = memorystream.ToArray();
+
+                   
+                }
+            }
+            
+            
         }
 
         #region ValidationLabels

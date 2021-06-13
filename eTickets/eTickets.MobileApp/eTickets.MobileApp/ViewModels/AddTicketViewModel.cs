@@ -14,7 +14,7 @@ namespace eTickets.MobileApp.ViewModels
     {
         private readonly APIService _ticketsService = new APIService("ticket");
         private readonly APIService _podkategorijeService = new APIService("podkategorija");
-        private readonly APIService _gradService = new APIService("podkategorija");
+        private readonly APIService _gradService = new APIService("grad");
 
         public AddTicketViewModel()
         {
@@ -91,41 +91,6 @@ namespace eTickets.MobileApp.ViewModels
         #endregion
 
         #region Validation
-
-        private async Task ValidateFields()
-        {
-            if (string.IsNullOrWhiteSpace(NazivDogadjaja))
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Event is mandatory field", "OK");
-                return;
-            }
-            if (string.IsNullOrWhiteSpace(Cijena))
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Price is mandatory field", "OK");
-                return;
-            }
-
-            if (SelectedGrad == null)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Choose city, it is mandatory field", "OK");
-                return;
-            }
-            if (SelectedPodKategorija == null)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error", "Choose type of event, it is mandatory field", "OK");
-                return;
-            }
-
-            foreach (var x in Red)
-            {
-                if (!Char.IsDigit(x))
-                {
-                    await Application.Current.MainPage.DisplayAlert("Error", "Row can contain only numbers", "OK");
-                    return;
-                }
-            }
-            //if(Slika == null)
-        }
         private bool ValidatePrice(decimal request)
         {
             if (request != 0)
@@ -153,10 +118,10 @@ namespace eTickets.MobileApp.ViewModels
 
             if (PodKategorijaList.Count == 0)
             {
-                var podKategorijaList = await _gradService.Get<List<Grad>>(null);
-                foreach (var grad in podKategorijaList)
+                var podKategorijaList = await _podkategorijeService.Get<List<PodKategorija>>(null);
+                foreach (var item in podKategorijaList)
                 {
-                    GradoviList.Add(grad);
+                    PodKategorijaList.Add(item);
                 }
             }
         }
@@ -164,7 +129,60 @@ namespace eTickets.MobileApp.ViewModels
         public async Task Submit()
         {
             
-            await ValidateFields();
+            if (string.IsNullOrWhiteSpace(NazivDogadjaja))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Event is mandatory field", "OK");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(Cijena))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Price is mandatory field", "OK");
+                return;
+            }
+            else
+            {
+                foreach (var x in Cijena)
+                {
+                    if (!Char.IsDigit(x))
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Price can contain just numbers, without decimal places", "OK");
+                        return;
+                    }
+                }
+            }
+            if (string.IsNullOrWhiteSpace(Sektor))
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Block is mandatory field", "OK");
+                return;
+            }
+            if (SelectedGrad == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Choose city, it is mandatory field", "OK");
+                return;
+            }
+            if (SelectedPodKategorija == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Choose type of event, it is mandatory field", "OK");
+                return;
+            }
+
+            if (!string.IsNullOrWhiteSpace(Red))
+            {
+                foreach (var x in Red)
+                {
+                    if (!Char.IsDigit(x))
+                    {
+                        await Application.Current.MainPage.DisplayAlert("Error", "Row can contain only numbers", "OK");
+                        return;
+                    }
+                }
+            }
+
+            if (Slika == null)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Add image, it is mandatory field", "OK");
+                return;
+            }
 
             var ticketRequest = new TicketInsertRequest()
             {
@@ -175,10 +193,13 @@ namespace eTickets.MobileApp.ViewModels
                 ProdavacId = APIService.PrijavljeniKorisnik.KorisnikId,
                 Cijena = decimal.Parse(Cijena),
                 Sektor = Sektor,
-                Red = Int32.Parse(Red),
-                Sjedalo = Sjedalo,
                 SlikaBytes = Slika
             };
+
+            if (!string.IsNullOrEmpty(Red))
+                ticketRequest.Red = Int32.Parse(Red);
+            if (!string.IsNullOrEmpty(Sjedalo))
+                ticketRequest.Sjedalo = Sjedalo;
 
             await _ticketsService.Insert<Ticket>(ticketRequest);
             await Application.Current.MainPage.DisplayAlert("Success", "Your request is waiting for approval", "OK");

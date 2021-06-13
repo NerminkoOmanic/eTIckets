@@ -85,7 +85,7 @@ namespace eTicketsAPI.Services
 
             var entityTicket = new Database.Ticket();
 
-            _mapper.Map(request, entitySlika);
+            _mapper.Map(request, entityTicket);
 
             Context.Ticket.Add(entityTicket);
             Context.SaveChanges();
