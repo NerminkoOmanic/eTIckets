@@ -46,18 +46,27 @@ namespace eTickets.MobileApp.Views
         
         private async void ListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
+            
             var ticket = ((ListView) sender).SelectedItem as Ticket;
 
-            if (ticket == null)
-                return;
+                if (ticket == null)
+                    return;
 
-            await Navigation.PushAsync(new TicketDetailsPage(ticket.TicketId));
+                await Navigation.PushAsync(new TicketDetailsPage(ticket.TicketId)); 
+            
+            
 
         }
 
         private async void AddToolBar_OnClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AddTicketPage());
+            if(!string.IsNullOrWhiteSpace(APIService.PrijavljeniKorisnik.BankAccount))
+                await Navigation.PushAsync(new AddTicketPage());
+            else
+            {
+                await Shell.Current.DisplayAlert("Error", "You need to add bank account first", "OK");
+                return;
+            }
         }
     }
 }

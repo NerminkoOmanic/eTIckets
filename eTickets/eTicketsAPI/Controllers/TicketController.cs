@@ -51,6 +51,7 @@ namespace eTicketsAPI.Controllers
 
 
         [HttpDelete("{id}")]
+        [ApiExplorerSettings(IgnoreApi = true)]
         public bool Remove(int id)
         {
             return _ticketService.Remove(id);

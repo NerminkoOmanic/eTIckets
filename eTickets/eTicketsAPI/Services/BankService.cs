@@ -6,8 +6,8 @@ using AutoMapper;
 using eTickets.Model;
 using eTickets.Model.Requests;
 using eTicketsAPI.Database;
+using eTicketsAPI.Filters;
 using Microsoft.EntityFrameworkCore;
-using Ticket = eTickets.Model.Ticket;
 
 namespace eTicketsAPI.Services
 {
@@ -28,33 +28,47 @@ namespace eTicketsAPI.Services
             return false;
         }
 
-        public int Insert(OnlinePaymentRequest request)
+        public eTickets.Model.BankTransaction Insert(OnlinePaymentRequest request)
         {
-            var card = Context.BankCards.Include(x=>x.Account)
-                .FirstOrDefault(x => x.CardId.Equals(request.CardId));
-            if (!ConfirmCard(request, card))
-                return 0;
+            
+                var card = Context.BankCards.Include(x=>x.Account)
+                    .FirstOrDefault(x => x.CardId.Equals(request.CardId));
+                if (ConfirmCard(request, card))
+                {
+                    var entity = new BankTransactions();
 
-            //Naplata kupcu
-            var accountKupac = Context.BankAccounts.FirstOrDefault(x=>x.AccountId == card.AccountId);
-            accountKupac.Balance -= request.Cijena;
+                    _mapper.Map(request, entity);
 
-            //Isplata prodavacu
-            var accountProdavac = Context.BankAccounts.FirstOrDefault(x => x.AccountId.Equals(request.Account));
-            accountProdavac.Balance += request.Cijena;
+                    Context.BankTransactions.Add(entity);
 
-            var entity = new BankTransactions()
-            {
-                CardId = request.CardId,
-                Iznos = request.Cijena,
-                Datum = DateTime.Now,
-                AccountId = request.Account
-            };
+                    //Naplata kupcu
+                    var accountKupac = Context.BankAccounts.FirstOrDefault(x=>x.AccountId == card.AccountId);
+                    if (accountKupac != null)
+                    {
+                        accountKupac.Balance -= request.Iznos;
+                    }
 
-            Context.BankTransactions.Add(entity);
-            Context.SaveChanges();
+                    //Isplata prodavacu
+                    var accountProdavac = Context.BankAccounts.FirstOrDefault(x => x.AccountId.Equals(request.AccountId));
+                    if (accountProdavac != null)
+                    {
+                        accountProdavac.Balance += request.Iznos;
+                    }
 
-            return entity.TransactionId;
+                    Context.SaveChanges();
+
+                    var result = new eTickets.Model.BankTransaction();
+
+                    _mapper.Map(entity, result);
+
+                    return result;
+
+                }
+
+                return null;
+
+            
+            
 
         }
 
@@ -62,7 +76,7 @@ namespace eTicketsAPI.Services
         {
             if (card.CardOwner.Equals(request.CardOwner) && card.CardValid.Equals(request.CardValid)
                                                          && card.ControlNumber == request.ControlNumber
-                                                         && card.Account.Balance>=request.Cijena)
+                                                         && card.Account.Balance>=request.Iznos)
             {
                 return true;
             }

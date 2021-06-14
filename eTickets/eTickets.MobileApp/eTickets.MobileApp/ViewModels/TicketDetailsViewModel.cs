@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using eTickets.MobileApp.Utility;
+using eTickets.MobileApp.Views;
 using eTickets.Model;
 using eTickets.Model.Requests;
 using Xamarin.Forms;
@@ -16,6 +17,9 @@ namespace eTickets.MobileApp.ViewModels
     {
         private readonly APIService _ticketsService = new APIService("ticket");
         private readonly APIService _kupovineService = new APIService("kupovine");
+        private readonly APIService _slikaService = new APIService("slika");
+
+
 
 
         public int Id { get; set; }
@@ -93,11 +97,12 @@ namespace eTickets.MobileApp.ViewModels
         public TicketDetailsViewModel()
         {
             InitCommand = new Command(async () => await Init());
+            CancelCommand = new Command(async () => await Cancel());
         }
 
         public ICommand InitCommand { get; set; }
+        public ICommand CancelCommand { get; set; }
 
-        public ICommand BuyCommand { get; set; }
 
         public async Task Init()
         {
@@ -118,7 +123,6 @@ namespace eTickets.MobileApp.ViewModels
                     {
                         Sektor = response.Ticket.Sektor;
                         NazivDogadjaja = response.NazivDogadjaja;
-                        Sjedalo = response.Ticket.Sjedalo;
                         Cijena = response.CijenaString;
                         Datum = response.Ticket.Datum;
                         Slika = response.Ticket.Slika.SlikaBytes;
@@ -133,6 +137,11 @@ namespace eTickets.MobileApp.ViewModels
                         else
                         {
                             Red = "-";
+                        }
+
+                        if (response.Ticket.Sjedalo != null)
+                        {
+                            Sjedalo = response.Ticket.Sjedalo;
                         }
                     }
                 }
@@ -157,15 +166,38 @@ namespace eTickets.MobileApp.ViewModels
                         Red = "-";
                     }
                 }
-                
+
+                Title = "Ticket details";
             }
             
         }
 
-        public async Task BuyTicket()
+        public async Task Cancel()
         {
-            return;
+            var entity = await _ticketsService.GetById<eTickets.Model.Ticket>(Id);
+
+            if (await _ticketsService.Remove(Id))
+            {
+                if (await _slikaService.Remove(entity.SlikaId))
+                {
+                    if (StaticHelper.VrstaTicket.Equals("active"))
+                        await Shell.Current.DisplayAlert("Success", "Ticket is removed", "OK");
+
+                    if (StaticHelper.VrstaTicket.Equals("request"))
+                        await Shell.Current.DisplayAlert("Success", "Request is canceled", "OK");
+
+                    Application.Current.MainPage = new AppShell();
+                }
+            }
+            else
+            {
+                        await Shell.Current.DisplayAlert("Error", "Ticket is already sold or deleted", "OK");
+                        Application.Current.MainPage = new AppShell();
+            }
+
+            
         }
+        
 
     }
 }

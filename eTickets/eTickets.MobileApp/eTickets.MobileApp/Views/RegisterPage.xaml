@@ -10,7 +10,8 @@
     <ContentPage.Content>
        <ScrollView>
            <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
-               <Frame BackgroundColor="RoyalBlue"
+               <Frame x:Name="Frame" 
+                      BackgroundColor="RoyalBlue"
                       Padding="24"
                       CornerRadius="0">
                    <Label x:Name="LabelTitle" Text="Register form" HorizontalTextAlignment="Center" TextColor="White" FontSize="24"></Label>

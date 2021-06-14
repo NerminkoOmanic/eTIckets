@@ -273,16 +273,16 @@ namespace eTicketsAPI.Migrations
                 name: "Kupovine",
                 columns: table => new
                 {
-                    TransakcijaId = table.Column<int>(nullable: false),
                     KupovinaID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     KupacID = table.Column<int>(nullable: false),
                     Datum = table.Column<DateTime>(type: "datetime", nullable: false),
-                    TicketID = table.Column<int>(nullable: false)
+                    TicketID = table.Column<int>(nullable: false),
+                    TransakcijaId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Transakcija", x => x.TransakcijaId);
+                    table.PrimaryKey("PK_Kupovine", x => x.KupovinaID);
                     table.ForeignKey(
                         name: "FK_Transakcija_Kupac",
                         column: x => x.KupacID,

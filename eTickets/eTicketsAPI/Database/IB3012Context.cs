@@ -210,18 +210,13 @@ namespace eTicketsAPI.Database
 
             modelBuilder.Entity<Kupovine>(entity =>
             {
-                entity.HasKey(e => e.TransakcijaId)
-                    .HasName("PK_Transakcija");
+                entity.HasKey(e => e.KupovinaId);
 
-                entity.Property(e => e.TransakcijaId).ValueGeneratedNever();
+                entity.Property(e => e.KupovinaId).HasColumnName("KupovinaID");
 
                 entity.Property(e => e.Datum).HasColumnType("datetime");
 
                 entity.Property(e => e.KupacId).HasColumnName("KupacID");
-
-                entity.Property(e => e.KupovinaId)
-                    .HasColumnName("KupovinaID")
-                    .ValueGeneratedOnAdd();
 
                 entity.Property(e => e.TicketId).HasColumnName("TicketID");
 
@@ -337,8 +332,6 @@ namespace eTicketsAPI.Database
                     .IsRequired()
                     .HasMaxLength(20);
             });
-
-            //modelBuilder.Entity<Blog>().HasData(new Blog { BlogId = 1, Url = "http://sample.com" });
 
             OnModelCreatingPartial(modelBuilder);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ using eTickets.MobileApp.ViewModels;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Encoder = System.Drawing.Imaging.Encoder;
 
 namespace eTickets.MobileApp.Views
 {
@@ -47,41 +49,34 @@ namespace eTickets.MobileApp.Views
                
                 _model.Slika= StreamToByte.ReadFully(stream);
 
-                        //var memorystream = new MemoryStream();
-
-                //await stream.CopyToAsync(memorystream);
-
-                //_model.Slika = memorystream.ToArray();
+                        
             }
 
         }
 
-        private async void ButtonTakeImage_OnClicked(object sender, EventArgs e)
-        {
-            if (!MediaPicker.IsCaptureSupported)
-                await Shell.Current.DisplayAlert("Error", "Taking picture is not supported", "OK");
-            else
-            {
-                var result = await MediaPicker.CapturePhotoAsync();
+        //private async void ButtonTakeImage_OnClicked(object sender, EventArgs e)
+        //{
+        //    if (!MediaPicker.IsCaptureSupported)
+        //        await Shell.Current.DisplayAlert("Error", "Taking picture is not supported", "OK");
+        //    else
+        //    {
+        //        var result = await MediaPicker.CapturePhotoAsync();
 
-                if (result!=null)
-                {
-                    var stream = await result.OpenReadAsync();
+        //        if (result!=null)
+        //        {
+        //            var stream = await result.OpenReadAsync();
 
-                    resultImage.Source = ImageSource.FromStream(() => stream);
+        //            resultImage.Source = ImageSource.FromStream(() => stream);
 
-                    var memorystream = new MemoryStream();
+                    
+        //            _model.Slika= StreamToByte.ReadFully(stream);
 
-                    await stream.CopyToAsync(memorystream);
 
-                    _model.Slika = memorystream.ToArray();
-
-                   
-                }
-            }
+        //        }
+        //    }
             
             
-        }
+        //}
 
         #region ValidationLabels
 

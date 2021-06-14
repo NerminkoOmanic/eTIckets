@@ -32,7 +32,7 @@ namespace eTicketsAPI.Controllers
         }
 
         [HttpPost]
-        public int Insert([FromBody]OnlinePaymentRequest request)
+        public eTickets.Model.BankTransaction Insert([FromBody]OnlinePaymentRequest request)
         {
             return _bankService.Insert(request);
         }

@@ -61,21 +61,28 @@
                        Unfocused="cijena_unfocused"></Entry>
                 <Label x:Name="ErrorLabel_Cijena" TextColor="Red" FontSize="13" />
 
-                <Label Text="Add picture :"></Label>
-                <Grid>
+               <Grid>
+                <Label VerticalOptions="StartAndExpand"
+                       HorizontalOptions="StartAndExpand"
+                       Text="Add picture :"></Label>
+                
                     <Button x:Name="ButtonPickImage" Text="Pick image"
                             Clicked="ButtonPickImage_OnClicked"
                             WidthRequest="150"
-                            HorizontalOptions="StartAndExpand"
-                            VerticalOptions="StartAndExpand">
+                            HorizontalOptions="EndAndExpand"
+                            VerticalOptions="EndAndExpand"
+                            BackgroundColor="gray"
+                            TextColor="Black">
                     </Button>
-                    <Button x:Name="ButtonTakeImage"
+                    <!--<Button x:Name="ButtonTakeImage"
                             Clicked="ButtonTakeImage_OnClicked"
                             Text="Take image"
                             WidthRequest="150"
                             HorizontalOptions="EndAndExpand"
-                            VerticalOptions="EndAndExpand">
-                    </Button>
+                            VerticalOptions="EndAndExpand"
+                            BackgroundColor="gray"
+                            TextColor="Black">
+                    </Button> -->
                 </Grid>
                 <Image x:Name="resultImage"></Image>
 

@@ -96,12 +96,17 @@
             <Image x:Name="ImageTicekt"
                    Source="{Binding Slika,Converter={StaticResource imgConv}}"></Image>
             <Button x:Name="ButtonBuy"
-                    Text="Buy"
+                    Text="    Buy    "
                     BackgroundColor="Chartreuse" 
                     VerticalOptions="EndAndExpand"
                     HorizontalOptions="EndAndExpand"
-                    Command="{Binding BuyCommand}"
-                    CommandParameter="{Binding }"></Button>
+                    Clicked="ButtonBuy_OnClicked"></Button>
+            <Button x:Name="ButtonCancel"
+                    Text="    Cancel    "
+                    BackgroundColor="Red" 
+                    VerticalOptions="EndAndExpand"
+                    HorizontalOptions="EndAndExpand"
+                    Command="{Binding CancelCommand}"></Button>
         </StackLayout>
             </ScrollView>
     </ContentPage.Content>

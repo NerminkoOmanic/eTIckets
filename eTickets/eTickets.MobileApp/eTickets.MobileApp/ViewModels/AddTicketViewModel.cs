@@ -90,18 +90,7 @@ namespace eTickets.MobileApp.ViewModels
 
         #endregion
 
-        #region Validation
-        private bool ValidatePrice(decimal request)
-        {
-            if (request != 0)
-            {
-                return true;
-            }
-
-            return false;
-        }
-
-        #endregion
+       
         public ICommand InitCommand { get; set; }
         public ICommand SubmitCommand { get; set; }
 

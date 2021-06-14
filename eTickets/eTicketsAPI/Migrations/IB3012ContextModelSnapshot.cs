@@ -15,7 +15,7 @@ namespace eTicketsAPI.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.14")
+                .HasAnnotation("ProductVersion", "3.1.16")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -239,8 +239,11 @@ namespace eTicketsAPI.Migrations
 
             modelBuilder.Entity("eTicketsAPI.Database.Kupovine", b =>
                 {
-                    b.Property<int>("TransakcijaId")
-                        .HasColumnType("int");
+                    b.Property<int>("KupovinaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("KupovinaID")
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("Datum")
                         .HasColumnType("datetime");
@@ -249,18 +252,14 @@ namespace eTicketsAPI.Migrations
                         .HasColumnName("KupacID")
                         .HasColumnType("int");
 
-                    b.Property<int>("KupovinaId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnName("KupovinaID")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
                     b.Property<int>("TicketId")
                         .HasColumnName("TicketID")
                         .HasColumnType("int");
 
-                    b.HasKey("TransakcijaId")
-                        .HasName("PK_Transakcija");
+                    b.Property<int>("TransakcijaId")
+                        .HasColumnType("int");
+
+                    b.HasKey("KupovinaId");
 
                     b.HasIndex("KupacId");
 

@@ -20,8 +20,10 @@ namespace eTickets.MobileApp
             Routing.RegisterRoute(nameof(RegisterPage),typeof(RegisterPage));
             Routing.RegisterRoute(nameof(TicketDetailsPage),typeof(TicketDetailsPage));
             Routing.RegisterRoute(nameof(AddTicketPage),typeof(AddTicketPage));
+            Routing.RegisterRoute(nameof(OnlinePaymentPage),typeof(OnlinePaymentPage));
 
-            
+
+
         }
 
         protected override void OnNavigating(ShellNavigatingEventArgs args)

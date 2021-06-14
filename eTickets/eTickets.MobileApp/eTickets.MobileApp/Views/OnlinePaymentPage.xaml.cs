@@ -10,20 +10,17 @@ using Xamarin.Forms.Xaml;
 namespace eTickets.MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class AddBankAccountPage : ContentPage
+    public partial class OnlinePaymentPage : ContentPage
     {
-        private AddBankAccountViewModel bank= null;
+        private OnlinePaymentViewModel _model = null;
 
-        public AddBankAccountPage()
+        public OnlinePaymentPage(int ticketId)
         {
             InitializeComponent();
-            BindingContext = bank = new AddBankAccountViewModel();
-        }
+            BindingContext = _model = new OnlinePaymentViewModel();
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            bank.Init();
+
+            _model.TicketId = ticketId;
         }
     }
 }

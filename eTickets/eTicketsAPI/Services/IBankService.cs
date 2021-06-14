@@ -10,6 +10,6 @@ namespace eTicketsAPI.Services
     public interface IBankService
     {
         bool Get(BankAccountRequest request);
-        int Insert(OnlinePaymentRequest request);
+        eTickets.Model.BankTransaction Insert(OnlinePaymentRequest request);
     }
 }

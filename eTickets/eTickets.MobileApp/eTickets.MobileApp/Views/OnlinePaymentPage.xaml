@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewModels="clr-namespace:eTickets.MobileApp.ViewModels;assembly=eTickets.MobileApp"
+             x:Class="eTickets.MobileApp.Views.OnlinePaymentPage">
+    <ContentPage.BindingContext>
+        <viewModels:OnlinePaymentViewModel/>
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
+            <Label Text="Card number :" />
+            <Entry Text="{Binding Card}" ></Entry>
+
+            <Label Text="Card owner:" />
+            <Entry Text="{Binding CardOwner}" ></Entry>
+
+            <Label Text="Valid till :" />
+            <Entry Text="{Binding CardValid}" ></Entry>
+
+            <Label Text="Control number :" />
+            <Entry Text="{Binding ControlNumber}" ></Entry>
+
+            <Button Command="{Binding PayCommand}"
+                    x:Name="ButtonBank" Text="Submit payment" BackgroundColor="RoyalBlue"
+                    VerticalOptions="End"
+                    HorizontalOptions="End"></Button>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

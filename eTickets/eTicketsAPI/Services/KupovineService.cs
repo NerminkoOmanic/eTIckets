@@ -23,27 +23,33 @@ namespace eTicketsAPI.Services
 
         public IEnumerable<eTickets.Model.Kupovine> Get(KupovineSearchRequest search = null)
         {
-            var dbSet = Context.Kupovine.AsQueryable();
+
+           
+
+
+            var dbSet = Context.Set<Database.Kupovine>().AsQueryable();
 
             dbSet = dbSet.Include(x => x.Ticket)
                 .Include(x => x.Kupac)
-                .Include(x => x.Ticket.Prodavac);
+                .Include(x => x.Ticket.Prodavac)
+                .Include(x=>x.Ticket.Slika)
+                .Include(x=>x.Ticket.Grad);
 
             if (search?.KorisnikId != 0)
             {
-                dbSet = dbSet.Where(x => x.KupacId == search.KorisnikId);
+                dbSet = dbSet.Where(x => x.Kupac.KorisnikId == search.KorisnikId);
             }
 
-            if (search?.PodKategorijaId != 0)
+            if (search?.PodKategorijaId != null)
             {
                 dbSet = dbSet.Where(x => x.Ticket.PodKategorijaId == search.PodKategorijaId);
             }
-            if (search?.TicketId != 0)
+            if (search?.TicketId != null)
             {
                 dbSet = dbSet.Where(x => x.Ticket.TicketId == search.TicketId);
             }
             var list = dbSet.ToList();
-            
+
             return _mapper.Map<List<eTickets.Model.Kupovine>>(list);
         }
 
@@ -64,9 +70,23 @@ namespace eTicketsAPI.Services
 
             _mapper.Map(request, entity);
 
+            var ticket = Context.Ticket.FirstOrDefault(x => x.TicketId == request.TicketId);
+
+            if (ticket != null)
+            {
+                ticket.Prodano = true;
+            }
+
             Context.Kupovine.Add(entity);
             Context.SaveChanges();
-            return _mapper.Map<eTickets.Model.Kupovine>(entity);
+
+            var returnEntity = Context.Kupovine.Include(x => x.Kupac)
+                                                        .Include(x => x.Ticket)
+                                                        .Include(x=>x.Ticket.Prodavac)
+                                                        .FirstOrDefault(x => x.KupovinaId == entity.KupovinaId);
+
+
+            return _mapper.Map<eTickets.Model.Kupovine>(returnEntity);
         }
 
     }

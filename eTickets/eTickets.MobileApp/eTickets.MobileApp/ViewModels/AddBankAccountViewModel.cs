@@ -18,6 +18,8 @@ namespace eTickets.MobileApp.ViewModels
         public AddBankAccountViewModel()
         {
             AddBankAccountCommand = new Command(async () => await AddBankAccount());
+            Title = "Add bank account";
+
         }
 
         string _bankaccount = string.Empty;

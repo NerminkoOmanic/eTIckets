@@ -48,10 +48,11 @@ namespace eTickets.MobileApp.Views
                 Ime.IsVisible = false;
                 LabelPrezime.IsVisible = false;
                 Prezime.IsVisible = false;
-                LabelTitle.Text = "Edit your profile";
                 LabelBank.IsVisible = true;
                 LabelValueBank.IsVisible = true;
                 ButtonBank.IsVisible = true;
+                Frame.IsVisible = false;
+                LabelTitle.IsVisible = false;
             }
             await register.Init();
         }

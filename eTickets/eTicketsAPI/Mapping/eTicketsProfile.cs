@@ -25,6 +25,9 @@ namespace eTicketsAPI.Mapping
             CreateMap<Database.Slika, eTickets.Model.Slika>()
                 .ForMember(dest=>dest.SlikaBytes,
                     opt=> opt.MapFrom(src=>src.Slika1));
+            CreateMap<eTickets.Model.BankTransaction, Database.BankTransactions>();
+            CreateMap<Database.BankTransactions, eTickets.Model.BankTransaction>();
+
 
             //Mapping model requests
             CreateMap<TicketInsertRequest , Database.Ticket>();
@@ -41,7 +44,7 @@ namespace eTicketsAPI.Mapping
                 .ForMember(dest=>dest.Slika1,
                     opt=> opt.MapFrom(src=>src.SlikaBytes));
             CreateMap<KupovineInsertRequest, Database.Kupovine>();
-
+            CreateMap<OnlinePaymentRequest, Database.BankTransactions>();
         }
     }
 }

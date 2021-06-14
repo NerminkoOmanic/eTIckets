@@ -10,7 +10,11 @@ namespace eTickets.Model.Requests
         public int ControlNumber { get; set; }
         public string CardOwner { get; set; }
         public string CardValid { get; set; }
-        public decimal Cijena { get; set; }
-        public string Account { get; set; }
+        public decimal Iznos { get; set; }
+
+        //bank account of user which is selling certain ticket
+        public string AccountId { get; set; }
+
+        public DateTime Datum { get; set; }
     }
 }

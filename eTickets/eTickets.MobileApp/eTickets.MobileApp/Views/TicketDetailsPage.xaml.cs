@@ -11,7 +11,6 @@ using Xamarin.Forms.Xaml;
 namespace eTickets.MobileApp.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    [QueryProperty(nameof(TicketId), nameof(TicketId))]
     public partial class TicketDetailsPage : ContentPage
     {
         private TicketDetailsViewModel _model = null;
@@ -52,8 +51,30 @@ namespace eTickets.MobileApp.Views
                 LabelProdavac.IsVisible = false;
                 LabelValueProdavac.IsVisible = false;
             }
-            
+            else
+            {
+                ButtonCancel.IsVisible = false;
+            }
+
+            if (StaticHelper.VrstaTicket.Equals("buying"))
+            {
+                LabelKupac.IsVisible = false;
+                LabelValueKupac.IsVisible = false;
+            }
+            if (StaticHelper.VrstaTicket.Equals("selling"))
+            {
+                LabelProdavac.IsVisible = false;
+                LabelValueProdavac.IsVisible = false;
+            }
+
             await _model.Init();
         }
+
+        private async void ButtonBuy_OnClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new OnlinePaymentPage(_model.Id));
+        }
+
+        
     }
 }
