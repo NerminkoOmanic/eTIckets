@@ -47,9 +47,7 @@ namespace eTicketsAPI
                     options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
                     options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
                 });
-
-            services.AddDbContext<IB3012Context>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            
 
             services.AddSwaggerGen(c =>
             {
@@ -77,6 +75,10 @@ namespace eTicketsAPI
 
             services.AddAuthentication("BasicAuthentication")
                 .AddScheme<AuthenticationSchemeOptions, BasicAuthenticationHandler>("BasicAuthentication", null);
+
+
+            services.AddDbContext<IB3012Context>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("eTickets")));
 
             services.AddScoped<IKorisnikService, KorisnikService>();
             services.AddScoped<IDrzavaService, DrzavaService>();

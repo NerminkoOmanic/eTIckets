@@ -13,14 +13,15 @@ namespace eTicketsAPI
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             var host = CreateHostBuilder(args).Build();
 
             using (var scope = host.Services.CreateScope())
             {
                 var database = scope.ServiceProvider.GetService<IB3012Context>();
-                await new SetupService().Init(database);
+                
+                new SetupService().Init(database);
             }
             host.Run();
         }

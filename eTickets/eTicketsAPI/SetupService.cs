@@ -9,12 +9,13 @@ namespace eTicketsAPI
 {
     public class SetupService
     {
-        public async Task Init(IB3012Context context)
+        public void Init(IB3012Context context)
         {
+            context.Database.Migrate();
+
+
             if (!context.Uloga.Any())
             {
-                context.Database.Migrate();
-
                 context.Uloga.Add(new Uloga()
                 {
                     Naziv = "Administrator"
@@ -71,13 +72,13 @@ namespace eTicketsAPI
                     AccountId = "222222222222"
                 });
 
-                await context.SaveChangesAsync();
+                context.SaveChanges();
 
-                var entityDrzava = await context.Drzava.FirstOrDefaultAsync(x => x.Naziv.Equals("Bosna i Hercegovina"));
-                var entitySpol = await context.Spol.FirstOrDefaultAsync(x => x.Naziv.Equals("Musko"));
-                var entityAdmin = await context.Uloga.FirstOrDefaultAsync(x => x.Naziv.Equals("Administrator"));
-                var entityKlijent = await context.Uloga.FirstOrDefaultAsync(x => x.Naziv.Equals("Klijent"));
-                var entityKategorija = await context.Kategorija.FirstOrDefaultAsync(x => x.Naziv.Equals("Sport"));
+                var entityDrzava = context.Drzava.FirstOrDefault(x => x.Naziv.Equals("Bosna i Hercegovina"));
+                var entitySpol = context.Spol.FirstOrDefault(x => x.Naziv.Equals("Musko"));
+                var entityAdmin = context.Uloga.FirstOrDefault(x => x.Naziv.Equals("Administrator"));
+                var entityKlijent = context.Uloga.FirstOrDefault(x => x.Naziv.Equals("Klijent"));
+                var entityKategorija = context.Kategorija.FirstOrDefault(x => x.Naziv.Equals("Sport"));
 
 
                 int drzavaId = entityDrzava.DrzavaId;
@@ -108,8 +109,8 @@ namespace eTicketsAPI
                     KategorijaId = kategorijaId
                 });
 
-                await context.SaveChangesAsync();
-                var entityGrad = await context.Grad.FirstOrDefaultAsync(x => x.Naziv.Equals("Mostar"));
+                context.SaveChanges();
+                var entityGrad = context.Grad.FirstOrDefault(x => x.Naziv.Equals("Mostar"));
 
                 int gradId = entityGrad.GradId;
 
@@ -141,7 +142,7 @@ namespace eTicketsAPI
                     SpolId = spolId,
                     GradId = gradId
                 });
-                await context.SaveChangesAsync();
+                context.SaveChanges();
             }
         }
 
