@@ -91,9 +91,10 @@ namespace eTicketsAPI
             services.AddScoped<ISlikaService, SlikaService>();
             services.AddScoped<IKupovineService, KupovineService>();
             services.AddScoped<IBankService, BankService>();
+            services.AddScoped<IRecommendService, RecommendService>();
 
 
-            
+
 
 
 

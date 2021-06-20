@@ -69,7 +69,6 @@ namespace eTicketsAPI.Services
 
             return _mapper.Map<eTickets.Model.Ticket>(entity);
         }
-
         public eTickets.Model.Ticket Insert(TicketInsertRequest request)
         {
             var entitySlika = new Database.Slika();
@@ -124,6 +123,8 @@ namespace eTicketsAPI.Services
             return false;
             
         }
+
+        
 
         #region Utility
 

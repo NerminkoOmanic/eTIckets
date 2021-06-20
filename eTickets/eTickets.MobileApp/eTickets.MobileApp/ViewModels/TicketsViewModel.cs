@@ -19,6 +19,8 @@ namespace eTickets.MobileApp.ViewModels
         private readonly APIService _ticketsService = new APIService("ticket");
         private readonly APIService _podkategorijeService = new APIService("podkategorija");
         private readonly APIService _kupovineService = new APIService("kupovine");
+        private readonly APIService _recommendService = new APIService("recommend");
+
 
         private string _vrsta { get; set; }
 
@@ -71,7 +73,6 @@ namespace eTickets.MobileApp.ViewModels
             {
                 if (_vrsta.Equals("activeAll"))
                 {
-                    searchObjectTicket.AktivnaProdaja = true;
                     Title = "Tickets";
                 }
 
@@ -120,6 +121,15 @@ namespace eTickets.MobileApp.ViewModels
                     TicketsList.Add(kupovina.Ticket);
                 } 
             }
+            else if (_vrsta == "activeAll")
+            {
+                var lstTickets = await _recommendService.Get<List<Ticket>>(null);
+                TicketsList.Clear();
+                foreach (var ticket in lstTickets)
+                {
+                    TicketsList.Add(ticket);
+                }
+            }
             else
             {
                 var lstTickets = await _ticketsService.Get<List<Ticket>>(searchObjectTicket);
@@ -127,17 +137,7 @@ namespace eTickets.MobileApp.ViewModels
                 TicketsList.Clear();
                 foreach (var ticket in lstTickets)
                 {
-                    if (_vrsta == "activeAll")
-                    {
-                        if (ticket.ProdavacId != APIService.PrijavljeniKorisnik.KorisnikId)
-                        {
-                            TicketsList.Add(ticket);
-                        }
-                    }
-                    else
-                    {
-                        TicketsList.Add(ticket);
-                    }
+                    TicketsList.Add(ticket);
                 } 
             }
 

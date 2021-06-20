@@ -20,7 +20,7 @@ services:
     environment:
       - ConnectionStrings:eTickets=Server=etickets-sql,1433;Database=3012;User=sa;Password=QWElkj132!;ConnectRetryCount=0
     ports:
-      - 61090:80
+      - 65080:80
     networks:
       - eticketsnet      
     links:

@@ -31,7 +31,7 @@ namespace eTickets.WinUI.Ticket
             var entity = await _ticketService.GetById<eTickets.Model.Ticket>(_id);
 
             lbNazivDogadjaja.Text = entity.NazivDogadjaja;
-            lbDatum.Text = entity.Datum.ToShortTimeString();
+            lbDatum.Text = entity.Datum.ToShortDateString();
             lbSektor.Text = entity.Sektor;
             lbRed.Text = entity.Red.ToString();
             lbSjedalo.Text = entity.Sjedalo;

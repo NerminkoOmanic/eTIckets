@@ -11,8 +11,11 @@ namespace eTicketsAPI
     {
         public void Init(IB3012Context context)
         {
-            context.Database.Migrate();
 
+            if (!context.Database.CanConnect())
+            {
+                context.Database.Migrate();
+            }
 
             if (!context.Uloga.Any())
             {
