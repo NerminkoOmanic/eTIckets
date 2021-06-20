@@ -166,6 +166,19 @@ namespace eTickets.MobileApp.ViewModels
             return false;
         }
 
+        private bool ValidatePhone()
+        {
+            foreach (var letter in Telefon)
+            {
+                if (Char.IsDigit(letter))
+                    continue;
+                return false;
+            }
+
+            return true;
+        }
+        
+
         private bool ValidateEmailFormat()
         {
             if (Email.Contains("@") && Email.Contains("."))
@@ -250,6 +263,11 @@ namespace eTickets.MobileApp.ViewModels
                 return;
             }
 
+            if (ValidatePhone() == false)
+            {
+                await Application.Current.MainPage.DisplayAlert("Error", "Phone number can contain only numbers", "OK");
+                return;
+            }
 
 
             var searchRequest = new KorisnikSearchRequest()

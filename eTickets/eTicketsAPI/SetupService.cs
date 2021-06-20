@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 namespace eTicketsAPI
 {
     public class SetupService
-    {
+    {   
         public void Init(IB3012Context context)
         {
 
