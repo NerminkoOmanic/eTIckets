@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -167,30 +168,39 @@ namespace eTickets.WinUI.Korisnik
         }
         private async void txtbEmail_Validating(object sender, CancelEventArgs e)
         {
-            var search = new KorisnikSearchRequest()
-            {
-                EmailValidacija = txtbEmail.Text
-            };
-            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
+            
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
+                return;
             }
-            else if (lst.Count>0)
+            try
             {
-                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailExist);
-                e.Cancel = true;
+                MailAddress mail = new MailAddress(txtbEmail.Text);
+
             }
-            else if (!(txtbEmail.Text.Contains("@") && txtbEmail.Text.Contains(".")) )
+            catch (Exception b)
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailFormat);
                 e.Cancel = true;
+                return;
             }
-            else
+
+            var search = new KorisnikSearchRequest()
             {
-                errorProvider.SetError(txtbEmail,null);
+                EmailValidacija = txtbEmail.Text
+            };
+
+            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
+
+            if (lst.Count>0)
+            {
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailExist);
+                e.Cancel = true;
+                return;
             }
+            errorProvider.SetError(txtbEmail,null);
         }
         private void txtbTelefon_Validating(object sender, CancelEventArgs e)
         {

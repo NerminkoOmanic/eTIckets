@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -74,25 +75,39 @@ namespace eTickets.WinUI.Korisnik
         #region Validation
         private async void txtbEmail_Validating(object sender, CancelEventArgs e)
         {
-            var search = new KorisnikSearchRequest()
-            {
-                EmailValidacija = txtbEmail.Text
-            };
-            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
             if (string.IsNullOrWhiteSpace(txtbEmail.Text))
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
+                return;
             }
-            else if (lst.Count>0)
+            try
+            {
+                MailAddress mail = new MailAddress(txtbEmail.Text);
+
+            }
+            catch (Exception b)
+            {
+                errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailFormat);
+                e.Cancel = true;
+                return;
+            }
+
+            var search = new KorisnikSearchRequest()
+            {
+                EmailValidacija = txtbEmail.Text
+            };
+
+            var lst = await _korisnikService.Get<List<eTickets.Model.Korisnik>>(search);
+
+            if (lst.Count>0)
             {
                 errorProvider.SetError(txtbEmail,Properties.Resources.msgEmailExist);
                 e.Cancel = true;
+                return;
             }
-            else
-            {
-                errorProvider.SetError(txtbEmail,null);
-            }
+            errorProvider.SetError(txtbEmail,null);
+            
         }
         
         private void txtbLozinka_Validating(object sender, CancelEventArgs e)

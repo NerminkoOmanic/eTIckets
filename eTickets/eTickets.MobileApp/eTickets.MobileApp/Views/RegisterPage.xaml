@@ -12,18 +12,18 @@
            <StackLayout Padding="7" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand">
                <Frame x:Name="Frame" 
                       BackgroundColor="RoyalBlue"
-                      Padding="24"
+                      Padding="2"
                       CornerRadius="0">
-                   <Label x:Name="LabelTitle" Text="Register form" HorizontalTextAlignment="Center" TextColor="White" FontSize="24"></Label>
+                   <ImageButton x:Name="ButtonGoBack"
+                                Source="btnBack.png"
+                                WidthRequest="75"
+                                HeightRequest="75"
+                                VerticalOptions="Start"
+                                HorizontalOptions="Start"
+                                Clicked="ImageButton_OnClicked"></ImageButton>
                </Frame>
-
-               <ImageButton x:Name="ButtonGoBack"
-                            Source="btnBack.png"
-                            WidthRequest="100"
-                            HeightRequest="100"
-                            VerticalOptions="Start"
-                            HorizontalOptions="Start"
-                            Clicked="ImageButton_OnClicked"></ImageButton>
+               <Label x:Name="LabelTitle" Text="Register form" HorizontalTextAlignment="Center" TextColor="RoyalBlue" FontSize="24"></Label>
+               
                
                <Label x:Name="LabelIme" Text="First name :" />
                 <Entry  x:Name="Ime"  TextChanged="ime_changed" Text="{Binding Ime}" ReturnType="Next" Unfocused="ime_unfocused"></Entry>

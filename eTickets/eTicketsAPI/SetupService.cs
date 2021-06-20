@@ -145,6 +145,20 @@ namespace eTicketsAPI
                     SpolId = spolId,
                     GradId = gradId
                 });
+                context.Korisnik.Add(new Korisnik()
+                {
+                    Ime = "user",
+                    Prezime = "user",
+                    Email = "user2@fit.ba",
+                    KorisnickoIme = "user2",
+                    Telefon = "(122) 223-1211",
+                    LozinkaHash = "1eUkf2Dokng/C1Z6opBZZyonKm4=",
+                    LozinkaSalt = "SkqFsnWs5uCbJYNyPGKWzQ==",
+                    DatumRodjenja = DateTime.Today,
+                    UlogaId = klijentulogaId,
+                    SpolId = spolId,
+                    GradId = gradId
+                });
                 context.SaveChanges();
             }
         }

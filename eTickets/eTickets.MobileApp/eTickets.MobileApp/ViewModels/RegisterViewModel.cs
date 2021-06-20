@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -10,6 +11,7 @@ using eTickets.MobileApp.Views;
 using eTickets.Model;
 using eTickets.Model.Requests;
 using Xamarin.Forms;
+using Exception = System.Exception;
 
 namespace eTickets.MobileApp.ViewModels
 {
@@ -170,9 +172,8 @@ namespace eTickets.MobileApp.ViewModels
         {
             foreach (var letter in Telefon)
             {
-                if (Char.IsDigit(letter))
-                    continue;
-                return false;
+                if (Char.IsLetter(letter))
+                    return false;
             }
 
             return true;
@@ -181,12 +182,16 @@ namespace eTickets.MobileApp.ViewModels
 
         private bool ValidateEmailFormat()
         {
-            if (Email.Contains("@") && Email.Contains("."))
+            try
             {
+                MailAddress mail = new MailAddress(Email);
+
                 return true;
             }
-
-            return false;
+            catch (Exception e)
+            {
+                return false;
+            }
         }
 
         private bool ValidateEmailUniqueEdit(List<Korisnik> lst)
@@ -259,13 +264,13 @@ namespace eTickets.MobileApp.ViewModels
 
             if (ValidateEmailFormat()==false)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Email needs to be in format xxx@xxx.xxx", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Email needs to be in valid format", "OK");
                 return;
             }
 
             if (ValidatePhone() == false)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Phone number can contain only numbers", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Phone number can't contain letters", "OK");
                 return;
             }
 

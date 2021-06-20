@@ -70,7 +70,7 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to *Email needs to be in valid format &quot;xxx@xxx.xxx&quot;.
+        ///   Looks up a localized string similar to *Email needs to be in valid format.
         /// </summary>
         public static string msgEmailFormat {
             get {

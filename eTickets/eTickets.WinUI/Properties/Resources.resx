@@ -121,7 +121,7 @@
     <value>*Email already exists</value>
   </data>
   <data name="msgEmailFormat" xml:space="preserve">
-    <value>*Email needs to be in valid format "xxx@xxx.xxx"</value>
+    <value>*Email needs to be in valid format</value>
   </data>
   <data name="msgError" xml:space="preserve">
     <value>Error</value>
