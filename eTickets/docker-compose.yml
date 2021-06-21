@@ -18,7 +18,7 @@ services:
     build:
       context: .
     environment:
-      - ConnectionStrings:eTickets=Server=etickets-sql,1433;Database=3012;User=sa;Password=QWElkj132!;ConnectRetryCount=0
+      - ConnectionStrings:eTickets=Server=etickets-sql,1433;Database=3012;User=sa;Password=QWElkj132!;ConnectRetryCount=250
     ports:
       - 65080:80
     networks:
