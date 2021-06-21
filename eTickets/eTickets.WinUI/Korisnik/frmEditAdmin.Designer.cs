@@ -36,12 +36,12 @@ namespace eTickets.WinUI.Korisnik
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
-            this.txtbTelefon = new System.Windows.Forms.MaskedTextBox();
             this.txtbEmail = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtbTelefon = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -101,15 +101,6 @@ namespace eTickets.WinUI.Korisnik
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // txtbTelefon
-            // 
-            this.txtbTelefon.Location = new System.Drawing.Point(119, 126);
-            this.txtbTelefon.Mask = "(999) 000-0000";
-            this.txtbTelefon.Name = "txtbTelefon";
-            this.txtbTelefon.Size = new System.Drawing.Size(164, 20);
-            this.txtbTelefon.TabIndex = 39;
-            this.txtbTelefon.Validating += new System.ComponentModel.CancelEventHandler(this.txtbTelefon_Validating);
-            // 
             // txtbEmail
             // 
             this.txtbEmail.Location = new System.Drawing.Point(119, 24);
@@ -149,18 +140,26 @@ namespace eTickets.WinUI.Korisnik
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // txtbTelefon
+            // 
+            this.txtbTelefon.Location = new System.Drawing.Point(119, 126);
+            this.txtbTelefon.Name = "txtbTelefon";
+            this.txtbTelefon.Size = new System.Drawing.Size(164, 20);
+            this.txtbTelefon.TabIndex = 53;
+            this.txtbTelefon.Validating += new System.ComponentModel.CancelEventHandler(this.txtbTelefon_Validating);
+            // 
             // frmEditAdmin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(315, 266);
+            this.Controls.Add(this.txtbTelefon);
             this.Controls.Add(this.cmbGrad);
             this.Controls.Add(this.txtbPotvrdaLozinke);
             this.Controls.Add(this.txtbLozinka);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.txtbTelefon);
             this.Controls.Add(this.txtbEmail);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
@@ -181,11 +180,11 @@ namespace eTickets.WinUI.Korisnik
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.MaskedTextBox txtbTelefon;
         private System.Windows.Forms.TextBox txtbEmail;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.TextBox txtbTelefon;
     }
 }

@@ -31,7 +31,6 @@ namespace eTickets.WinUI.Korisnik
         {
             this.components = new System.ComponentModel.Container();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.txtbTelefon = new System.Windows.Forms.MaskedTextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.txtbEmail = new System.Windows.Forms.TextBox();
@@ -52,6 +51,7 @@ namespace eTickets.WinUI.Korisnik
             this.cmbSpol = new System.Windows.Forms.ComboBox();
             this.dtpDatum = new System.Windows.Forms.DateTimePicker();
             this.errorProvider = new System.Windows.Forms.ErrorProvider(this.components);
+            this.txtbTelefon = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.errorProvider)).BeginInit();
             this.SuspendLayout();
             // 
@@ -64,15 +64,6 @@ namespace eTickets.WinUI.Korisnik
             this.btnAdd.Text = "Add";
             this.btnAdd.UseVisualStyleBackColor = false;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // txtbTelefon
-            // 
-            this.txtbTelefon.Location = new System.Drawing.Point(128, 221);
-            this.txtbTelefon.Mask = "(999) 000-0000";
-            this.txtbTelefon.Name = "txtbTelefon";
-            this.txtbTelefon.Size = new System.Drawing.Size(164, 20);
-            this.txtbTelefon.TabIndex = 6;
-            this.txtbTelefon.Validating += new System.ComponentModel.CancelEventHandler(this.txtbTelefon_Validating);
             // 
             // label7
             // 
@@ -247,11 +238,20 @@ namespace eTickets.WinUI.Korisnik
             // 
             this.errorProvider.ContainerControl = this;
             // 
+            // txtbTelefon
+            // 
+            this.txtbTelefon.Location = new System.Drawing.Point(128, 221);
+            this.txtbTelefon.Name = "txtbTelefon";
+            this.txtbTelefon.Size = new System.Drawing.Size(164, 20);
+            this.txtbTelefon.TabIndex = 34;
+            this.txtbTelefon.Validating += new System.ComponentModel.CancelEventHandler(this.txtbTelefon_Validating);
+            // 
             // frmDodajAdmina
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(356, 450);
+            this.Controls.Add(this.txtbTelefon);
             this.Controls.Add(this.dtpDatum);
             this.Controls.Add(this.cmbSpol);
             this.Controls.Add(this.cmbGrad);
@@ -262,7 +262,6 @@ namespace eTickets.WinUI.Korisnik
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.btnAdd);
-            this.Controls.Add(this.txtbTelefon);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.txtbEmail);
@@ -285,7 +284,6 @@ namespace eTickets.WinUI.Korisnik
         #endregion
 
         private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.MaskedTextBox txtbTelefon;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtbEmail;
@@ -306,5 +304,6 @@ namespace eTickets.WinUI.Korisnik
         private System.Windows.Forms.ComboBox cmbSpol;
         private System.Windows.Forms.DateTimePicker dtpDatum;
         private System.Windows.Forms.ErrorProvider errorProvider;
+        private System.Windows.Forms.TextBox txtbTelefon;
     }
 }

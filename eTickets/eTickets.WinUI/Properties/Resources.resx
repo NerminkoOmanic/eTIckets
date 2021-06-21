@@ -141,6 +141,9 @@
   <data name="msgPasswordWeak" xml:space="preserve">
     <value>*Password is too weak, at least 6 characters</value>
   </data>
+  <data name="msgPhoneFormat" xml:space="preserve">
+    <value>*Phone number needs to be in valid format (eg. +433434334)</value>
+  </data>
   <data name="msgRequestDenied" xml:space="preserve">
     <value>Successfully denied</value>
   </data>

@@ -142,11 +142,40 @@ namespace eTickets.WinUI.Korisnik
             {
                 errorProvider.SetError(txtbTelefon,Properties.Resources.msgValidation_ReqField);
                 e.Cancel = true;
+                return;
             }
-            else
+
+            int loopIndex = 0;
+
+            foreach (var letter in txtbTelefon.Text)
             {
-                errorProvider.SetError(txtbTelefon,null);
+                if (loopIndex==0 && char.IsSymbol(letter) && !letter.Equals(char.Parse("+")))
+                {
+                    errorProvider.SetError(txtbTelefon,Properties.Resources.msgPhoneFormat);
+                    e.Cancel = true;
+                    return;
+                }
+
+                if (Char.IsLetter(letter))
+                {
+                    errorProvider.SetError(txtbTelefon,Properties.Resources.msgPhoneFormat);
+                    e.Cancel = true;
+                    return;
+                }
+                
+
+                if(loopIndex!=0 && char.IsSymbol(letter))
+                {
+                    errorProvider.SetError(txtbTelefon,Properties.Resources.msgPhoneFormat);
+                    e.Cancel = true;
+                    return;
+                }
+
+                loopIndex++;
             }
+            
+           
+            errorProvider.SetError(txtbTelefon,null);
         }
         private void cmbGrad_Validating(object sender, CancelEventArgs e)
         {

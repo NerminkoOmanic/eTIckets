@@ -170,11 +170,28 @@ namespace eTickets.MobileApp.ViewModels
 
         private bool ValidatePhone()
         {
+            if (string.IsNullOrWhiteSpace(Telefon))
+                return false;
+            
+
+            int loopIndex = 0;
+
             foreach (var letter in Telefon)
             {
+                if (loopIndex == 0 && char.IsSymbol(letter) && !letter.Equals(char.Parse("+")))
+                    return false;
+            
+
                 if (Char.IsLetter(letter))
                     return false;
+                
+
+                if (loopIndex != 0 && char.IsSymbol(letter))
+                    return false;
+
+                loopIndex++;
             }
+
 
             return true;
         }
@@ -270,7 +287,7 @@ namespace eTickets.MobileApp.ViewModels
 
             if (ValidatePhone() == false)
             {
-                await Application.Current.MainPage.DisplayAlert("Error", "Phone number can't contain letters", "OK");
+                await Application.Current.MainPage.DisplayAlert("Error", "Phone number needs to be in valid format (eg. +123456788", "OK");
                 return;
             }
 

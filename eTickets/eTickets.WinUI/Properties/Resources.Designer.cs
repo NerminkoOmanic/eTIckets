@@ -133,6 +133,15 @@ namespace eTickets.WinUI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to *Phone number needs to be in valid format (eg. +433434334).
+        /// </summary>
+        public static string msgPhoneFormat {
+            get {
+                return ResourceManager.GetString("msgPhoneFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Successfully denied.
         /// </summary>
         public static string msgRequestDenied {
