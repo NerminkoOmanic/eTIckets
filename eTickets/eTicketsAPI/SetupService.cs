@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Mime;
 using System.Threading.Tasks;
 using eTicketsAPI.Database;
 using Microsoft.EntityFrameworkCore;
@@ -186,173 +187,148 @@ namespace eTicketsAPI
                     GradId = gradId,
                     BankAccount = "111111111111"
                 };
-                //context.Korisnik.Add(new Korisnik()
-                //{
-                //    Ime = "admin",
-                //    Prezime = "admin",
-                //    Email = "admin@fit.ba",
-                //    KorisnickoIme = "admin",
-                //    Telefon = "(122) 223-1211",
-                //    LozinkaHash = "1eUkf2Dokng/C1Z6opBZZyonKm4=",
-                //    LozinkaSalt = "SkqFsnWs5uCbJYNyPGKWzQ==",
-                //    DatumRodjenja = DateTime.Today,
-                //    UlogaId = adminulogaId,
-                //    SpolId = spolId,
-                //    GradId = gradId
-                //});
-                //context.Korisnik.Add(new Korisnik()
-                //{
-                //    Ime = "user",
-                //    Prezime = "user",
-                //    Email = "user@fit.ba",
-                //    KorisnickoIme = "user",
-                //    Telefon = "(122) 223-1211",
-                //    LozinkaHash = "1eUkf2Dokng/C1Z6opBZZyonKm4=",
-                //    LozinkaSalt = "SkqFsnWs5uCbJYNyPGKWzQ==",
-                //    DatumRodjenja = DateTime.Today,
-                //    UlogaId = klijentulogaId,
-                //    SpolId = spolId,
-                //    GradId = gradId
-                //});
-                //context.Korisnik.Add(new Korisnik()
-                //{
-                //    Ime = "user2",
-                //    Prezime = "user2",
-                //    Email = "user2@fit.ba",
-                //    KorisnickoIme = "user2",
-                //    Telefon = "(122) 223-1211",
-                //    LozinkaHash = "1eUkf2Dokng/C1Z6opBZZyonKm4=",
-                //    LozinkaSalt = "SkqFsnWs5uCbJYNyPGKWzQ==",
-                //    DatumRodjenja = DateTime.Today,
-                //    UlogaId = klijentulogaId,
-                //    SpolId = spolId,
-                //    GradId = gradId,
-                //    BankAccount = "111111111111"
-                //});
+               
                 context.Korisnik.AddRange(admin,user1,user2);
-
-                Slika picFootball1 = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageFootball.jpg"))
-                };
-                Slika picFootball2 = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageFootball.jpg"))
-                };
-                Slika picFootball3 = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageFootball.jpg"))
-                };
-
-                Slika picMusic = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageMusic.jpg"))
-                };
-
-                Slika picMusic2 = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageMusic.jpg"))
-                };
-
-                Slika picMusic3 = new Slika()
-                {
-                    Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "SeedImages/imageMusic.jpg"))
-                };
-
-                context.Slika.AddRange(picMusic3,picFootball1,picFootball2,picFootball3,picMusic,picMusic2);
-
                 context.SaveChanges();
 
-                Ticket ticket1 = new Ticket()
-                {
-                    NazivDogadjaja = "football1",
-                    Cijena = 350,
-                    GradId = gradId,
-                    PodKategorijaId = footballId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    AdminId = admin.KorisnikId,
-                    Sektor = "B",
-                    Red = 34,
-                    Sjedalo = "23",
-                    SlikaId = picFootball1.SlikaId
-                };
-                Ticket ticket2 = new Ticket()
-                {
-                    NazivDogadjaja = "football2",
-                    Cijena = 350,
-                    GradId = gradId,
-                    PodKategorijaId = footballId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    Sektor = "C",
-                    Red = 34,
-                    Sjedalo = "23",
-                    SlikaId = picFootball2.SlikaId
-                };
-                Ticket ticket3 = new Ticket()
-                {
-                    NazivDogadjaja = "football3",
-                    Cijena = 350,
-                    GradId = gradId,
-                    PodKategorijaId = footballId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    AdminId = admin.KorisnikId,
-                    Sektor = "A",
-                    Red = 3,
-                    Sjedalo = "22",
-                    SlikaId = picFootball3.SlikaId
-                };
-                Ticket ticket4 = new Ticket()
-                {
-                    NazivDogadjaja = "Rock1",
-                    Cijena = 50,
-                    GradId = gradId,
-                    PodKategorijaId = rockId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    AdminId = admin.KorisnikId,
-                    Sektor = "Ispred bine",
-                    SlikaId = picMusic.SlikaId
-                };
-                Ticket ticket5 = new Ticket()
-                {
-                    NazivDogadjaja = "Rock2",
-                    Cijena = 60,
-                    GradId = gradId,
-                    PodKategorijaId = footballId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    Sektor = "C",
-                    Red = 34,
-                    Sjedalo = "22",
-                    SlikaId = picMusic2.SlikaId
-                };
-                Ticket ticket6 = new Ticket()
-                {
-                    NazivDogadjaja = "rock3",
-                    Cijena = 45,
-                    GradId = gradId,
-                    PodKategorijaId = footballId,
-                    Datum = DateTime.Now,
-                    ProdavacId = user2.KorisnikId,
-                    Prodano = false,
-                    AdminId = admin.KorisnikId,
-                    Sektor = "B",
-                    Red = 34,
-                    Sjedalo = "23",
-                    SlikaId = picMusic3.SlikaId
-                };
+                
+                //Docker can't find path 
+                //string currentDirectory = Directory.GetCurrentDirectory();
 
-                context.Ticket.AddRange(ticket1,ticket2,ticket3,ticket4,ticket5,ticket6);
+                //Slika picFootball1 = new Slika();
+                //Slika picFootball2 = new Slika();
+                //Slika picFootball3 = new Slika();
+                //Slika picMusic = new Slika();
+                //Slika picMusic2 = new Slika();
+                //Slika picMusic3 = new Slika();
 
-                context.SaveChanges();
+
+                //if (currentDirectory.Contains("eTicketsAPI"))
+                //{
+                //    picFootball1.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageFootball.jpg"));
+                //    picFootball2.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageFootball.jpg"));
+                //    picFootball3.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageFootball.jpg"));
+                //    picMusic.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageMusic.jpg"));
+                //    picMusic2.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageMusic.jpg"));
+                //    picMusic3.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "SeedImages/imageMusic.jpg"));
+
+                //}
+                //else
+                //{
+                //    picFootball1.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageFootball.jpg"));
+                //    picFootball2.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageFootball.jpg"));
+                //    picFootball3.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageFootball.jpg"));
+                //    picMusic.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageMusic.jpg"));
+                //    picMusic2.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageMusic.jpg"));
+                //    picMusic3.Slika1 = File.ReadAllBytes(Path.Combine(Directory.GetCurrentDirectory(),
+                //        "eTicketsAPI/SeedImages/imageMusic.jpg"));
+                //}
+
+                //context.Slika.AddRange(picMusic3,picFootball1,picFootball2,picFootball3,picMusic,picMusic2);
+
+                //context.SaveChanges();
+
+                //Ticket ticket1 = new Ticket()
+                //{
+                //    NazivDogadjaja = "football1",
+                //    Cijena = 350,
+                //    GradId = gradId,
+                //    PodKategorijaId = footballId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    AdminId = admin.KorisnikId,
+                //    Sektor = "B",
+                //    Red = 34,
+                //    Sjedalo = "23",
+                //    SlikaId = picFootball1.SlikaId
+                //};
+                //Ticket ticket2 = new Ticket()
+                //{
+                //    NazivDogadjaja = "football2",
+                //    Cijena = 350,
+                //    GradId = gradId,
+                //    PodKategorijaId = footballId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    Sektor = "C",
+                //    Red = 34,
+                //    Sjedalo = "23",
+                //    SlikaId = picFootball1.SlikaId
+                //};
+                //Ticket ticket3 = new Ticket()
+                //{
+                //    NazivDogadjaja = "football3",
+                //    Cijena = 350,
+                //    GradId = gradId,
+                //    PodKategorijaId = footballId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    AdminId = admin.KorisnikId,
+                //    Sektor = "A",
+                //    Red = 3,
+                //    Sjedalo = "22",
+                //    SlikaId = picFootball1.SlikaId
+                //};
+                //Ticket ticket4 = new Ticket()
+                //{
+                //    NazivDogadjaja = "Rock1",
+                //    Cijena = 50,
+                //    GradId = gradId,
+                //    PodKategorijaId = rockId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    AdminId = admin.KorisnikId,
+                //    Sektor = "Ispred bine",
+                //    SlikaId = picMusic.SlikaId
+                //};
+                //Ticket ticket5 = new Ticket()
+                //{
+                //    NazivDogadjaja = "Rock2",
+                //    Cijena = 60,
+                //    GradId = gradId,
+                //    PodKategorijaId = footballId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    Sektor = "C",
+                //    Red = 34,
+                //    Sjedalo = "22",
+                //    SlikaId = picMusic.SlikaId
+                //};
+                //Ticket ticket6 = new Ticket()
+                //{
+                //    NazivDogadjaja = "rock3",
+                //    Cijena = 45,
+                //    GradId = gradId,
+                //    PodKategorijaId = footballId,
+                //    Datum = DateTime.Now,
+                //    ProdavacId = user2.KorisnikId,
+                //    Prodano = false,
+                //    AdminId = admin.KorisnikId,
+                //    Sektor = "B",
+                //    Red = 34,
+                //    Sjedalo = "23",
+                //    SlikaId = picMusic.SlikaId
+                //};
+
+                //context.Ticket.AddRange(ticket1,ticket2,ticket3,ticket4,ticket5,ticket6);
+
+                //context.SaveChanges();
             }
         }
 
