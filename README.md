@@ -2,20 +2,20 @@
 
 Seminarski rad za predmet Razvoj softvera 2
 
-Docker details:
--> ne znam zasto ali i meni prikazuje API listening : 80, ali kad pristupam preko pretrazivaca moram koristit port localhost:65080
--> pristup sql serveru preko SSMS također ne dozvoljava preko 1433, nego 1401 porta
+Docker details:  
+-> ne znam zasto ali i meni prikazuje API listening : 80, ali kad pristupam preko pretrazivaca moram koristit port localhost:65080  
+-> pristup sql serveru preko SSMS također ne dozvoljava preko 1433, nego 1401 porta  
 
 
-Login details:
--> admin moze pristupiti samo WinForms
--> korisnik moze pristupiti samo Mobile
+Login details:  
+-> admin moze pristupiti samo WinForms  
+-> korisnik moze pristupiti samo Mobile  
 
-Administrator
+Administrator  
 username : admin  
 password : Reset1  
 
-User
+User  
 username: user  
 password: Reset1  
 
@@ -23,12 +23,12 @@ username: user2
 password: Reset1  
 
 
-Online payment details: 
+Online payment details:  
 Online payment service je zamisljen kao zasebna baza, da bi to ponasanje imitirao 3 tabele unutar baze su povezane međusoobno ali ne i sa ostatkom baze, posto nijedan payment service nebi imali dostupno unutar nase aplikacije zelio sam simulirati slicno ponasanje
 
 
-Da bi korisnik mogao prodavati ulaznice mora imati registriran validan broj bankovnog racuna
-Bank accounts:
+Da bi korisnik mogao prodavati ulaznice mora imati registriran validan broj bankovnog racuna  
+Bank accounts:  
 1. bank account number(id) : 111111111111  
 2. bank account number(id) : 222222222222  
 
