@@ -18,7 +18,7 @@ namespace eTickets.MobileApp
         public static eTickets.Model.Korisnik PrijavljeniKorisnik { get; set; }
 
 #if DEBUG
-        private string _apiUrl = "http://localhost:1838/api/";
+        private string _apiUrl = "http://localhost:65010/api/";
 #endif
 #if RELEASE
         private string _apiUrl = "https://mywebsite.com/api/";

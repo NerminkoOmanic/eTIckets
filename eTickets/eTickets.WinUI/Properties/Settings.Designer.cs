@@ -25,7 +25,7 @@ namespace eTickets.WinUI.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:1838/api/")]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:65010/api/")]
         public string APIUrl {
             get {
                 return ((string)(this["APIUrl"]));
