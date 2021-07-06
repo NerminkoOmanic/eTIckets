@@ -138,11 +138,15 @@ namespace eTicketsAPI
                 var entityGrad = context.Grad.FirstOrDefault(x => x.Naziv.Equals("Mostar"));
                 var entityFootball = context.PodKategorija.FirstOrDefault(x => x.Naziv.Equals("Football"));
                 var entityRock = context.PodKategorija.FirstOrDefault(x => x.Naziv.Equals("Rock"));
-
+                var entityKosarka = context.PodKategorija.FirstOrDefault(x => x.Naziv.Equals("Basketball"));
+                var entityPop = context.PodKategorija.FirstOrDefault(x => x.Naziv.Equals("Pop"));
 
                 int gradId = entityGrad.GradId;
                 int footballId = entityFootball.PodKategorijaId;
                 int rockId = entityRock.PodKategorijaId;
+                int basketballId = entityKosarka.PodKategorijaId;
+                int popId = entityPop.PodKategorijaId;
+
 
                 Korisnik admin = new Korisnik()
                 {
@@ -220,7 +224,22 @@ namespace eTicketsAPI
 
                 }
 
-
+                Slika picBasketball1 = new Slika()
+                {
+                    Slika1 = imgFootball
+                };
+                Slika picBasketball2 = new Slika()
+                {
+                    Slika1 = imgFootball
+                };
+                Slika picPop1 = new Slika()
+                {
+                    Slika1 = imgMusic
+                };
+                Slika picPop2 = new Slika()
+                {
+                    Slika1 = imgMusic
+                };
                 Slika picFootball1 = new Slika()
                 {
                     Slika1 = imgFootball
@@ -233,17 +252,17 @@ namespace eTicketsAPI
                 {
                     Slika1 = imgFootball
                 };
-                Slika picMusic = new Slika()
+                Slika picRock = new Slika()
                 {
                     Slika1 = imgMusic
 
                 };
-                Slika picMusic2 = new Slika()
+                Slika picRock2 = new Slika()
                 {
                     Slika1 = imgMusic
 
                 };
-                Slika picMusic3 = new Slika()
+                Slika picRock3 = new Slika()
                 {
                     Slika1 = imgMusic
                 };
@@ -251,14 +270,15 @@ namespace eTicketsAPI
                     
                     
 
-                context.Slika.AddRange(picMusic3, picFootball1, picFootball2, picFootball3, picMusic, picMusic2);
+                context.Slika.AddRange(picRock3, picFootball1, picFootball2, picFootball3, picRock, picRock2,
+                    picBasketball1,picBasketball2,picPop1,picPop2);
 
                 context.SaveChanges();
 
                 Ticket ticket1 = new Ticket()
                 {
                     NazivDogadjaja = "football1",
-                    Cijena = 350,
+                    Cijena = 35,
                     GradId = gradId,
                     PodKategorijaId = footballId,
                     Datum = DateTime.Now,
@@ -273,7 +293,7 @@ namespace eTicketsAPI
                 Ticket ticket2 = new Ticket()
                 {
                     NazivDogadjaja = "football2", 
-                    Cijena = 350, 
+                    Cijena = 35, 
                     GradId = gradId,
                     PodKategorijaId = footballId,
                     Datum = DateTime.Now, 
@@ -282,12 +302,12 @@ namespace eTicketsAPI
                     Sektor = "C", 
                     Red = 34, 
                     Sjedalo = "23", 
-                    SlikaId = picFootball1.SlikaId
+                    SlikaId = picFootball2.SlikaId
                 };
                 Ticket ticket3 = new Ticket()
                 {
                     NazivDogadjaja = "football3",
-                    Cijena = 350, 
+                    Cijena = 35, 
                     GradId = gradId, 
                     PodKategorijaId = footballId,
                     Datum = DateTime.Now,
@@ -297,7 +317,7 @@ namespace eTicketsAPI
                     Sektor = "A",
                     Red = 3,
                     Sjedalo = "22",
-                    SlikaId = picFootball1.SlikaId
+                    SlikaId = picFootball3.SlikaId
                 };
                 Ticket ticket4 = new Ticket()
                 {
@@ -310,28 +330,43 @@ namespace eTicketsAPI
                     Prodano = false,
                     AdminId = admin.KorisnikId,
                     Sektor = "Ispred bine",
-                    SlikaId = picMusic.SlikaId
+                    SlikaId = picRock.SlikaId
                 };
                 Ticket ticket5 = new Ticket()
                 {
                     NazivDogadjaja = "Rock2",
                     Cijena = 60, 
                     GradId = gradId, 
-                    PodKategorijaId = footballId,
+                    PodKategorijaId = rockId,
                     Datum = DateTime.Now,
                     ProdavacId = user2.KorisnikId,
                     Prodano = false,
                     Sektor = "C",
                     Red = 34,
                     Sjedalo = "22",
-                    SlikaId = picMusic.SlikaId
+                    SlikaId = picRock2.SlikaId
                 };
                 Ticket ticket6 = new Ticket()
                 {
                     NazivDogadjaja = "rock3", 
                     Cijena = 45,
                     GradId = gradId, 
-                    PodKategorijaId = footballId,
+                    PodKategorijaId = rockId,
+                    Datum = DateTime.Now,
+                    ProdavacId = user2.KorisnikId,
+                    Prodano = true,
+                    AdminId = admin.KorisnikId,
+                    Sektor = "B",
+                    Red = 34,
+                    Sjedalo = "23",
+                    SlikaId = picRock3.SlikaId,
+                };
+                Ticket ticket7 = new Ticket()
+                {
+                    NazivDogadjaja = "basketball1", 
+                    Cijena = 45,
+                    GradId = gradId, 
+                    PodKategorijaId = basketballId,
                     Datum = DateTime.Now,
                     ProdavacId = user2.KorisnikId,
                     Prodano = false,
@@ -339,11 +374,84 @@ namespace eTicketsAPI
                     Sektor = "B",
                     Red = 34,
                     Sjedalo = "23",
-                    SlikaId = picMusic.SlikaId
+                    SlikaId = picBasketball1.SlikaId
                 };
-                context.Ticket.AddRange(ticket1, ticket2, ticket3, ticket4, ticket5, ticket6);
+                Ticket ticket8 = new Ticket()
+                {
+                    NazivDogadjaja = "basketball2", 
+                    Cijena = 45,
+                    GradId = gradId, 
+                    PodKategorijaId = basketballId,
+                    Datum = DateTime.Now,
+                    ProdavacId = user2.KorisnikId,
+                    Prodano = false,
+                    AdminId = admin.KorisnikId,
+                    Sektor = "B",
+                    Red = 34,
+                    Sjedalo = "23",
+                    SlikaId = picBasketball2.SlikaId
+                };
+                Ticket ticket9 = new Ticket()
+                {
+                    NazivDogadjaja = "pop1", 
+                    Cijena = 45,
+                    GradId = gradId, 
+                    PodKategorijaId = popId,
+                    Datum = DateTime.Now,
+                    ProdavacId = user2.KorisnikId,
+                    Prodano = false,
+                    AdminId = admin.KorisnikId,
+                    Sektor = "B",
+                    Red = 34,
+                    Sjedalo = "23",
+                    SlikaId = picPop1.SlikaId
+                };
+                Ticket ticket10 = new Ticket()
+                {
+                    NazivDogadjaja = "pop2", 
+                    Cijena = 45,
+                    GradId = gradId, 
+                    PodKategorijaId = popId,
+                    Datum = DateTime.Now,
+                    ProdavacId = user2.KorisnikId,
+                    Prodano = false,
+                    AdminId = admin.KorisnikId,
+                    Sektor = "B",
+                    Red = 34,
+                    Sjedalo = "23",
+                    SlikaId = picPop2.SlikaId
+                };
+                context.Ticket.AddRange(ticket1, ticket2, ticket3, ticket4, ticket5, ticket6, ticket7, 
+                    ticket8, ticket9, ticket10);
                 context.SaveChanges();
 
+                BankTransactions transaction1 = new BankTransactions()
+                {
+                    CardId = "2222222222222222",
+                    AccountId = "111111111111",
+                    Iznos = 50,
+                    Datum = DateTime.Now,
+                };
+
+                context.BankTransactions.Add(transaction1);
+                context.SaveChanges();
+
+                var entityTransaction =
+                    context.BankTransactions.FirstOrDefault(x => x.CardId.Equals("2222222222222222"));
+
+
+                //ticket6
+
+                Kupovine kupovina1 = new Kupovine()
+                {
+                    TransakcijaId = entityTransaction.TransactionId,
+                    KupacId = user1.KorisnikId,
+                    TicketId = ticket6.TicketId,
+                    Datum = DateTime.Now
+                };
+
+                context.Kupovine.Add(kupovina1);
+                context.SaveChanges();
             }
         }
 
