@@ -3,8 +3,8 @@
 Seminarski rad za predmet Razvoj softvera 2
 
 Docker details:  
--> ne znam zasto ali i meni prikazuje API listening : 80, ali kad pristupam preko pretrazivaca moram koristit port localhost:65010  
--> pristup sql serveru preko SSMS također ne dozvoljava preko 1433, nego 1401 porta  
+-> API localhost:65010  
+-> pristup sql serveru preko SSMS-a , port 1401
 
 
 Login details:  
