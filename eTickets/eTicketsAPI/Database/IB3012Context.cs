@@ -38,7 +38,7 @@ namespace eTicketsAPI.Database
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer("Data Source=localhost,1434;Initial Catalog=IB3012; User=sa; Password=qweASD123!");
+                //optionsBuilder.UseSqlServer("Data Source=localhost,1434;Initial Catalog=IB3012; User=sa; Password=qweASD123!");
             }
         }
 
