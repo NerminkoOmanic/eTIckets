@@ -3,8 +3,8 @@
 Seminarski rad za predmet Razvoj softvera 2
 
 Docker details:  
--> ne znam zasto ali i meni prikazuje API listening : 80, ali kad pristupam preko pretrazivaca moram koristit port localhost:65080  
--> pristup sql serveru preko SSMS također ne dozvoljava preko 1433, nego 1401 porta  
+-> API localhost:65010  
+-> pristup sql serveru preko SSMS-a , port 1401
 
 
 Login details:  
@@ -22,6 +22,7 @@ password: Reset1
 username: user2  
 password: Reset1  
 
+U seeding sam dodao sve ulaznice da prodaje user2, tako da za kupovinu treba koristit user, a i ostavio sam jednog korisnika da nema jos dodanih ulaznica da mozete isprobati i funkcionalnost dodavanja bankovnog računa, te nemogucnost predaje zahtjeva za prodaju dok se ne doda bankovni račun.
 
 Online payment details:  
 Online payment service je zamisljen kao zasebna baza, da bi to ponasanje imitirao 3 tabele unutar baze su povezane međusoobno ali ne i sa ostatkom baze, posto nijedan payment service nebi imali dostupno unutar nase aplikacije zelio sam simulirati slicno ponasanje
