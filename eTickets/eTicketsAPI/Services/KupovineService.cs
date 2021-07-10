@@ -24,8 +24,6 @@ namespace eTicketsAPI.Services
         public IEnumerable<eTickets.Model.Kupovine> Get(KupovineSearchRequest search = null)
         {
 
-           
-
 
             var dbSet = Context.Set<Database.Kupovine>().AsQueryable();
 
