@@ -18,8 +18,8 @@ Technical implementation of  [eTicketsApi](/eTickets/eTicketsAPI) :
 * Preview of choosen request, options to accept or reject
 * Preview of all users
 * Add new user
-* Preview of all categories (eg. sport, music, movies...)
-* Preview of all subcategories ( eg. football, basketball, opera, hiphop...)
+* Preview of all categories and add/edit/delete (eg. sport, music, movies...)
+* Preview of all subcategories and add/edit/delete ( eg. football, basketball, opera, hiphop...)
 
 ## eTickets Mobile (Xamarin)
 * Customer registration and profile edit
