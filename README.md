@@ -55,7 +55,7 @@ password: Reset1
 username: user2  
 password: Reset1  
 
-One user is hardcoded in seeding to just have seelling tickets, other is just with buying history for purpose of content based filtering
+**One of users is hardcoded in seeding to have just active selling tickets, other is just with bought tickets for purpose of content based filtering**
 
 # Online payment details 
 
