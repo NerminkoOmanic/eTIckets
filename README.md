@@ -4,7 +4,7 @@ Desktop part of application is for administrators, while mobile app is for clien
 
 ## eTickets back-end REST API (ASP.NET Core 3.1)
 
-Technical implementation of  [eTicketsApi](/eTickets) :
+Technical implementation of  [eTicketsApi](/eTickets/eTicketsAPI) :
 * SQL Server database
 * Service layer
 * Content-Based Filtering 
