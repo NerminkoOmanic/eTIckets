@@ -38,7 +38,7 @@ Technical implementation of  [eTicketsApi](/eTickets/eTicketsAPI) :
 5. Open console, then open "eTickets" root folder in console
 6. Run "docker-compose build"
 7. Run "docker-compose up"
-8. After a console message that the application has started appears, open http://localhost:65010/swagger/index.html in browser NOTE: docker-compose build may take a few minutes
+8. After a console message that the application has started appears, open http://localhost:65010/swagger/index.html in browser **NOTE: docker-compose build may take a few minutes**
 
 
 # Login Credentials
