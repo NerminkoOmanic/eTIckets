@@ -1,5 +1,5 @@
 # About the project
-Desktop and mobile application which can be used to sell and buy tickets for events of every kind 
+Desktop and mobile application which can be used to sell and buy tickets for events of every kind  
 Desktop part of application is for administrators, while mobile app is for clients
 
 ## eTickets back-end REST API (ASP.NET Core 3.1)
@@ -21,7 +21,7 @@ Technical implementation of  [eTicketsApi](/eTickets/eTicketsAPI) :
 * Preview of all categories and add/edit/delete (eg. sport, music, movies...)
 * Preview of all subcategories and add/edit/delete ( eg. football, basketball, opera, hiphop...)
 
-## eTickets Mobile (Xamarin)
+## eTickets Mobile (Xamarin, MVVM pattern)
 * Customer registration and profile edit
 * Active tickets (list of tickets which are available for buying)
 * List of personal ticket requests (tickets which we wanna sell first needs to be accepted by administrator)
