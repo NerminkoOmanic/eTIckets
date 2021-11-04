@@ -35,7 +35,7 @@ Technical implementation of  [eTicketsApi](/eTickets/eTicketsAPI) :
 2. Open Visual Studio, right click the solution and go to "Properties". Select "Common Properties", "Startup Project". Select "Multiple startup projects", and set  eTickets.Mobile.UWP and eTickets.WinUI values to "Start"
 3. While In solution "Properties", select "Configuration Properties". Check "Build" and "Deploy" checkboxes next to eTickets.Mobile.UWP
 4. Start Docker Desktop
-5. Open console, then open "eTickets" root folder in console
+5. Open console, then open "eTickets" [root folder](/eTickets) in console
 6. Run "docker-compose build"
 7. Run "docker-compose up"
 8. After a console message that the application has started appears, open http://localhost:65010/swagger/index.html in browser **NOTE: docker-compose build may take a few minutes**
