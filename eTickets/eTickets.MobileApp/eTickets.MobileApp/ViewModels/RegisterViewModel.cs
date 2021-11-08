@@ -326,7 +326,10 @@ namespace eTickets.MobileApp.ViewModels
                 await Application.Current.MainPage.DisplayAlert("Success", "Profile updated!","OK");
 
                 APIService.PrijavljeniKorisnik = updatedKorisnik;
-                APIService.Password = Lozinka;
+                if (!string.IsNullOrEmpty(Lozinka))
+                {
+                    APIService.Password = Lozinka;
+                }
                 Application.Current.MainPage = new AppShell();
 
             }
