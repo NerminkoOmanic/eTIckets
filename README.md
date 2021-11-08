@@ -80,3 +80,46 @@ ControlNumber : 222
 Owner : test  
 Valid : 03/22  
 Account : 222222222222  
+
+
+# Preview of app
+
+## WinForms
+
+Preview of tabs which are available for administrators inside desktop part of application, Windows Forms
+
+![WinForms Tab](/Gifs/AdminTabMenuPreview.gif)
+
+
+Administrator has option to reset password for certain administrator or client.  
+Click on button Add opens form for adding new administrator.  
+
+![Admin resets password and adds new admin](/Gifs/AdminResetPW_AddAdmin.gif)
+
+
+Checking new request to sell ticket.  
+After admin is sure that details filled in form correspond to ones on picture, he approves it.
+Making sure it is approved by opening active tickets list.
+
+![Approving request to sell ticket](/Gifs/Approving_Request.gif)
+
+
+Adding new category and subcategory, so clients can choose wider variety of types for events.  
+
+![Admin adds new category and subcategory](/Gifs/AddCategory_Subcategory.gif)
+
+
+
+## Xamarin
+
+After client logs in, he can apply subcategory filter to see just events of certain type.  
+Inside menu you can choose update profile, there you can change your personal details and also add your bank account number, which is mandatory to sell tickets.  
+
+![Update profile, adding bank account](/Gifs/StartEditProfile_AddBankAcc.gif)
+
+
+Making new request to sell ticket.  
+After it is approved you can find it inside active tickets.
+In case you decide to keep ticket, if still somone did not bought it, you can cancel it.
+
+![New request to sell ticekt](/Gifs/MakeRequest_checkActive.gif)
